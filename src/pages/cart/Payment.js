@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from 'react'
-
-import MetaData from '../layout/MetaData'
-import CheckoutSteps from './CheckoutSteps'
 import { useNavigate } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
+
+import MetaData from '../../components/layout/MetaData'
+import CheckoutSteps from './CheckoutSteps'
 
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js'
 

@@ -1,11 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import MetaData from '../layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, clearErrors} from '../../actions/userActions'
-import Loader from '../layout/Loader'
 import { useAlert } from 'react-alert'
 import { useNavigate } from 'react-router-dom'
+
+import MetaData from '../../components/layout/MetaData'
+import { login, clearErrors} from '../../actions/userActions'
+import Loader from '../../components/layout/Loader'
 
 
 

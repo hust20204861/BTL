@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react'
-
-import MetaData from '../layout/MetaData'
-import Sidebar from './Sidebar'
 import { useParams } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import { useAlert } from 'react-alert'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+
+import MetaData from '../../components/layout/MetaData'
+import Sidebar from '../../components/layout/Sidebar'
 import { updateCourse, getCourseDetails, clearErrors } from '../../actions/courseActions'
 import { UPDATE_COURSE_RESET } from '../../constants/courseConstants'
 

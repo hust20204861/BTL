@@ -1,51 +1,50 @@
 import React, { Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { MDBDataTable } from 'mdbreact'
-
-import MetaData from '../layout/MetaData'
-import Loader from '../layout/Loader'
-import Sidebar from './Sidebar'
-import { useNavigate } from 'react-router-dom'
 import { useAlert } from 'react-alert'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAdminCourses, deleteCourse, clearErrors } from '../../actions/courseActions'
-import { DELETE_COURSE_RESET } from '../../constants/courseConstants'
 
-const CoursesList = () => {
+import MetaData from '../../components/layout/MetaData'
+import Loader from '../../components/layout/Loader'
+import Sidebar from '../../components/layout/Sidebar'
+import { allUsers, deleteUser, clearErrors } from '../../actions/userActions'
+import { DELETE_USER_RESET } from '../../constants/userConstants'
+
+const UsersList = () => {
 
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { loading, error, courses } = useSelector(state => state.courses);
-    const { error: deleteError, isDeleted } = useSelector(state => state.course)
+    const { loading, error, users } = useSelector(state => state.allUsers);
+    const { isDeleted } = useSelector(state => state.user)
 
     useEffect(() => {
-        dispatch(getAdminCourses());
+        dispatch(allUsers());
 
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
         }
 
-        if (deleteError) {
-            alert.error(deleteError);
-            dispatch(clearErrors())
-        }
-
         if (isDeleted) {
-            alert.success('Course deleted successfully');
-            navigate('/admin/products');
-            dispatch({ type: DELETE_COURSE_RESET })
+            alert.success('User deleted successfully');
+            navigate('/admin/users');
+            dispatch({ type: DELETE_USER_RESET })
         }
 
-    }, [dispatch, alert, error, deleteError, isDeleted, navigate])
+    }, [dispatch, alert, error, isDeleted, navigate])
 
-    const setCourses = () => {
+    const deleteUserHandler = (id) => {
+        dispatch(deleteUser(id))
+    }
+
+    const setUsers = () => {
         const data = {
             columns: [
                 {
-                    label: 'ID',
+                    label: 'User ID',
                     field: 'id',
                     sort: 'asc'
                 },
@@ -55,13 +54,13 @@ const CoursesList = () => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Price',
-                    field: 'price',
+                    label: 'Email',
+                    field: 'email',
                     sort: 'asc'
                 },
                 {
-                    label: 'Stock',
-                    field: 'stock',
+                    label: 'Role',
+                    field: 'role',
                     sort: 'asc'
                 },
                 {
@@ -72,17 +71,18 @@ const CoursesList = () => {
             rows: []
         }
 
-        courses.forEach(course => {
+        users.forEach(user => {
             data.rows.push({
-                id: course._id,
-                name: course.name,
-                price: `$${course.price}`,
-                stock: course.stock,
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+
                 actions: <Fragment>
-                    <Link to={`/admin/product/${course._id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/admin/user/${user._id}`} className="btn btn-primary py-1 px-2">
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteCourseHandler(course._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user._id)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>
@@ -92,13 +92,10 @@ const CoursesList = () => {
         return data;
     }
 
-    const deleteCourseHandler = (id) => {
-        dispatch(deleteCourse(id))
-    }
 
     return (
         <Fragment>
-            <MetaData title={'All Courses'} />
+            <MetaData title={'All Users'} />
             <div className="row">
                 <div className="col-12 col-md-2">
                     <Sidebar />
@@ -106,11 +103,11 @@ const CoursesList = () => {
 
                 <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1 className="my-5">All Courses</h1>
+                        <h1 className="my-5">All Users</h1>
 
                         {loading ? <Loader /> : (
                             <MDBDataTable
-                                data={setCourses()}
+                                data={setUsers()}
                                 className="px-3"
                                 bordered
                                 striped
@@ -126,4 +123,4 @@ const CoursesList = () => {
     )
 }
 
-export default CoursesList
+export default UsersList

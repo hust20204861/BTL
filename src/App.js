@@ -4,30 +4,30 @@ import './App.css'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 
-import Home from './components/Home'
-import CourseDetails from './components/course/CourseDetails'
+import Home from './pages/Home'
+import CourseDetails from './pages/course/CourseDetails'
 
 // Cart Imports
-import Cart from './components/cart/Cart'
-import Payment from './components/cart/Payment'
+import Cart from './pages/cart/Cart'
+import Payment from './pages/cart/Payment'
 
 // Auth or User imports
-import Login from './components/user/Login'
-import Register from './components/user/Register'
-import Profile from './components/user/Profile'
-import UpdateProfile from './components/user/UpdateProfile'
-import UpdatePassword from './components/user/UpdatePassword'
-import ForgotPassword from './components/user/ForgotPassword'
-import NewPassword from './components/user/NewPassword'
+import Login from './pages/user/Login'
+import Register from './pages/user/Register'
+import Profile from './pages/user/Profile'
+import UpdateProfile from './pages/user/UpdateProfile'
+import UpdatePassword from './pages/user/UpdatePassword'
+import ForgotPassword from './pages/user/ForgotPassword'
+import NewPassword from './pages/user/NewPassword'
 
 // Admin Imports
-import Dashboard from './components/admin/Dashboard'
-import CoursesList from './components/admin/CoursesList'
-import NewCourse from './components/admin/NewCourse'
-import UpdateCourse from './components/admin/UpdateCourse'
-import UsersList from './components/admin/UsersList'
-import UpdateUser from './components/admin/UpdateUser'
-import CourseReviews from './components/admin/CourseReviews'
+import Dashboard from './pages/admin/Dashboard'
+import CoursesList from './pages/admin/CoursesList'
+import NewCourse from './pages/admin/NewCourse'
+import UpdateCourse from './pages/admin/UpdateCourse'
+import UsersList from './pages/admin/UsersList'
+import UpdateUser from './pages/admin/UpdateUser'
+import CourseReviews from './pages/admin/CourseReviews'
 
 
 import { loadUser } from './actions/userActions'

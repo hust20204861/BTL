@@ -1,16 +1,15 @@
-
-
 import React, { Fragment, useEffect, useState } from 'react'
-import MetaData from './layout/MetaData'
 import Pagination from 'react-js-pagination'
 import Slider from 'rc-slider'
 import "rc-slider/assets/index.css";
 import { useDispatch, useSelector } from 'react-redux'
-import { getCourses } from '../actions/courseActions'
 import { useAlert } from 'react-alert'
-import Course from './course/Course'
-import Loader from './layout/Loader'
 import { useParams } from 'react-router-dom';
+
+import MetaData from '../components/layout/MetaData'
+import { getCourses } from '../actions/courseActions'
+import Course from './course/Course'
+import Loader from '../components/layout/Loader'
 
 
 
@@ -43,9 +42,8 @@ const Range = createSliderWithTooltip(Slider.Range)
   const dispatch = useDispatch();
   const { keyword } = useParams();
   const { loading, courses, error, coursesCount, resPerPage } = useSelector(state => state.courses) 
-  console.log("sgdfg", typeof courses)
 
-
+console.log("dfgds", typeof courses)
 useEffect(() => {
   if(error) {
     return alert.error(error)
@@ -67,7 +65,7 @@ function setCurrentPageNo(pageNumber) {
 <h1>Courses</h1>
  <div>
   {  <Fragment>
-                                   {/* <div className="home">
+                                   <div className="home">
                                         <div className="range">
                                             <Range
                                                 marks={{
@@ -138,23 +136,20 @@ function setCurrentPageNo(pageNumber) {
                                             </div>
 
                                         </div>
-                                    </div> */}
+                                    </div>
 
                                  
                                         <div className="coursee">
                                             {courses?.map(course => (
                                                 <Course key={course._id} course={course} col={4} />
                                             ))}
-                                       
-                                        </div>
-                                    
-                                                          
+                                        </div>                         
                                 </Fragment> && courses.map( course => (
        <Course key = {course._id} course={course} />
   ) )} 
  </div>
 
-{/* {resPerPage <= coursesCount && (
+{resPerPage <= coursesCount && (
   <div className="pagination-container">
                             <Pagination
                                 activePage={currentPage}
@@ -169,7 +164,7 @@ function setCurrentPageNo(pageNumber) {
                                 linkClass="page-link"
                             />
                         </div>
-)} */}
+)}
  
         </Fragment>
       )}

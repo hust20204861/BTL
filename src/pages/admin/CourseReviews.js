@@ -1,14 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { MDBDataTable } from 'mdbreact'
-
-import MetaData from '../layout/MetaData'
-import Loader from '../layout/Loader'
-import Sidebar from './Sidebar'
-
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { getCourseReviews, deleteReview, clearErrors } from '../../actions/courseActions'
+
+import MetaData from '../../components/layout/MetaData'
+import Sidebar from '../../components/layout/Sidebar'
 import { DELETE_REVIEW_RESET } from '../../constants/courseConstants'
+import Loader from '../../components/layout/Loader'
+import { getCourseReviews, deleteReview, clearErrors } from '../../actions//courseActions'
 
 const CourseReviews = () => {
 

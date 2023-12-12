@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-
-import MetaData from '../layout/MetaData'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+
+import MetaData from '../../components/layout/MetaData'
 import { addItemToCart, removeItemFromCart } from '../../actions/cartActions'
 
 const Cart = () => {

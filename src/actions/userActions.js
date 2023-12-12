@@ -94,7 +94,7 @@ export const register = (userData) => async (dispatch) => {
 }
 
 // Load user
-export const loadUser = (id) => async (dispatch) => {
+export const loadUser = (id) => async (dispatch, getState) => {
     try {
 
         dispatch({ type: LOAD_USER_REQUEST })
@@ -122,7 +122,7 @@ export const loadUser = (id) => async (dispatch) => {
 }
 
 // Update profile
-export const updateProfile = (userData) => async (dispatch, getState) => {
+export const updateProfile = (id,userData) => async (dispatch, getState) => {
     try {
 
         dispatch({ type: UPDATE_PROFILE_REQUEST })
@@ -134,7 +134,7 @@ export const updateProfile = (userData) => async (dispatch, getState) => {
             }
         };
 
-        const { data } = await axios.put('/api/v1/me/update', userData, config)
+        const { data } = await axios.put(`/api/v1/user/update/${id}`, userData, config)
 
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
@@ -162,7 +162,7 @@ export const updatePassword = (passwords) => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.put('/api/v1/password/update', passwords, config)
+        const { data } = await axios.put('/api/v1/user/update_pass', passwords, config)
 
         dispatch({
             type: UPDATE_PASSWORD_SUCCESS,
@@ -232,7 +232,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 }
 
 // Logout user
-export const logout = () => async (dispatch) => {
+export const logout = () => async (dispatch, getState) => {
     try {
         const { user: { token } } = getState(); 
 
@@ -256,7 +256,7 @@ export const logout = () => async (dispatch) => {
 }
 
 // Get all users
-export const allUsers = () => async (dispatch) => {
+export const allUsers = () => async (dispatch, getState) => {
     try {
 
         dispatch({ type: ALL_USERS_REQUEST })
@@ -267,7 +267,7 @@ export const allUsers = () => async (dispatch) => {
             'Authorization': `Bearer ${token}`
           }
         };
-        const { data } = await axios.get('/api/v1/admin/users', config)
+        const { data } = await axios.get('/api/v1/user', config)
 
         dispatch({
             type: ALL_USERS_SUCCESS,
@@ -283,7 +283,7 @@ export const allUsers = () => async (dispatch) => {
 }
 
 // Update user - ADMIN
-export const updateUser = (id, userData) => async (dispatch) => {
+export const updateUser = (id, userData) => async (dispatch, getState) => {
     try {
         const { user: { token } } = getState(); 
 
@@ -296,7 +296,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/v1/admin/user/${id}`, userData, config)
+        const { data } = await axios.put(`/api/v1/user/${id}`, userData, config)
 
         dispatch({
             type: UPDATE_USER_SUCCESS,
@@ -312,7 +312,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
 }
 
 // Get user details - ADMIN
-export const getUserDetails = (id) => async (dispatch) => {
+export const getUserDetails = (id) => async (dispatch, getState) => {
     try {
 
         dispatch({ type: USER_DETAILS_REQUEST });
@@ -323,7 +323,7 @@ export const getUserDetails = (id) => async (dispatch) => {
                 'Authorization': `Bearer ${token}`
             }
         };
-        const { data } = await axios.get(`/api/v1/admin/user/${id}`, config)
+        const { data } = await axios.get(`/api/v1/user/${id}`, config)
 
         dispatch({
             type: USER_DETAILS_SUCCESS,
@@ -339,7 +339,7 @@ export const getUserDetails = (id) => async (dispatch) => {
 }
 
 // Delete user - ADMIN
-export const deleteUser = (id) => async (dispatch) => {
+export const deleteUser = (id) => async (dispatch, getState) => {
     try {
 
         dispatch({ type: DELETE_USER_REQUEST })
@@ -350,7 +350,7 @@ export const deleteUser = (id) => async (dispatch) => {
                 'Authorization': `Bearer ${token}`
             }
         };
-        const { data } = await axios.delete(`/api/v1/admin/user/${id}`, config)
+        const { data } = await axios.delete(`/api/v1/user/${id}`, config)
 
         dispatch({
             type: DELETE_USER_SUCCESS,

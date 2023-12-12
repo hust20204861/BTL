@@ -31,6 +31,12 @@ import {
     DELETE_REVIEW_SUCCESS,
     DELETE_REVIEW_RESET,
     DELETE_REVIEW_FAIL,
+    MY_COURSES_FAIL,
+    MY_COURSES_REQUEST,
+    MY_COURSES_SUCCESS,
+    MY_ENROLL_COURSES_FAIL,
+    MY_ENROLL_COURSES_REQUEST,
+    MY_ENROLL_COURSES_SUCCESS,
     CLEAR_ERRORS
 
 } from '../constants/courseConstants'
@@ -39,15 +45,19 @@ export const coursesReducer = (state = { courses: [] }, action) => {
     switch (action.type) {
         case ALL_COURSES_REQUEST:
         case ADMIN_COURSES_REQUEST:
+        case MY_COURSES_REQUEST:    
+        case MY_ENROLL_COURSES_REQUEST:
             return {
                 loading: true,
                 courses: []
             }
 
         case ALL_COURSES_SUCCESS:
+        case MY_COURSES_SUCCESS:  
+        case MY_ENROLL_COURSES_SUCCESS:  
             return {
                 loading: false,
-                courses: action.payload.response,
+                courses: []
                 // coursesCount: action.payload.coursesCount,
                 // courses: action.payload.courses,
                 // coursesCount: action.payload.coursesCount,
@@ -63,6 +73,8 @@ export const coursesReducer = (state = { courses: [] }, action) => {
 
         case ALL_COURSES_FAIL:
         case ADMIN_COURSES_FAIL:
+        case MY_COURSES_FAIL:  
+        case MY_ENROLL_COURSES_FAIL:  
             return {
                 loading: false,
                 error: action.payload

@@ -1,12 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react'
-
-import MetaData from '../layout/MetaData'
-
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
+import MetaData from '../../components/layout/MetaData'
 import { updatePassword, clearErrors } from '../../actions/userActions'
 import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants'
-import { useNavigate } from 'react-router-dom'
 
 const UpdatePassword = () => {
 
