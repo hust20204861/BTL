@@ -42,20 +42,20 @@ import { loadStripe } from '@stripe/stripe-js'
 
 function App() {
 
-  const [stripeApiKey, setStripeApiKey] = useState('');
+  // const [stripeApiKey, setStripeApiKey] = useState('');
 
-  useEffect(() => {
-    store.dispatch(loadUser())
+  // useEffect(() => {
+  //   store.dispatch(loadUser())
 
-    async function getStripApiKey() {
-      const { data } = await axios.get('/api/v1/stripeapi');
+  //   async function getStripApiKey() {
+  //     const { data } = await axios.get('/api/v1/stripeapi');
 
-      setStripeApiKey(data.stripeApiKey)
-    }
+  //     setStripeApiKey(data.stripeApiKey)
+  //   }
 
-    getStripApiKey();
+  //   getStripApiKey();
 
-  }, [])
+  // }, [])
 
   const { user, isAuthenticated, loading } = useSelector(state => state.auth)
 
@@ -66,9 +66,8 @@ function App() {
         <div className="container container-fluid">
           <Routes>
           <Route path="/" element={<Home/>} exact />
-          {/* <Route path="/search/:keyword" element={<Home/>} /> */}
-          <Route path="/product/:id" element={<CourseDetails/>} exact />
-
+          <Route path="/search/:keyword" element={<Home/>} />
+          <Route path="/course/:id" element={<CourseDetails/>} exact />
           <Route path="/cart" element={<Cart/>} exact />
           {/* {stripeApiKey &&
             <Elements stripe={loadStripe(stripeApiKey)}>
@@ -78,24 +77,24 @@ function App() {
             </Elements>
           }  */}
  
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/auth/login" element={<Login/>} />
+          <Route path="auth/register" element={<Register/>} />
           <Route path="/password/forgot" element={<ForgotPassword/>} exact />
-          <Route path="/password/reset/:token" element={<NewPassword/>} exact />
+          <Route path="/user/reset_pass" element={<NewPassword/>} exact />
           <Route path="/me" element={<Profile/>} exact />
-          <Route path="/me/update" element={<UpdateProfile/>} exact />
-          <Route path="/password/update" element={<UpdatePassword/>} exact />
-
+          <Route path="/user/update/:id" element={<UpdateProfile/>} exact />
+          <Route path="/user/update_pass" element={<UpdatePassword/>} exact />
+ 
           </Routes>
         </div>
         <Routes>
         <Route path="/dashboard" isAdmin={true} element={<Dashboard/>} exact />
-        <Route path="/admin/products" isAdmin={true} element={<CoursesList/>} exact />
-        <Route path="/admin/product" isAdmin={true} element={<NewCourse/>} exact />
-        <Route path="/admin/product/:id" isAdmin={true} element={<UpdateCourse/>} exact />
-        <Route path="/admin/users" isAdmin={true} element={<UsersList/>} exact />
-        <Route path="/admin/user/:id" isAdmin={true} element={<UpdateUser/>} exact />
-        <Route path="/admin/reviews" isAdmin={true} element={<CourseReviews/>} exact />
+        <Route path="/products" isAdmin={true} element={<CoursesList/>} exact />
+        <Route path="/course" isAdmin={true} element={<NewCourse/>} exact />
+        <Route path="/course/ :id" isAdmin={true} element={<UpdateCourse/>} exact />
+        <Route path="/users" isAdmin={true} element={<UsersList/>} exact />
+        <Route path="/user/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
+        {/* <Route path="/admin/reviews" isAdmin={true} element={<CourseReviews/>} exact /> */}
         </Routes>
 
         {!loading && (!isAuthenticated || user.role !== 'admin') && (

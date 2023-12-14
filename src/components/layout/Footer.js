@@ -3,8 +3,8 @@ import React, { Fragment } from 'react'
 const Footer = () => {
     return (
         <Fragment>
-            <footer className="py-1">
-                <p className="text-center mt-1">
+            <footer>
+                <p className="footer">
                     Web Learning - 2023-2024, All Rights Reserved
                 </p>
             </footer>

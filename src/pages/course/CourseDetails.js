@@ -42,7 +42,7 @@ const CourseDetails = () => {
             alert.success('Reivew posted successfully')
             dispatch({ type: NEW_REVIEW_RESET })
         }
-console.log("ddd", id)
+
     }, [dispatch, alert, error, reviewError, id, success])
 
     const addToCart = () => {
@@ -140,10 +140,10 @@ console.log("ddd", id)
 
                             <hr />
 
-                            <div className="rating">
+                            <div className="course-rating">
                                 <div className="star" style={{ width: `${(course.ratings / 5) * 100}%` }}></div>
                             </div>
-                            <span id="reviews">({course.numOfReviews} Reviews)</span>
+                            <span id="course-reviews">({course.numOfReviews} Reviews)</span>
 
                             <hr />
 
@@ -166,13 +166,13 @@ console.log("ddd", id)
                             <h4 className="mt-2">Description:</h4>
                             <p>{course.description}</p>
                             <hr />
-                            <p id="course_seller mb-3">Sold by: <strong>{course.seller}</strong></p>
+                            <p id="course_seller">Sold by: <strong>{course.seller}</strong></p>
 
                             {user ? <button id="review_btn" type="button" className="btn btn-primary mt-4" data-toggle="modal" data-target="#ratingModal" onClick={setUserRatings}>
                                 Submit Your Review
                             </button>
                                 :
-                                <div className="alert alert-danger mt-5" type='alert'>Login to post your review.</div>
+                                <div className="alert alert-danger " type='alert'>Login to post your review.</div>
                             }
 
 

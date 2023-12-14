@@ -29,7 +29,7 @@ let initialState = {
             ? JSON.parse(localStorage.getItem('cartItems'))
             : [],
     },
-    user: {
+    auth: {
         token: localStorage.getItem('user')
         ? JSON.parse(localStorage.getItem('user')).token
         : {},

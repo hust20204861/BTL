@@ -38,17 +38,25 @@ import {
 
 } from '../constants/courseConstants'
 
-export const getCourses = (keyword = '', currentPage = 1, category) => async (dispatch) => {
+export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch, getState) => {
     try {
 
         dispatch({ type: ALL_COURSES_REQUEST })
+        const { user: { token } } = getState(); 
+
+        const config = {
+            headers: {
+           
+                'Authorization': `Bearer ${token}` 
+                }
+            }
 
         const link = `/api/v1/course?keyword=${keyword}&page=${currentPage}`
-        if(category) {
-            link = `/api/v1/course?keyword=${keyword}&page=${currentPage}&category=${category}`
-        }
+        // if(category) {
+        //     link = `/api/v1/course?keyword=${keyword}&page=${currentPage}`
+        // }
 
-        // const { data } = await axios.get(link)
+        // const { data } = await axios.get(link, config)
         const { data } = await axios.get('/api/v1/course')
       
         dispatch({

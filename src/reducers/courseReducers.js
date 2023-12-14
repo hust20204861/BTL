@@ -57,7 +57,7 @@ export const coursesReducer = (state = { courses: [] }, action) => {
         case MY_ENROLL_COURSES_SUCCESS:  
             return {
                 loading: false,
-                courses: []
+                courses: action.payload
                 // coursesCount: action.payload.coursesCount,
                 // courses: action.payload.courses,
                 // coursesCount: action.payload.coursesCount,

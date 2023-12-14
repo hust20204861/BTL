@@ -51,7 +51,7 @@ const Login = () => {
                                 <div className="login-email">
                                     <label htmlFor="email">Email</label>
                                     <input
-                                        type="email"
+                                        type="text"
                                         id="email_field"
                                         className="form-control"
                                         value={email}

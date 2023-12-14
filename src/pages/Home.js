@@ -65,7 +65,7 @@ function setCurrentPageNo(pageNumber) {
 <h1>Courses</h1>
  <div>
   {  <Fragment>
-                                   <div className="home">
+                                   {/* <div className="home">
                                         <div className="range">
                                             <Range
                                                 marks={{
@@ -136,7 +136,7 @@ function setCurrentPageNo(pageNumber) {
                                             </div>
 
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                  
                                         <div className="coursee">
@@ -145,11 +145,11 @@ function setCurrentPageNo(pageNumber) {
                                             ))}
                                         </div>                         
                                 </Fragment> && courses.map( course => (
-       <Course key = {course._id} course={course} />
+       <Course key = {course.id} course={course} />
   ) )} 
  </div>
 
-{resPerPage <= coursesCount && (
+{/* {resPerPage <= coursesCount && (
   <div className="pagination-container">
                             <Pagination
                                 activePage={currentPage}
@@ -164,7 +164,7 @@ function setCurrentPageNo(pageNumber) {
                                 linkClass="page-link"
                             />
                         </div>
-)}
+)} */}
  
         </Fragment>
       )}
