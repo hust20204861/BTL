@@ -31,9 +31,12 @@ let initialState = {
     },
     auth: {
         token: localStorage.getItem('user')
-        ? JSON.parse(localStorage.getItem('user')).token
-        : {},
-    }
+          ? JSON.parse(localStorage.getItem('user')).access_token || ''
+          : '',
+        userId: localStorage.getItem('user')
+          ? JSON.parse(localStorage.getItem('user')).user_id || ''
+          : '',
+      }
 }
 
 const middlware = [thunk];

@@ -33,15 +33,15 @@ const CourseDetails = () => {
             dispatch(clearErrors())
         }
 
-        if (reviewError) {
-            alert.error(reviewError);
-            dispatch(clearErrors())
-        }
+        // if (reviewError) {
+        //     alert.error(reviewError);
+        //     dispatch(clearErrors())
+        // }
 
-        if (success) {
-            alert.success('Reivew posted successfully')
-            dispatch({ type: NEW_REVIEW_RESET })
-        }
+        // if (success) {
+        //     alert.success('Reivew posted successfully')
+        //     dispatch({ type: NEW_REVIEW_RESET })
+        // }
 
     }, [dispatch, alert, error, reviewError, id, success])
 
@@ -122,7 +122,7 @@ const CourseDetails = () => {
         <Fragment>
             {loading ? <Loader /> : (
                 <Fragment>
-                    <MetaData title={course.name} />
+                    <MetaData title={course.learningObject} />
                     <div className="courses-details">
                         <div className="" id="course_image">
                             <Carousel>

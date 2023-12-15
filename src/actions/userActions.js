@@ -94,7 +94,7 @@ export const register = (userData) => async (dispatch) => {
 }
 
 // Load user
-export const loadUser = (id) => async (dispatch, getState) => {
+export const loadUser = (user_id) => async (dispatch, getState) => {
     try {
 
         dispatch({ type: LOAD_USER_REQUEST })
@@ -106,7 +106,7 @@ export const loadUser = (id) => async (dispatch, getState) => {
             'Authorization': `Bearer ${token}`
           }
         };
-        const { data } = await axios.get(`/api/v1/user/${id}`, config)
+        const { data } = await axios.get(`/api/v1/user/${user_id}`, config)
 
         dispatch({
             type: LOAD_USER_SUCCESS,
@@ -122,7 +122,7 @@ export const loadUser = (id) => async (dispatch, getState) => {
 }
 
 // Update profile
-export const updateProfile = (id,userData) => async (dispatch, getState) => {
+export const updateProfile = (userId,userData) => async (dispatch, getState) => {
     try {
 
         dispatch({ type: UPDATE_PROFILE_REQUEST })
@@ -134,7 +134,7 @@ export const updateProfile = (id,userData) => async (dispatch, getState) => {
             }
         };
 
-        const { data } = await axios.put(`/api/v1/user/update/${id}`, userData, config)
+        const { data } = await axios.put(`/api/v1/user/update/${userId}`, userData, config)
 
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,

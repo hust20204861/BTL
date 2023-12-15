@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux'
 
 import Loader from '../../components/layout/Loader'
 import MetaData from '../../components/layout/MetaData'
+import { useParams } from 'react-router-dom'
 
 const Profile = () => {
 
     const { user, loading } = useSelector(state => state.auth)
+    const {id} = useParams();
     // const i = user.avatar.url
     // console.log("ghhfhfd", typeof i)
 
@@ -24,7 +26,7 @@ const Profile = () => {
                                 <img className="rounded-circle img-fluid" src={user.avatar.url} alt={user.name} />
                             </figure>
                         <div >
-                            <Link to="/me/update" className="edit-profile">
+                            <Link to={`/user/update/${id}`} className="edit-profile">
                                 Edit Profile
                             </Link>
                         </div>

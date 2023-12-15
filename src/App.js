@@ -81,7 +81,7 @@ function App() {
           <Route path="auth/register" element={<Register/>} />
           <Route path="/password/forgot" element={<ForgotPassword/>} exact />
           <Route path="/user/reset_pass" element={<NewPassword/>} exact />
-          <Route path="/me" element={<Profile/>} exact />
+          <Route path="/user/:user_id" element={<Profile/>} exact />
           <Route path="/user/update/:id" element={<UpdateProfile/>} exact />
           <Route path="/user/update_pass" element={<UpdatePassword/>} exact />
  
@@ -91,7 +91,7 @@ function App() {
         <Route path="/dashboard" isAdmin={true} element={<Dashboard/>} exact />
         <Route path="/products" isAdmin={true} element={<CoursesList/>} exact />
         <Route path="/course" isAdmin={true} element={<NewCourse/>} exact />
-        <Route path="/course/ :id" isAdmin={true} element={<UpdateCourse/>} exact />
+        <Route path="/course/:id" isAdmin={true} element={<UpdateCourse/>} exact />
         <Route path="/users" isAdmin={true} element={<UsersList/>} exact />
         <Route path="/user/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
         {/* <Route path="/admin/reviews" isAdmin={true} element={<CourseReviews/>} exact /> */}
