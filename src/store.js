@@ -3,7 +3,7 @@ import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { coursesReducer, newCourseReducer, courseReducer, courseDetailsReducer, newReviewReducer, courseReviewsReducer, reviewReducer } from './reducers/courseReducers'
-import { authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer } from './reducers/userReducers'
+import { authReducer, userReducer,infoReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer } from './reducers/userReducers'
 import { cartReducer } from './reducers/cartReducers'
 
 const reducer = combineReducers({
@@ -19,7 +19,8 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     forgotPassword: forgotPasswordReducer,
     cart: cartReducer,
-    newReview: newReviewReducer
+    newReview: newReviewReducer,
+    info:infoReducer
 })
 
 
@@ -29,14 +30,8 @@ let initialState = {
             ? JSON.parse(localStorage.getItem('cartItems'))
             : [],
     },
-    auth: {
-        token: localStorage.getItem('user')
-          ? JSON.parse(localStorage.getItem('user')).access_token || ''
-          : '',
-        userId: localStorage.getItem('user')
-          ? JSON.parse(localStorage.getItem('user')).user_id || ''
-          : '',
-      }
+    token: localStorage.getItem('token'),
+    userId: localStorage.getItem('userId'),
 }
 
 const middlware = [thunk];

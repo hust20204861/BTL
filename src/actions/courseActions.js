@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 import {
     ALL_COURSES_REQUEST,
@@ -38,18 +39,17 @@ import {
 
 } from '../constants/courseConstants'
 
-export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch, getState) => {
+export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch) => {
     try {
 
         dispatch({ type: ALL_COURSES_REQUEST })
-        const { user: { token } } = getState(); 
-
-        const config = {
-            headers: {
+        // const { token } = useSelector(state => state.auth)
+        // const config = {
+        //     headers: {
            
-                'Authorization': `Bearer ${token}` 
-                }
-            }
+        //         'Authorization': `Bearer ${token}` 
+        //         }
+        //     }
 
         const link = `/api/v1/course?keyword=${keyword}&page=${currentPage}`
         // if(category) {
@@ -74,13 +74,12 @@ export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch, g
     }
 }
 
-export const newCourse = (courseData) => async (dispatch, getState) => {
+export const newCourse = (courseData) => async (dispatch) => {
     try {
 
         dispatch({ type: NEW_COURSE_REQUEST })
 
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -104,13 +103,12 @@ export const newCourse = (courseData) => async (dispatch, getState) => {
 }
 
 // Delete course 
-export const deleteCourse = (id) => async (dispatch, getState) => {
+export const deleteCourse = (id) => async (dispatch) => {
     try {
 
         dispatch({ type: DELETE_COURSE_REQUEST })
 
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -132,13 +130,12 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
 }
 
 // Update course 
-export const updateCourse = (id, courseData) => async (dispatch, getState) => {
+export const updateCourse = ( id, courseData) => async (dispatch) => {
     try {
      
         dispatch({ type: UPDATE_COURSE_REQUEST })
 
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -159,18 +156,23 @@ export const updateCourse = (id, courseData) => async (dispatch, getState) => {
             payload: error.response.data.message
         }) 
     }
-    console.log("sdfsdf", typeof id)
 }
 
 export const getCourseDetails = (id) => async (dispatch) => {
     try {
      
         dispatch({ type: COURSE_DETAILS_REQUEST })
-        const { data } = await axios.get(`/api/v1/course/${id}`)
+        const { token } = useSelector(state => state.auth)
 
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+                }
+            }
+        const { data } = await axios.get(`/api/v1/course/${id}`, config)
         dispatch({
             type: COURSE_DETAILS_SUCCESS,
-            payload: data
+            payload: data,
         })
 
     } catch (error) {
@@ -182,13 +184,12 @@ export const getCourseDetails = (id) => async (dispatch) => {
 
 }
 
-export const newReview = (reviewData) => async (dispatch, getState) => {
+export const newReview = (reviewData) => async (dispatch) => {
     try {
 
         dispatch({ type: NEW_REVIEW_REQUEST })
 
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -212,13 +213,12 @@ export const newReview = (reviewData) => async (dispatch, getState) => {
 }
 
 
-export const getAdminCourses = () => async (dispatch, getState) => {
+export const getAdminCourses = () => async (dispatch) => {
     try {
 
         dispatch({ type: ADMIN_COURSES_REQUEST })
 
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -263,12 +263,11 @@ export const getCourseReviews = (id) => async (dispatch) => {
 }
 
 // Delete course review
-export const deleteReview = (id, courseId) => async (dispatch, getState) => {
+export const deleteReview = (id, courseId) => async (dispatch) => {
     try {
 
         dispatch({ type: DELETE_REVIEW_REQUEST })
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -293,18 +292,17 @@ export const deleteReview = (id, courseId) => async (dispatch, getState) => {
 }
 
 //My Courses
-export const myCourses = (id) => async (dispatch, getState) => {
+export const myCourses = (userId) => async (dispatch) => {
     try {
   
         dispatch({ type: MY_COURSES_REQUEST })
-        const { user: { token } } = getState(); 
-  
+        const { token } = useSelector(state => state.auth)  
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         };
-        const { data } = await axios.get(`/api/v1/course/create/list/${id}`, config)
+        const { data } = await axios.get(`/api/v1/course/create/list/${userId}`, config)
       
         dispatch({
             type: MY_COURSES_SUCCESS,
@@ -319,12 +317,11 @@ export const myCourses = (id) => async (dispatch, getState) => {
     }
 }
 //my enroll course
-export const myEnrollCourses = (id) => async (dispatch, getState) => {
+export const myEnrollCourses = (id) => async (dispatch) => {
     try {
   
         dispatch({ type: MY_ENROLL_COURSES_REQUEST })
-        const { user: { token } } = getState(); 
-  
+        const { token } = useSelector(state => state.auth)  
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`

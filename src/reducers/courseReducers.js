@@ -58,11 +58,6 @@ export const coursesReducer = (state = { courses: [] }, action) => {
             return {
                 loading: false,
                 courses: action.payload
-                // coursesCount: action.payload.coursesCount,
-                // courses: action.payload.courses,
-                // coursesCount: action.payload.coursesCount,
-                // resPerPage: action.payload.resPerPage,
-                // filteredCoursesCount: action.payload.filteredCoursesCount
             }
 
         case ADMIN_COURSES_SUCCESS:
@@ -185,13 +180,14 @@ export const courseReducer = (state = {}, action) => {
     }
 }
 
-export const courseDetailsReducer = (state = { course: {} }, action) => {
+export const courseDetailsReducer = (state = { course: [] }, action) => {
     switch (action.type) {
 
         case COURSE_DETAILS_REQUEST:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                course: []
             }
 
         case COURSE_DETAILS_SUCCESS:

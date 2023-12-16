@@ -4,14 +4,11 @@ import { useSelector } from 'react-redux'
 
 import Loader from '../../components/layout/Loader'
 import MetaData from '../../components/layout/MetaData'
-import { useParams } from 'react-router-dom'
 
 const Profile = () => {
 
-    const { user, loading } = useSelector(state => state.auth)
-    const {id} = useParams();
-    // const i = user.avatar.url
-    // console.log("ghhfhfd", typeof i)
+    const { userinfo, loading } = useSelector(state => state.info)
+const { userId } = useSelector(state => state.auth)
 
   return (
     <Fragment>
@@ -22,24 +19,24 @@ const Profile = () => {
                     <h2 className="my-profile">My Profile</h2>
                     <div className="profile">
                       
-                            <figure className='avatar avatar-profile'>
-                                <img className="rounded-circle img-fluid" src={user.avatar.url} alt={user.name} />
-                            </figure>
+                            {/* <figure className='avatar avatar-profile'>
+                                <img className="rounded-circle img-fluid" src={userinfo.avatar.url} alt={user.name} />
+                            </figure> */}
                         <div >
-                            <Link to={`/user/update/${id}`} className="edit-profile">
+                            <Link to={`/user/update/${userId}`} className="edit-profile">
                                 Edit Profile
                             </Link>
                         </div>
                        
                         <div className="ifnomation">
                             <h4>Full Name</h4>
-                            <p>{user.name}</p>
+                            <p>{userinfo.name}</p>
 
                             <h4>Email Address</h4>
-                            <p>{user.email}</p>
+                            <p>{userinfo.email}</p>
 
                             <h4>Joined On</h4>
-                            <p>{String(user.createdAt).substring(0, 10)}</p>
+                            <p>{String(userinfo.createdAt).substring(0, 10)}</p>
                          
                         <div >
                             <Link to="/password/update" className="change-password">

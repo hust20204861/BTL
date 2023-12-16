@@ -39,20 +39,12 @@ const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { keyword } = useParams();
-  const { loading, courses, error, coursesCount, resPerPage } = useSelector(
-    (state) => state.courses
-  );
+  const { loading, courses, error, coursesCount, resPerPage } = useSelector(state => state.courses) 
 
-  console.log("dfgds", typeof courses);
-  useEffect(() => {
-    if (error) {
-      return alert.error(error);
-    }
-    dispatch(getCourses(keyword, currentPage, category));
-  }, [dispatch, alert, error, keyword, currentPage, category]);
+useEffect(() => {
+  if(error) {
+    return alert.error(error)
 
-  function setCurrentPageNo(pageNumber) {
-    setCurrentPage(pageNumber);
   }
 
   return (

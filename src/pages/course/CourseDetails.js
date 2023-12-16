@@ -22,9 +22,9 @@ const CourseDetails = () => {
     const {id} = useParams();
 
     const { loading, error, course } = useSelector(state => state.courseDetails)
-    const { user } = useSelector(state => state.auth)
+    const { userinfo } = useSelector(state => state.info)
     const { error: reviewError, success } = useSelector(state => state.newReview)
-
+console.log("iddddd", id)
     useEffect(() => {
         dispatch(getCourseDetails(id))
 
@@ -33,16 +33,6 @@ const CourseDetails = () => {
             dispatch(clearErrors())
         }
 
-        // if (reviewError) {
-        //     alert.error(reviewError);
-        //     dispatch(clearErrors())
-        // }
-
-        // if (success) {
-        //     alert.success('Reivew posted successfully')
-        //     dispatch({ type: NEW_REVIEW_RESET })
-        // }
-
     }, [dispatch, alert, error, reviewError, id, success])
 
     const addToCart = () => {
@@ -50,25 +40,6 @@ const CourseDetails = () => {
         alert.success('Item Added to Cart')
     }
 
-    const increaseQty = () => {
-        const count = document.querySelector('.count')
-
-        if (count.valueAsNumber >= course.stock) return;
-
-        const qty = count.valueAsNumber + 1;
-        setQuantity(qty)
-    }
-
-    const decreaseQty = () => {
-
-        const count = document.querySelector('.count')
-
-        if (count.valueAsNumber <= 1) return;
-
-        const qty = count.valueAsNumber - 1;
-        setQuantity(qty)
-
-    }
 
     function setUserRatings() {
         const stars = document.querySelectorAll('.star');
@@ -108,16 +79,6 @@ const CourseDetails = () => {
         }
     }
 
-    const reviewHandler = () => {
-        const formData = new FormData();
-
-        formData.set('rating', rating);
-        formData.set('comment', comment);
-        formData.set('courseId', id);
-
-        dispatch(newReview(formData));
-    }
-
     return (
         <Fragment>
             {loading ? <Loader /> : (
@@ -125,41 +86,41 @@ const CourseDetails = () => {
                     <MetaData title={course.learningObject} />
                     <div className="courses-details">
                         <div className="" id="course_image">
-                            <Carousel>
+                            {/* <Carousel>
                                 {course.images && course.images.map(image => (
                                     <Carousel.Item key={image.public_id}>
                                         <img className="course-details-img" src={image.url} alt={course.title} />
                                     </Carousel.Item>
                                 ))}
-                            </Carousel>
+                            </Carousel> */}
                         </div>
 
                         <div className="course-details-name">
-                            <h3>{course.name}</h3>
-                            <p id="course_id">Course # {course._id}</p>
+                            <h3>{course.learningObject}</h3>
+                            <p id="course_id">Course # {course.id}</p>
 
                             <hr />
 
                             <div className="course-rating">
-                                <div className="star" style={{ width: `${(course.ratings / 5) * 100}%` }}></div>
+                                <div className="star" style={{ width: `${(course.rating / 5) * 100}%` }}></div>
                             </div>
-                            <span id="course-reviews">({course.numOfReviews} Reviews)</span>
+                            {/* <span id="course-reviews">({course.numOfReviews} Reviews)</span> */}
 
                             <hr />
 
                             <p id="course_price">${course.price}</p>
-                            <div className="stockCounter">
+                            {/* <div className="stockCounter">
                                 <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
                                 <input type="number" className="form-control count d-inline" value={quantity} readOnly />
 
                                 <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
-                            </div>
-                            <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={course.stock === 0} onClick={addToCart}>Add to Cart</button>
+                            </div> */}
+                            <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={course.sale === 0} onClick={addToCart}>Add to Cart</button>
 
                             <hr />
 
-                            <p>Status: <span id="stock_status" className={course.stock > 0 ? 'greenColor' : 'redColor'} >{course.stock > 0 ? 'In Stock' : 'Out of Stock'}</span></p>
+                            <p>Status: <span id="stock_status" className={course.stock > 0 ? 'greenColor' : 'redColor'} >{course.sale > 0 ? 'In Stock' : 'Out of Stock'}</span></p>
 
                             <hr />
 
@@ -168,7 +129,7 @@ const CourseDetails = () => {
                             <hr />
                             <p id="course_seller">Sold by: <strong>{course.seller}</strong></p>
 
-                            {user ? <button id="review_btn" type="button" className="btn btn-primary mt-4" data-toggle="modal" data-target="#ratingModal" onClick={setUserRatings}>
+                            {userinfo ? <button id="review_btn" type="button" className="btn btn-primary mt-4" data-toggle="modal" data-target="#ratingModal" onClick={setUserRatings}>
                                 Submit Your Review
                             </button>
                                 :
@@ -190,7 +151,7 @@ const CourseDetails = () => {
                                                 </div>
                                                 <div className="modal-body">
 
-                                                    <ul className="stars" >
+                                                    {/* <ul className="stars" >
                                                         <li className="star"><i className="fa fa-star"></i></li>
                                                         <li className="star"><i className="fa fa-star"></i></li>
                                                         <li className="star"><i className="fa fa-star"></i></li>
@@ -205,9 +166,9 @@ const CourseDetails = () => {
                                                         onChange={(e) => setComment(e.target.value)}
                                                     >
 
-                                                    </textarea>
+                                                    </textarea> */}
 
-                                                    <button className="btn my-3 float-right review-btn px-4 text-white" onClick={reviewHandler} data-dismiss="modal" aria-label="Close">Submit</button>
+                                                    {/* <button className="btn my-3 float-right review-btn px-4 text-white" onClick={reviewHandler} data-dismiss="modal" aria-label="Close">Submit</button> */}
                                                 </div>
                                             </div>
                                         </div>
