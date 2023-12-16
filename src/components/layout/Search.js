@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
+import { MDBInputGroup, MDBInput, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
+
 const Search = () => {
 
     const [keyword, setKeyword] = useState('');
@@ -17,7 +19,14 @@ const Search = () => {
     }
 
     return (
-        <form onSubmit={searchHandler} >
+        <MDBInputGroup onSubmit={searchHandler} >
+      <MDBInput label='Search' onChange={(e) => setKeyword(e.target.value)} id="search_field" />
+      <MDBBtn rippleColor='dark'>
+        <MDBIcon icon='search' />
+      </MDBBtn>
+    </MDBInputGroup>
+
+        /* <form onSubmit={searchHandler} >
             <div className="input-group">
                 <input
                     type="text"
@@ -27,7 +36,7 @@ const Search = () => {
                     onChange={(e) => setKeyword(e.target.value)}
                 />
             </div>
-        </form>
+        </form> */
     )
 }
 
