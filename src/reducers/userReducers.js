@@ -118,7 +118,7 @@ export const infoReducer = (state = { userinfo: {} }, action) => {
             return {
                 loading: false,
                 isAuthenticated: false,
-                 user: null,
+                 userinfo: null,
                 error: action.payload
                 }
     

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 const Course = ({ course }) => {
     return (
         <div className='courses'>

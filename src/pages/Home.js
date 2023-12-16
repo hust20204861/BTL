@@ -42,10 +42,11 @@ const Home = () => {
   const { loading, courses, error, coursesCount, resPerPage } = useSelector(state => state.courses) 
 
 useEffect(() => {
+dispatch(getCourses())
   if(error) {
     return alert.error(error)
-
   }
+},[dispatch])
 
   return (
     <Fragment>

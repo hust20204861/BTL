@@ -194,6 +194,7 @@ export const courseDetailsReducer = (state = { course: [] }, action) => {
             return {
                 loading: false,
                 course: action.payload
+
             }
 
         case COURSE_DETAILS_FAIL:

@@ -160,21 +160,23 @@ export const updateCourse = ( id, courseData) => async (dispatch) => {
 
 export const getCourseDetails = (id) => async (dispatch) => {
     try {
+        console.log("bemajnasasljk")
      
         dispatch({ type: COURSE_DETAILS_REQUEST })
+        console.log("bemajnasaslasjidhbsauidhuiashdjk")
         const { token } = useSelector(state => state.auth)
-
+console.log("tehththtffg", token)
         const config = {
             headers: {
                 'Authorization': `Bearer ${token}`
                 }
             }
+            console.log("asdasdasdasdasdsadasd",id)
         const { data } = await axios.get(`/api/v1/course/${id}`, config)
         dispatch({
             type: COURSE_DETAILS_SUCCESS,
             payload: data,
         })
-
     } catch (error) {
         dispatch({
             type: COURSE_DETAILS_FAIL,

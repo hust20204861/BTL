@@ -21,20 +21,17 @@ const CourseDetails = () => {
     const alert = useAlert();
     const {id} = useParams();
 
-    const { loading, error, course } = useSelector(state => state.courseDetails)
+    const { error, loading, course } = useSelector(state => state.courseDetails)
     const { userinfo } = useSelector(state => state.info)
-    const { error: reviewError, success } = useSelector(state => state.newReview)
-console.log("iddddd", id)
     useEffect(() => {
-        dispatch(getCourseDetails(id))
+console.log("sfsdgdsfgfsgfs")
 
+        dispatch(getCourseDetails(id))
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
         }
-
-    }, [dispatch, alert, error, reviewError, id, success])
-
+    }, [dispatch, id])
     const addToCart = () => {
         dispatch(addItemToCart(id, quantity));
         alert.success('Item Added to Cart')
