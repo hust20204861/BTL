@@ -12,20 +12,16 @@ import { useEffect } from 'react'
 const Header = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { user, loading } = useSelector(state => state.auth)
-  const { token, userId } = useSelector(state => state.auth);
-  console.log("Token", token);
-  console.log("userId", userId)
+  const { loading, userId, token } = useSelector(state => state.auth)
+console.log("iddd", userId)
+console.log("tokennn", token)
 
- 
-  //lấy token được lưu gọi hàm loadUser và lấy dữ liệu
+ //lấy token được lưu gọi hàm loadUser và lấy dữ liệu
   useEffect(() => {
-    // const token = localStorage.getItem('user'); 
-    // if (token) {
-    //   dispatch(loadUser(token)); 
-    // }
+      dispatch(loadUser());   
   }, [dispatch]);
- 
+ const { userinfo } = useSelector(state => state.auth)
+ console.log("dgsdfgsdfgfs", userinfo)
   const logoutHandler = () => {
     dispatch(logout());
     alert.success('Logged out successfully')
@@ -63,10 +59,10 @@ const Header = () => {
                                         className="rounded-circle"
                                     />
                                 </figure> */}
-                                <span className='head-user-name'>{user && user.name}</span>
+                                <span className='head-user-name'>{userinfo && userinfo.name}</span>
                             <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
 
-                                {user && user.role === 'ADMIN' && (
+                                {userinfo && userinfo.role === 'ADMIN' && (
                                     <Link className="dropdown-item" id="head-item" to="/dashboard">Dashboard</Link>
                                 )}
                                 <Link className="dropdown-item" id="head-item" to={`/enroll/user/${userId}`}  onClick={myEnrollCourseHandle} >MyEnrollCourses</Link>

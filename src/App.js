@@ -91,15 +91,15 @@ function App() {
         <Route path="/dashboard" isAdmin={true} element={<Dashboard/>} exact />
         <Route path="/products" isAdmin={true} element={<CoursesList/>} exact />
         <Route path="/course" isAdmin={true} element={<NewCourse/>} exact />
-        <Route path="/course/:id" isAdmin={true} element={<UpdateCourse/>} exact />
+        <Route path="/update/course/:id" isAdmin={true} element={<UpdateCourse/>} exact />
         <Route path="/users" isAdmin={true} element={<UsersList/>} exact />
         <Route path="/user/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
         {/* <Route path="/admin/reviews" isAdmin={true} element={<CourseReviews/>} exact /> */}
         </Routes>
 
-        {!loading && (!isAuthenticated || user.role !== 'admin') && (
+        {/* {!loading && (!isAuthenticated || user.role !== 'ADMIN') && ( */}
           <Footer />
-        )}
+        {/* )} */}
       </div>
     </Router>
   );

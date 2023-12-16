@@ -43,7 +43,7 @@ const Range = createSliderWithTooltip(Slider.Range)
   const { keyword } = useParams();
   const { loading, courses, error, coursesCount, resPerPage } = useSelector(state => state.courses) 
 
-console.log("dfgds", typeof courses)
+console.log("dfgds", courses)
 useEffect(() => {
   if(error) {
     return alert.error(error)

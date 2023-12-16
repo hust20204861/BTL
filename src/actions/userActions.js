@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
@@ -56,7 +57,10 @@ export const login = (email, password) => async (dispatch) => {
             type: LOGIN_SUCCESS,
             payload: data
         });
-        localStorage.setItem('user', JSON.stringify(data));
+        const { access_token, user_id } = data;
+
+        localStorage.setItem('access_token', access_token);
+        localStorage.setItem('user_id', user_id);
     } catch (error) {
         dispatch({
             type: LOGIN_FAIL,
@@ -84,7 +88,6 @@ export const register = (userData) => async (dispatch) => {
             type: REGISTER_USER_SUCCESS,
             payload: data
         })
-        localStorage.setItem('user', JSON.stringify(data));
     } catch (error) {
         dispatch({
             type: REGISTER_USER_FAIL,
@@ -94,25 +97,24 @@ export const register = (userData) => async (dispatch) => {
 }
 
 // Load user
-export const loadUser = (user_id) => async (dispatch, getState) => {
+export const loadUser = () => async (dispatch, getState) => {
     try {
 
         dispatch({ type: LOAD_USER_REQUEST })
 
-        const { user: { token } } = getState(); 
+        const {  token, userId  } = getState(); 
 
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         };
-        const { data } = await axios.get(`/api/v1/user/${user_id}`, config)
+        const { data } = await axios.get(`/api/v1/user/${userId}`, config)
 
         dispatch({
             type: LOAD_USER_SUCCESS,
             payload: data
         })
-
     } catch (error) {
         dispatch({
             type: LOAD_USER_FAIL,
@@ -122,12 +124,12 @@ export const loadUser = (user_id) => async (dispatch, getState) => {
 }
 
 // Update profile
-export const updateProfile = (userId,userData) => async (dispatch, getState) => {
+export const updateProfile = (userId,userData) => async (dispatch) => {
     try {
 
         dispatch({ type: UPDATE_PROFILE_REQUEST })
-        const { user: { token } } = getState();
-        const config = {
+        const { token } = useSelector(state => state.auth)     
+           const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${token}`
@@ -150,12 +152,12 @@ export const updateProfile = (userId,userData) => async (dispatch, getState) => 
 }
 
 // Update password
-export const updatePassword = (passwords) => async (dispatch, getState) => {
+export const updatePassword = (passwords) => async (dispatch) => {
     try {
 
         dispatch({ type: UPDATE_PASSWORD_REQUEST })
-        const { user: { token } } = getState();
-        const config = {
+        const { token } = useSelector(state => state.auth)      
+          const config = {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -234,19 +236,18 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 // Logout user
 export const logout = () => async (dispatch, getState) => {
     try {
-        const { user: { token } } = getState(); 
+        const { auth: { token } } = getState(); 
 
-        const config = {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        };
-        await axios.get('/api/v1/logout', config)
+        // const config = {
+        //   headers: {
+        //     'Authorization': `Bearer ${token}`
+        //   }
+        // };
+        // await axios.get('/api/v1/logout', config)
 
         dispatch({
             type: LOGOUT_SUCCESS,
         })
-        localStorage.removeItem('user');
     } catch (error) {
         dispatch({
             type: LOGOUT_FAIL,
@@ -256,12 +257,11 @@ export const logout = () => async (dispatch, getState) => {
 }
 
 // Get all users
-export const allUsers = () => async (dispatch, getState) => {
+export const allUsers = () => async (dispatch) => {
     try {
 
         dispatch({ type: ALL_USERS_REQUEST })
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -283,10 +283,9 @@ export const allUsers = () => async (dispatch, getState) => {
 }
 
 // Update user - ADMIN
-export const updateUser = (id, userData) => async (dispatch, getState) => {
+export const updateUser = (id, userData) => async (dispatch) => {
     try {
-        const { user: { token } } = getState(); 
-
+        const { token } = useSelector(state => state.auth)
         dispatch({ type: UPDATE_USER_REQUEST })
 
         const config = {
@@ -312,13 +311,13 @@ export const updateUser = (id, userData) => async (dispatch, getState) => {
 }
 
 // Get user details - ADMIN
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserDetails = (id) => async (dispatch) => {
     try {
 
         dispatch({ type: USER_DETAILS_REQUEST });
 
-        const { user: { token } } = getState();
-        const config = {
+        const { token } = useSelector(state => state.auth)    
+            const config = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -339,13 +338,13 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 }
 
 // Delete user - ADMIN
-export const deleteUser = (id) => async (dispatch, getState) => {
+export const deleteUser = (id) => async (dispatch) => {
     try {
 
         dispatch({ type: DELETE_USER_REQUEST })
 
-        const { user: { token } } = getState();
-        const config = {
+        const { token } = useSelector(state => state.auth)
+                const config = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
