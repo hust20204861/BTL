@@ -152,7 +152,7 @@ const Payment = () => {
       height: "800px"}}>
         <MDBCol md="10" lg="8" xl="5">
           <MDBCard className="rounded-3">
-            <MDBCardBody className="p-4">
+            <MDBCardBody className="p-4" onSubmit={submitHandler}>
               <div className="text-center mb-4">
                 <h3>Payment</h3>
                 

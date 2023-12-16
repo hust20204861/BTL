@@ -43,3 +43,5 @@ const middlware = [thunk];
 const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middlware)))
 
 export default store;
+console.log("initial state = ");
+console.log(initialState);
