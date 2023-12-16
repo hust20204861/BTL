@@ -22,9 +22,9 @@ const CourseDetails = () => {
     const {id} = useParams();
 
     const { loading, error, course } = useSelector(state => state.courseDetails)
-    const { userinfo } = useSelector(state => state.auth)
+    const { userinfo } = useSelector(state => state.info)
     const { error: reviewError, success } = useSelector(state => state.newReview)
-
+console.log("iddddd", id)
     useEffect(() => {
         dispatch(getCourseDetails(id))
 
@@ -33,16 +33,6 @@ const CourseDetails = () => {
             dispatch(clearErrors())
         }
 
-        // if (reviewError) {
-        //     alert.error(reviewError);
-        //     dispatch(clearErrors())
-        // }
-
-        // if (success) {
-        //     alert.success('Reivew posted successfully')
-        //     dispatch({ type: NEW_REVIEW_RESET })
-        // }
-
     }, [dispatch, alert, error, reviewError, id, success])
 
     const addToCart = () => {
@@ -50,25 +40,6 @@ const CourseDetails = () => {
         alert.success('Item Added to Cart')
     }
 
-    // const increaseQty = () => {
-    //     const count = document.querySelector('.count')
-
-    //     if (count.valueAsNumber >= course.stock) return;
-
-    //     const qty = count.valueAsNumber + 1;
-    //     setQuantity(qty)
-    // }
-
-    // const decreaseQty = () => {
-
-    //     const count = document.querySelector('.count')
-
-    //     if (count.valueAsNumber <= 1) return;
-
-    //     const qty = count.valueAsNumber - 1;
-    //     setQuantity(qty)
-
-    // }
 
     function setUserRatings() {
         const stars = document.querySelectorAll('.star');
@@ -107,16 +78,6 @@ const CourseDetails = () => {
             })
         }
     }
-
-    // const reviewHandler = () => {
-    //     const formData = new FormData();
-
-    //     formData.set('rating', rating);
-    //     formData.set('comment', comment);
-    //     formData.set('courseId', id);
-
-    //     dispatch(newReview(formData));
-    // }
 
     return (
         <Fragment>

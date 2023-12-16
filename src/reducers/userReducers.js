@@ -46,7 +46,6 @@ export const authReducer = (state = { user: {} }, action) => {
 
         case LOGIN_REQUEST:
         case REGISTER_USER_REQUEST:
-        case LOAD_USER_REQUEST:
             return {
                 loading: true,
                 isAuthenticated: false,
@@ -60,16 +59,6 @@ export const authReducer = (state = { user: {} }, action) => {
                 isAuthenticated: true,
                 token: action.payload.access_token,
                 userId: action.payload.user_id,
-                // user: action.payload,
-            }
-        case LOAD_USER_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isAuthenticated: true,
-                // token: action.payload.access_token,
-                // userId: action.payload.user_id,
-                userinfo: action.payload
             }
         case LOGOUT_SUCCESS:
             return {
@@ -78,16 +67,6 @@ export const authReducer = (state = { user: {} }, action) => {
                 user: null,
                 token: null,
                 userId: null
-            }
-
-        case LOAD_USER_FAIL:
-            return {
-                loading: false,
-                isAuthenticated: false,
-                // token: action.payload.access_token,
-                // userId: action.payload.user_id,
-                user: null,
-                error: action.payload
             }
 
         case LOGOUT_FAIL:
@@ -104,9 +83,45 @@ export const authReducer = (state = { user: {} }, action) => {
                 isAuthenticated: false,
                 token: null,
                 userId: null,
-                // user: null,
                 error: action.payload
             }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+
+export const infoReducer = (state = { userinfo: {} }, action) => {
+    switch (action.type) {
+
+        case LOAD_USER_REQUEST:
+            return {
+                loading: true,
+                isAuthenticated: false,
+            }
+            
+        case LOAD_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                userinfo: action.payload
+            }
+        case LOAD_USER_FAIL:
+            return {
+                loading: false,
+                isAuthenticated: false,
+                 user: null,
+                error: action.payload
+                }
+    
 
         case CLEAR_ERRORS:
             return {

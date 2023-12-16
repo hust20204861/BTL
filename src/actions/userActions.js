@@ -38,6 +38,8 @@ import {
     LOGOUT_FAIL,
     CLEAR_ERRORS
 } from '../constants/userConstants'
+import Cookies from 'js-cookie'
+
 
 // Login
 export const login = (email, password) => async (dispatch) => {
@@ -58,9 +60,9 @@ export const login = (email, password) => async (dispatch) => {
             payload: data
         });
         const { access_token, user_id } = data;
+        localStorage.setItem("token", access_token);
+        localStorage.setItem("userId", user_id);
 
-        localStorage.setItem('access_token', access_token);
-        localStorage.setItem('user_id', user_id);
     } catch (error) {
         dispatch({
             type: LOGIN_FAIL,
@@ -88,6 +90,9 @@ export const register = (userData) => async (dispatch) => {
             type: REGISTER_USER_SUCCESS,
             payload: data
         })
+        const { access_token, user_id } = data;
+        localStorage.setItem("token", access_token);
+        localStorage.setItem("userId", user_id);
     } catch (error) {
         dispatch({
             type: REGISTER_USER_FAIL,
@@ -97,20 +102,15 @@ export const register = (userData) => async (dispatch) => {
 }
 
 // Load user
-export const loadUser = () => async (dispatch, getState) => {
+export const loadUser = (userId, token) => async (dispatch, getState) => {
     try {
-
         dispatch({ type: LOAD_USER_REQUEST })
-
-        const {  token, userId  } = getState(); 
-
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         };
         const { data } = await axios.get(`/api/v1/user/${userId}`, config)
-
         dispatch({
             type: LOAD_USER_SUCCESS,
             payload: data

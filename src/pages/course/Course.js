@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Course = ({ course }) => {
-  
     return (
         <div className='courses'>
             <div className="course">
@@ -22,7 +21,7 @@ const Course = ({ course }) => {
                         {/* <span id="course-reviews">({course.numOfReviews} Reviews)</span> */}
                     </div>
                     <p className="course-price">${course.price}</p>
-                    <Link to={`/course/${course.id}`} className="course-details">View Details</Link>
+                    <Link to={`/course/${course.id}`}  className="course-details">View Details</Link>
                 </div>
             </div>
         </div>
