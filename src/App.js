@@ -93,7 +93,7 @@ function App() {
         <Route path="/course" isAdmin={true} element={<NewCourse/>} exact />
         <Route path="/update/course/:id" isAdmin={true} element={<UpdateCourse/>} exact />
         <Route path="/users" isAdmin={true} element={<UsersList/>} exact />
-        <Route path="/user/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
+        <Route path="/admin/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
         {/* <Route path="/admin/reviews" isAdmin={true} element={<CourseReviews/>} exact /> */}
         </Routes>
 

@@ -8,30 +8,29 @@ import { register, clearErrors } from '../../actions/userActions'
 
 const Register = () => {
 
-    const [user, setUser] = useState({
-        name: '',
-        email: '',
-        password: '',
-    })
+    // const [user, setUser] = useState({
+    //     name: '',
+    //     email: '',
+    //     password: '',
+    // })
 
-    const { name, email, password } = user;
+    // const { name, email, password } = user;
 
-    const [avatar, setAvatar] = useState('')
-    const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
-
-    
+    // const [avatar, setAvatar] = useState('')
+    // const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     
 
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { isAuthenticated, error, loading } = useSelector(state => state.auth);
+    const { isError, error, loading } = useSelector(state => state.register);
 
     useEffect(() => {
-        
-
-        if (isAuthenticated) {
+        if (!isError) {
             navigate('/')
         }
 
@@ -40,39 +39,13 @@ const Register = () => {
             dispatch(clearErrors());
         }
 
-    }, [dispatch, alert, isAuthenticated, error, navigate])
+    }, [dispatch, alert, isError, error, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault();
-
-        const formData = new FormData();
-        formData.set('name', name);
-        formData.set('email', email);
-        formData.set('password', password);
-        formData.set('avatar', avatar);
-
-        dispatch(register(formData))
+        dispatch(register(name, email, password))
     }
 
-    const onChange = e => {
-        if (e.target.name === 'avatar') {
-
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setAvatarPreview(reader.result)
-                    setAvatar(reader.result)
-                }
-            }
-
-            reader.readAsDataURL(e.target.files[0])
-
-        } else {
-            setUser({ ...user, [e.target.name]: e.target.value })
-        }
-      
-    }
    
     return (
         <Fragment>
@@ -92,7 +65,7 @@ const Register = () => {
                                 className="form-control"
                                 name='name'
                                 value={name}
-                                onChange={onChange}
+                                onChange={(e) => setName(e.target.value)}
                             />
                         </div>
 
@@ -104,7 +77,7 @@ const Register = () => {
                                 className="form-control"
                                 name='email'
                                 value={email}
-                                onChange={onChange}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
 
@@ -116,36 +89,8 @@ const Register = () => {
                                 className="form-control"
                                 name='password'
                                 value={password}
-                                onChange={onChange}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
-                        </div>
-
-                        <div className='form-group'>
-                            <label htmlFor='avatar_upload'>Avatar</label>
-                            <div className='d-flex align-items-center'>
-                                <div>
-                                    <figure className='avatar mr-3 item-rtl'>
-                                        <img
-                                            src={avatarPreview}
-                                            className='rounded-circle'
-                                            alt='Avatar Preview'
-                                        />
-                                    </figure>
-                                </div>
-                                <div className='custom-file'>
-                                    <input
-                                        type='file'
-                                        name='avatar'
-                                        className='custom-file-input'
-                                        id='customFile'
-                                        accept="iamges/*"
-                                        onChange={onChange}
-                                    />
-                                    <label className='custom-file-label' htmlFor='customFile'>
-                                        Choose Avatar
-                                    </label>
-                                </div>
-                            </div>
                         </div>
 
                         <button

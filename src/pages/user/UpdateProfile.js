@@ -11,22 +11,23 @@ const UpdateProfile = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [avatar, setAvatar] = useState('')
-    const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
+    // const [avatar, setAvatar] = useState('')
+    // const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
 
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { user } = useSelector(state => state.auth);
+    const { token, userId } = useSelector(state => state.auth);
+    const { userinfo } = useSelector(state => state.info);
     const { error, isUpdated, loading } = useSelector(state => state.user)
 
     useEffect(() => {
 
-        if (user) {
-            setName(user.name);
-            setEmail(user.email);
-            setAvatarPreview(user.avatar.url)
+        if (userinfo) {
+            setName(userinfo.name);
+            setEmail(userinfo.email);
+            // setAvatarPreview(userinfo.avatar.url)
         }
 
         if (error) {
@@ -38,14 +39,14 @@ const UpdateProfile = () => {
             alert.success('User updated successfully')
             dispatch(loadUser());
 
-            navigate('/me')
+            navigate(`/user/:id`)
 
             dispatch({
                 type: UPDATE_PROFILE_RESET
             })
         }
 
-    }, [dispatch, alert, error, navigate, isUpdated, user])
+    }, [dispatch, alert, error, navigate, isUpdated])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -53,20 +54,20 @@ const UpdateProfile = () => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('email', email);
-        formData.set('avatar', avatar);
+        // formData.set('avatar', avatar);
 
-        dispatch(updateProfile(formData))
+        dispatch(updateProfile(userId, formData,  token))
     }
 
     const onChange = e => {
         const reader = new FileReader();
 
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setAvatarPreview(reader.result)
-                setAvatar(reader.result)
-            }
-        }
+        // reader.onload = () => {
+        //     if (reader.readyState === 2) {
+        //         setAvatarPreview(reader.result)
+        //         setAvatar(reader.result)
+        //     }
+        // }
 
         reader.readAsDataURL(e.target.files[0])
 
@@ -95,7 +96,7 @@ const UpdateProfile = () => {
                         <div className="form-group">
                             <label htmlFor="email_field">Email</label>
                             <input
-                                type="email"
+                                type="text"
                                 id="email_field"
                                 className="form-control"
                                 name='email'
@@ -110,7 +111,7 @@ const UpdateProfile = () => {
                                 <div>
                                     <figure className='avatar mr-3 item-rtl'>
                                         <img
-                                            src={avatarPreview}
+                                            // src={avatarPreview}
                                             className='rounded-circle'
                                             alt='Avatar Preview'
                                         />
@@ -132,7 +133,7 @@ const UpdateProfile = () => {
                             </div>
                         </div>
 
-                        <button type="submit" className="btn update-btn btn-block mt-4 mb-3" disabled={loading ? true : false} >Update</button>
+                        <button type="submit" onSubmit={submitHandler} disabled={loading ? true : false} >Update</button>
                     </form>
                 </div>
             </div>

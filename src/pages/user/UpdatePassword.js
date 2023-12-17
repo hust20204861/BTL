@@ -15,6 +15,7 @@ const UpdatePassword = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { userId, token } = useSelector(state => state.auth)
 
     const { error, isUpdated, loading } = useSelector(state => state.user)
 
@@ -28,7 +29,7 @@ const UpdatePassword = () => {
         if (isUpdated) {
             alert.success('Password updated successfully')
 
-            navigate('/me')
+            navigate('/')
 
             dispatch({
                 type: UPDATE_PASSWORD_RESET
@@ -44,7 +45,7 @@ const UpdatePassword = () => {
         formData.set('oldPassword', oldPassword);
         formData.set('password', password);
 
-        dispatch(updatePassword(formData))
+        dispatch(updatePassword(formData, token, userId))
     }
 
     return (

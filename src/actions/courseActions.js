@@ -74,12 +74,11 @@ export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch) =
     }
 }
 
-export const newCourse = (courseData) => async (dispatch) => {
+export const newCourse = (courseData, token) => async (dispatch) => {
     try {
 
         dispatch({ type: NEW_COURSE_REQUEST })
 
-        const { token } = useSelector(state => state.auth)
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -103,12 +102,11 @@ export const newCourse = (courseData) => async (dispatch) => {
 }
 
 // Delete course 
-export const deleteCourse = (id) => async (dispatch) => {
+export const deleteCourse = (id, token) => async (dispatch) => {
     try {
 
         dispatch({ type: DELETE_COURSE_REQUEST })
 
-        const { token } = useSelector(state => state.auth)
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -130,12 +128,11 @@ export const deleteCourse = (id) => async (dispatch) => {
 }
 
 // Update course 
-export const updateCourse = ( id, courseData) => async (dispatch) => {
+export const updateCourse = ( id, token, courseData) => async (dispatch) => {
     try {
      
         dispatch({ type: UPDATE_COURSE_REQUEST })
 
-        const { token } = useSelector(state => state.auth)
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -158,14 +155,10 @@ export const updateCourse = ( id, courseData) => async (dispatch) => {
     }
 }
 
-export const getCourseDetails = (id) => async (dispatch) => {
+export const getCourseDetails = (id, token) => async (dispatch) => {
     try {
-        console.log("bemajnasasljk")
      
         dispatch({ type: COURSE_DETAILS_REQUEST })
-        console.log("bemajnasaslasjidhbsauidhuiashdjk")
-        const { token } = useSelector(state => state.auth)
-console.log("tehththtffg", token)
         const config = {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -186,12 +179,11 @@ console.log("tehththtffg", token)
 
 }
 
-export const newReview = (reviewData) => async (dispatch) => {
+export const newReview = (feedbackData, token) => async (dispatch) => {
     try {
 
         dispatch({ type: NEW_REVIEW_REQUEST })
 
-        const { token } = useSelector(state => state.auth)
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -199,7 +191,7 @@ export const newReview = (reviewData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/v1/review`, reviewData, config)
+        const { data } = await axios.post(`/api/v1/feedback`, feedbackData, config)
 
         dispatch({
             type: NEW_REVIEW_SUCCESS,
@@ -215,12 +207,11 @@ export const newReview = (reviewData) => async (dispatch) => {
 }
 
 
-export const getAdminCourses = () => async (dispatch) => {
+export const getAdminCourses = (token) => async (dispatch) => {
     try {
 
         dispatch({ type: ADMIN_COURSES_REQUEST })
 
-        const { token } = useSelector(state => state.auth)
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -243,12 +234,16 @@ export const getAdminCourses = () => async (dispatch) => {
 }
 
 // Get course feedbacks
-export const getCourseReviews = (id) => async (dispatch) => {
+export const getCourseReviews = (id, token) => async (dispatch) => {
     try {
 
         dispatch({ type: GET_REVIEWS_REQUEST })
-
-        const { data } = await axios.get(`/api/v1/feedback?id=${id}`)
+        const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          };
+        const { data } = await axios.get(`/api/v1/feedback/${id}`, config)
 
         dispatch({
             type: GET_REVIEWS_SUCCESS,
@@ -265,7 +260,7 @@ export const getCourseReviews = (id) => async (dispatch) => {
 }
 
 // Delete course review
-export const deleteReview = (id, courseId) => async (dispatch) => {
+export const deleteReview = (id) => async (dispatch) => {
     try {
 
         dispatch({ type: DELETE_REVIEW_REQUEST })
@@ -275,7 +270,7 @@ export const deleteReview = (id, courseId) => async (dispatch) => {
             'Authorization': `Bearer ${token}`
           }
         };
-        const { data } = await axios.delete(`/api/v1/feedbacks?id=${id}&courseId=${courseId}`, config)
+        const { data } = await axios.delete(`/api/v1/feedbacks/${id}`, config)
 
         dispatch({
             type: DELETE_REVIEW_SUCCESS,
@@ -294,11 +289,10 @@ export const deleteReview = (id, courseId) => async (dispatch) => {
 }
 
 //My Courses
-export const myCourses = (userId) => async (dispatch) => {
+export const myCourses = (userId, token) => async (dispatch) => {
     try {
   
         dispatch({ type: MY_COURSES_REQUEST })
-        const { token } = useSelector(state => state.auth)  
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -319,11 +313,10 @@ export const myCourses = (userId) => async (dispatch) => {
     }
 }
 //my enroll course
-export const myEnrollCourses = (id) => async (dispatch) => {
+export const myEnrollCourses = (id, token) => async (dispatch) => {
     try {
   
         dispatch({ type: MY_ENROLL_COURSES_REQUEST })
-        const { token } = useSelector(state => state.auth)  
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
