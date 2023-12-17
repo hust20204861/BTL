@@ -35,6 +35,11 @@ const { userId } = useSelector(state => state.auth)
                             <h4>Email Address</h4>
                             <p>{userinfo.email}</p>
 
+                            <p>{userinfo.website}</p>
+                            <p>{userinfo.avatar}</p>
+                            <p>{userinfo.description}</p>
+                            <p>{userinfo.money}</p>
+
                             <h4>Joined On</h4>
                             <p>{String(userinfo.createdAt).substring(0, 10)}</p>
                          

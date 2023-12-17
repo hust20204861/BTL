@@ -43,11 +43,11 @@ const { token, userId, loading } = useSelector(state => state.auth)
     alert.success("Logged out successfully");
   };
   const myEnrollCourseHandle = () => {
-    dispatch(myEnrollCourses(userId));
+    dispatch(myEnrollCourses(userId, token));
     alert.success("Here is your enroll courses");
   };
   const myCourseHandle = () => {
-    dispatch(myCourses(userId));
+    dispatch(myCourses(userId, token));
     alert.success('Here is your courses')
   }
   
