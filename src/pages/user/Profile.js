@@ -44,7 +44,7 @@ const { userId } = useSelector(state => state.auth)
                             <p>{String(userinfo.createdAt).substring(0, 10)}</p>
                          
                         <div >
-                            <Link to="/password/update" className="change-password">
+                            <Link to="/user/update_pass" className="change-password">
                                 Change Password
                             </Link>
                             </div>

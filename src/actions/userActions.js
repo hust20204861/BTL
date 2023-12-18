@@ -121,18 +121,18 @@ export const loadUser = (userId, token) => async (dispatch, getState) => {
 }
 
 // Update profile
-export const updateProfile = (userId, formData, token) => async (dispatch) => {
+export const updateProfile = (userId, jsonData, token) => async (dispatch) => {
     try {
 
         dispatch({ type: UPDATE_PROFILE_REQUEST })
            const config = {
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         };
 console.log("sdgdfgds", userId)
-        const { data } = await axios.put(`/api/v1/user/update/${userId}`, formData, config)
+        const { data } = await axios.put(`/api/v1/user/update/${userId}`, jsonData, config)
 
         dispatch({
             type: UPDATE_PROFILE_SUCCESS,
@@ -148,7 +148,7 @@ console.log("sdgdfgds", userId)
 }
 
 // Update password
-export const updatePassword = (passwords, token) => async (dispatch) => {
+export const updatePassword = (jsonData, token) => async (dispatch) => {
     try {
 
         dispatch({ type: UPDATE_PASSWORD_REQUEST })
@@ -159,7 +159,7 @@ export const updatePassword = (passwords, token) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put('/api/v1/user/update_pass', passwords, config)
+        const { data } = await axios.patch('/api/v1/user/update_pass', jsonData, config)
 
         dispatch({
             type: UPDATE_PASSWORD_SUCCESS,

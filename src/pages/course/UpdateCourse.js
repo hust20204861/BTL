@@ -77,7 +77,14 @@ const UpdateCourse = () => {
         formData.set('sale', sale);
         formData.set('totalEnroll', totalEnroll);
         formData.set('userId', useId);
-        dispatch(updateCourse(formData, token))
+
+        const jsonObject = {};
+        for (const pair of formData.entries()) {
+            jsonObject[pair[0]] = pair[1]
+        }
+        const jsonData = JSON.stringify(jsonObject);
+
+        dispatch(updateCourse(jsonData, token))
     }
 
 

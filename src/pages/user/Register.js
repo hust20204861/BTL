@@ -62,7 +62,7 @@ const Register = () => {
                         <div className="form-group">
                             <label htmlFor="email_field">Email</label>
                             <input
-                                type="email"
+                                type="text"
                                 id="email_field"
                                 className="form-control"
                                 name='email'

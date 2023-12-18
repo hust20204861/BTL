@@ -64,7 +64,7 @@ export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch) =
     }
 }
 
-export const newCourse = (formData, token) => async (dispatch) => {
+export const newCourse = (jsonData, token) => async (dispatch) => {
     try {
 
         dispatch({ type: NEW_COURSE_REQUEST })
@@ -76,7 +76,7 @@ export const newCourse = (formData, token) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(`/api/v1/course`, formData, config)
+        const { data } = await axios.post(`/api/v1/course`, jsonData, config)
 
         dispatch({
             type: NEW_COURSE_SUCCESS,
@@ -118,7 +118,7 @@ export const deleteCourse = (id, token) => async (dispatch) => {
 }
 
 // Update course 
-export const updateCourse = ( id, token, courseData) => async (dispatch) => {
+export const updateCourse = ( id, token, jsonData) => async (dispatch) => {
     try {
      
         dispatch({ type: UPDATE_COURSE_REQUEST })
@@ -130,7 +130,7 @@ export const updateCourse = ( id, token, courseData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/v1/course/${id}`, courseData, config)
+        const { data } = await axios.put(`/api/v1/course/${id}`, jsonData, config)
 
         dispatch({
             type: UPDATE_COURSE_SUCCESS,
