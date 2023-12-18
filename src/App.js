@@ -6,6 +6,10 @@ import Footer from './components/layout/Footer'
 
 import Home from './pages/Home'
 import CourseDetails from './pages/course/CourseDetails'
+import MyCourse from './pages/course/MyCourse'
+import MyEnrollCourseDetails from './pages/course/MyEnrollCourseDetails'
+import MyCourseDetails from './pages/course/MyCourseDetails'
+// import { myEnrollCourses } from './actions/courseActions'
 
 // Cart Imports
 import Cart from './pages/cart/Cart'
@@ -23,11 +27,10 @@ import NewPassword from './pages/user/NewPassword'
 // Admin Imports
 import Dashboard from './pages/admin/Dashboard'
 import CoursesList from './pages/admin/CoursesList'
-import NewCourse from './pages/admin/NewCourse'
-import UpdateCourse from './pages/admin/UpdateCourse'
+import NewCourse from './pages/course/NewCourse'
+import UpdateCourse from './pages/course/UpdateCourse'
 import UsersList from './pages/admin/UsersList'
 import UpdateUser from './pages/admin/UpdateUser'
-import CourseReviews from './pages/admin/CourseReviews'
 
 
 import { loadUser } from './actions/userActions'
@@ -89,17 +92,17 @@ function App() {
         </div>
         <Routes>
         <Route path="/dashboard" isAdmin={true} element={<Dashboard/>} exact />
-        <Route path="/products" isAdmin={true} element={<CoursesList/>} exact />
-        <Route path="/course" isAdmin={true} element={<NewCourse/>} exact />
+        <Route path="/courses" isAdmin={true} element={<CoursesList/>} exact />
+        <Route path="/create/course" isAdmin={true} element={<NewCourse/>} exact />
         <Route path="/update/course/:id" isAdmin={true} element={<UpdateCourse/>} exact />
         <Route path="/users" isAdmin={true} element={<UsersList/>} exact />
         <Route path="/admin/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
-        {/* <Route path="/admin/reviews" isAdmin={true} element={<CourseReviews/>} exact /> */}
+        <Route path="/course/create/list/:userId" element={<MyCourse/>} exact />
+        <Route path="/mycourse/:id" element={<MyCourseDetails/>} exact />
+        {/* <Route path="/course/enrolled/:userId" element={<myEnrollCourses/>} exact /> */}
         </Routes>
 
-        {/* {!loading && (!isAuthenticated || user.role !== 'ADMIN') && ( */}
           <Footer />
-        {/* )} */}
       </div>
     </Router>
   );

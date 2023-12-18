@@ -16,12 +16,13 @@ const CoursesList = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { token } = useSelector(state => state.auth)
 
     const { loading, error, courses } = useSelector(state => state.courses);
     const { error: deleteError, isDeleted } = useSelector(state => state.course)
 
     useEffect(() => {
-        dispatch(getAdminCourses());
+        dispatch(getAdminCourses(token));
 
         if (error) {
             alert.error(error);
@@ -35,11 +36,11 @@ const CoursesList = () => {
 
         if (isDeleted) {
             alert.success('Course deleted successfully');
-            navigate('/admin/products');
+            navigate('/courses');
             dispatch({ type: DELETE_COURSE_RESET })
         }
 
-    }, [dispatch, alert, error, deleteError, isDeleted, navigate])
+    }, [dispatch, alert, error, deleteError, isDeleted, navigate, token])
 
     const setCourses = () => {
         const data = {
@@ -60,8 +61,8 @@ const CoursesList = () => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Stock',
-                    field: 'stock',
+                    label: 'Status',
+                    field: 'Status',
                     sort: 'asc'
                 },
                 {
@@ -74,15 +75,15 @@ const CoursesList = () => {
 
         courses.forEach(course => {
             data.rows.push({
-                id: course._id,
-                name: course.name,
+                id: course.id,
+                name: course.learningObject,
                 price: `$${course.price}`,
-                stock: course.stock,
+                status: course.status,
                 actions: <Fragment>
-                    <Link to={`/admin/product/${course._id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/course/${course.id}`} className="btn btn-primary py-1 px-2">
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteCourseHandler(course._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteCourseHandler(course.id, token)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>
@@ -92,8 +93,8 @@ const CoursesList = () => {
         return data;
     }
 
-    const deleteCourseHandler = (id) => {
-        dispatch(deleteCourse(id))
+    const deleteCourseHandler = (id, token) => {
+        dispatch(deleteCourse(id, token))
     }
 
     return (

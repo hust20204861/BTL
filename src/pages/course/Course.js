@@ -6,11 +6,7 @@ const Course = ({ course }) => {
     return (
         <div className='courses'>
             <div className="course">
-                {/* <img
-                    className="course-img"
-                    src={course.images[0].url}
-                    alt='course'
-                /> */}
+              
                 <div className="course-title">
                     <h5 className="cart-name">
                         <Link to={`/course/${course.id}`}>{course.learningObject}</Link>

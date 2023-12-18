@@ -257,7 +257,7 @@ export const allUsers = (token) => async (dispatch) => {
 
         dispatch({
             type: ALL_USERS_SUCCESS,
-            payload: data.users
+            payload: data
         })
 
     } catch (error) {

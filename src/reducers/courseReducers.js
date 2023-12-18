@@ -45,16 +45,12 @@ export const coursesReducer = (state = { courses: [] }, action) => {
     switch (action.type) {
         case ALL_COURSES_REQUEST:
         case ADMIN_COURSES_REQUEST:
-        case MY_COURSES_REQUEST:    
-        case MY_ENROLL_COURSES_REQUEST:
             return {
                 loading: true,
                 courses: []
             }
 
-        case ALL_COURSES_SUCCESS:
-        case MY_COURSES_SUCCESS:  
-        case MY_ENROLL_COURSES_SUCCESS:  
+        case ALL_COURSES_SUCCESS:  
             return {
                 loading: false,
                 courses: action.payload
@@ -67,9 +63,7 @@ export const coursesReducer = (state = { courses: [] }, action) => {
             }
 
         case ALL_COURSES_FAIL:
-        case ADMIN_COURSES_FAIL:
-        case MY_COURSES_FAIL:  
-        case MY_ENROLL_COURSES_FAIL:  
+        case ADMIN_COURSES_FAIL:  
             return {
                 loading: false,
                 error: action.payload
@@ -320,5 +314,38 @@ export const reviewReducer = (state = {}, action) => {
 
         default:
             return state
+    }
+
+ 
+}
+
+export const myCoursesReducer = (state = { mycourses: [] }, action) => {
+    switch (action.type) {
+        case MY_COURSES_REQUEST:
+            return {
+                loading: true,
+                mycourses: []
+            }
+
+        case MY_COURSES_SUCCESS:  
+            return {
+                loading: false,
+                mycourses: action.payload
+            }
+
+        case MY_COURSES_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
     }
 }

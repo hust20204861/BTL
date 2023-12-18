@@ -16,12 +16,13 @@ const UsersList = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { token } = useSelector(state => state.auth)
 
     const { loading, error, users } = useSelector(state => state.allUsers);
     const { isDeleted } = useSelector(state => state.user)
 
     useEffect(() => {
-        dispatch(allUsers());
+        dispatch(allUsers(token));
 
         if (error) {
             alert.error(error);
@@ -34,10 +35,10 @@ const UsersList = () => {
             dispatch({ type: DELETE_USER_RESET })
         }
 
-    }, [dispatch, alert, error, isDeleted, navigate])
+    }, [dispatch, alert, error, isDeleted, navigate, token])
 
-    const deleteUserHandler = (id) => {
-        dispatch(deleteUser(id))
+    const deleteUserHandler = (userId, token) => {
+        dispatch(deleteUser(userId, token))
     }
 
     const setUsers = () => {
@@ -73,16 +74,16 @@ const UsersList = () => {
 
         users.forEach(user => {
             data.rows.push({
-                id: user._id,
+                id: user.user_id,
                 name: user.name,
                 email: user.email,
                 role: user.role,
 
                 actions: <Fragment>
-                    <Link to={`/admin/user/${user._id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/admin/user/${user.user_id}`} className="btn btn-primary py-1 px-2">
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user.user_id)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>

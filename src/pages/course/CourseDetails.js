@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 
-import ListReviews from '../review/ListReviews'
 import Loader from '../../components/layout/Loader'
 import MetaData from '../../components/layout/MetaData'
 import { getCourseDetails, newReview, clearErrors } from '../../actions/courseActions'
@@ -39,12 +38,7 @@ const CourseDetails = () => {
                 <Fragment>
                     <MetaData title={course.learningObject} />
                     <div className="courses-details">
-                        {/* <div className="" id="course_image">
-                            <Carousel>
-                                        <img className="course-details-img" src={course.courseImageUrl.url} alt={course.title} />
-                            </Carousel>
-                        </div> */}
-
+                    
                         <div className="course-details-name">
                             <h3>{course.learningObject}</h3>
                             <p id="course_id">Course # {course.id}</p>
@@ -83,14 +77,9 @@ const CourseDetails = () => {
                             <h4 className="mt-2">Description:</h4>
                             <p>{course.courseDescription}</p>
                             <hr />
-                            {/* <p id="course_seller">Teacher: <strong>{course.seller}</strong></p> */}
 
                         </div>
                     </div>
-
-                    {course.reviews && course.reviews.length > 0 && (
-                        <ListReviews reviews={course.reviews} />
-                    )}
 
                 </Fragment>
             )}

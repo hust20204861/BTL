@@ -1,23 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useAlert } from 'react-alert'
 
-const myCourse = () => {  
-    const { courses } = useSelector(state => state.courses) 
-
-    return (
-        <div className='courses'>
-            {courses.map(course => (
+const MyCourse = () => {  
+const { mycourses } = useSelector(state => state.mycourses)
+    return (      
+        <div className='mycourses'>
+<Link to='/create/course'> CREATE YOUR COURSE </Link>
+            {mycourses.map(course => (
                 <div className="course" key={course.id}>
-                    <img
-                        className="course-img"
-                        src={course.images[0].url}
-                        alt='course'
-                    />
                     <div className="course-name">
                         <h5 className="cart-title">
-                            <Link to={`/product/${course._id}`}>{course.name}</Link>
+                            <Link to={`/mycourse/${course.id}`}>{course.learningObject}</Link>
                         </h5>
                     </div>
                 </div>
@@ -26,4 +20,4 @@ const myCourse = () => {
     )
 }
 
-export default myCourse
+export default MyCourse

@@ -11,8 +11,12 @@ const UpdateProfile = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    // const [avatar, setAvatar] = useState('')
-    // const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
+    const [website, setWebsite] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [description, setDescription] = useState('')
+    const [money, setMoney] = useState('')
+    const [role, setRole] = useState('')
+
 
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -27,7 +31,11 @@ const UpdateProfile = () => {
         if (userinfo) {
             setName(userinfo.name);
             setEmail(userinfo.email);
-            // setAvatarPreview(userinfo.avatar.url)
+            setAvatar(userinfo.avatar);
+            setDescription(userinfo.description);
+            setMoney(userinfo.money);
+            setRole(userinfo.role);
+   
         }
 
         if (error) {
@@ -37,7 +45,7 @@ const UpdateProfile = () => {
 
         if (isUpdated) {
             alert.success('User updated successfully')
-            dispatch(loadUser());
+            dispatch(loadUser(userId, token));
 
             navigate(`/user/:id`)
 
@@ -54,24 +62,14 @@ const UpdateProfile = () => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('email', email);
-        // formData.set('avatar', avatar);
+        formData.set('avatar', avatar);
+        formData.set('description', description);
+        formData.set('money', money);
+        formData.set('role', role);
 
-        dispatch(updateProfile(userId, formData,  token))
+        dispatch(updateProfile(userId, formData, token))
     }
 
-    const onChange = e => {
-        const reader = new FileReader();
-
-        // reader.onload = () => {
-        //     if (reader.readyState === 2) {
-        //         setAvatarPreview(reader.result)
-        //         setAvatar(reader.result)
-        //     }
-        // }
-
-        reader.readAsDataURL(e.target.files[0])
-
-    }
     return (
         <Fragment>
             <MetaData title={'Update Profile'} />
@@ -104,36 +102,64 @@ const UpdateProfile = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-
-                        <div className='form-group'>
-                            <label htmlFor='avatar_upload'>Avatar</label>
-                            <div className='d-flex align-items-center'>
-                                <div>
-                                    <figure className='avatar mr-3 item-rtl'>
-                                        <img
-                                            // src={avatarPreview}
-                                            className='rounded-circle'
-                                            alt='Avatar Preview'
-                                        />
-                                    </figure>
-                                </div>
-                                <div className='custom-file'>
-                                    <input
-                                        type='file'
-                                        name='avatar'
-                                        className='custom-file-input'
-                                        id='customFile'
-                                        accept='image/*'
-                                        onChange={onChange}
-                                    />
-                                    <label className='custom-file-label' htmlFor='customFile'>
-                                        Choose Avatar
-                                </label>
-                                </div>
-                            </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Website</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={website}
+                                onChange={(e) => setWebsite(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Avatar</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={avatar}
+                                onChange={(e) => setAvatar(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Description</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Money</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={money}
+                                onChange={(e) => setMoney(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Role</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={role}
+                                onChange={(e) => setRole(e.target.value)}
+                            />
                         </div>
 
-                        <button type="submit" onSubmit={submitHandler} disabled={loading ? true : false} >Update</button>
+
+                        <button type="submit"  disabled={loading ? true : false} >Update</button>
                     </form>
                 </div>
             </div>

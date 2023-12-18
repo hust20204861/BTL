@@ -8,16 +8,6 @@ import { register, clearErrors } from '../../actions/userActions'
 
 const Register = () => {
 
-    // const [user, setUser] = useState({
-    //     name: '',
-    //     email: '',
-    //     password: '',
-    // })
-
-    // const { name, email, password } = user;
-
-    // const [avatar, setAvatar] = useState('')
-    // const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
