@@ -31,7 +31,7 @@ const UsersList = () => {
 
         if (isDeleted) {
             alert.success('User deleted successfully');
-            navigate('/admin/users');
+            navigate('/users');
             dispatch({ type: DELETE_USER_RESET })
         }
 

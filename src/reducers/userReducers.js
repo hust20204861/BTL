@@ -181,14 +181,14 @@ export const userReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: true
             }
 
         case DELETE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: true
             }
 
         case UPDATE_PROFILE_RESET:

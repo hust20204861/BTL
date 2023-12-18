@@ -46,7 +46,7 @@ const NewCourse = () => {
         }
 
         if (success) {
-            navigate('/admin/products');
+            navigate('/mycourses');
             alert.success('Course created successfully');
             dispatch({ type: NEW_COURSE_RESET })
         }
@@ -77,7 +77,14 @@ const NewCourse = () => {
         formData.set('sale', sale);
         formData.set('totalEnroll', totalEnroll);
         formData.set('userId', useId);
-        dispatch(newCourse(formData, token))
+
+        const jsonObject = {};
+        for (const pair of formData.entries()) {
+            jsonObject[pair[0]] = pair[1]
+        }
+        const jsonData = JSON.stringify(jsonObject);
+
+        dispatch(newCourse(jsonData, token))
     }
 
 

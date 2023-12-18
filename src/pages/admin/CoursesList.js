@@ -80,7 +80,7 @@ const CoursesList = () => {
                 price: `$${course.price}`,
                 status: course.status,
                 actions: <Fragment>
-                    <Link to={`/course/${course.id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/update/course/${course.id}`} className="btn btn-primary py-1 px-2">
                         <i className="fa fa-pencil"></i>
                     </Link>
                     <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteCourseHandler(course.id, token)}>

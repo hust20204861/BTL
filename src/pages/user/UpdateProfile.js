@@ -31,6 +31,7 @@ const UpdateProfile = () => {
         if (userinfo) {
             setName(userinfo.name);
             setEmail(userinfo.email);
+            setWebsite(userinfo.website);
             setAvatar(userinfo.avatar);
             setDescription(userinfo.description);
             setMoney(userinfo.money);
@@ -47,7 +48,7 @@ const UpdateProfile = () => {
             alert.success('User updated successfully')
             dispatch(loadUser(userId, token));
 
-            navigate(`/user/:id`)
+            navigate(`/auth/login`)
 
             dispatch({
                 type: UPDATE_PROFILE_RESET
@@ -62,12 +63,19 @@ const UpdateProfile = () => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('email', email);
+        formData.set('website', website);
         formData.set('avatar', avatar);
         formData.set('description', description);
         formData.set('money', money);
         formData.set('role', role);
 
-        dispatch(updateProfile(userId, formData, token))
+        const jsonObject = {};
+        for (const pair of formData.entries()) {
+            jsonObject[pair[0]] = pair[1]
+        }
+        const jsonData = JSON.stringify(jsonObject);
+
+        dispatch(updateProfile(userId, jsonData, token))
     }
 
     return (
@@ -76,7 +84,7 @@ const UpdateProfile = () => {
 
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">
-                    <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
+                    <form className="shadow-lg" onSubmit={submitHandler} encType='application/json'>
                         <h1 className="mt-2 mb-5">Update Profile</h1>
 
                         <div className="form-group">

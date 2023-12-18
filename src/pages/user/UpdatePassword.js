@@ -9,13 +9,14 @@ import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants'
 
 const UpdatePassword = () => {
 
-    const [oldPassword, setOldPassword] = useState('')
-    const [password, setPassword] = useState('')
+    const [currentPassword, setCurrentPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [confirmationPassword, setConfirmationPassword] = useState('')
 
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { userId, token } = useSelector(state => state.auth)
+    const { token } = useSelector(state => state.auth)
 
     const { error, isUpdated, loading } = useSelector(state => state.user)
 
@@ -28,9 +29,7 @@ const UpdatePassword = () => {
 
         if (isUpdated) {
             alert.success('Password updated successfully')
-
-            navigate('/')
-
+            navigate('/auth/login')
             dispatch({
                 type: UPDATE_PASSWORD_RESET
             })
@@ -42,10 +41,17 @@ const UpdatePassword = () => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.set('oldPassword', oldPassword);
-        formData.set('password', password);
+        formData.set('currentPassword', currentPassword);
+        formData.set('newPassword', newPassword);
+        formData.set('confirmationPassword', confirmationPassword);
 
-        dispatch(updatePassword(formData, token, userId))
+        const jsonObject = {};
+        for (const pair of formData.entries()) {
+            jsonObject[pair[0]] = pair[1]
+        }
+        const jsonData = JSON.stringify(jsonObject);
+
+        dispatch(updatePassword(jsonData, token))
     }
 
     return (
@@ -62,8 +68,8 @@ const UpdatePassword = () => {
                                 type="password"
                                 id="old_password_field"
                                 className="form-control"
-                                value={oldPassword}
-                                onChange={(e) => setOldPassword(e.target.value)}
+                                value={currentPassword}
+                                onChange={(e) => setCurrentPassword(e.target.value)}
                             />
                         </div>
 
@@ -73,8 +79,18 @@ const UpdatePassword = () => {
                                 type="password"
                                 id="new_password_field"
                                 className="form-control"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label for="new_password_field">Confirm Password</label>
+                            <input
+                                type="password"
+                                id="new_password_field"
+                                className="form-control"
+                                value={confirmationPassword}
+                                onChange={(e) => setConfirmationPassword(e.target.value)}
                             />
                         </div>
 
