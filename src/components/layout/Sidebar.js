@@ -15,17 +15,17 @@ const Sidebar = () => {
                             className="admin-course"></i> Courses</a>
                         <ul  id="courseSubmenu">
                             <li>
-                                <Link to="/admin/products"><i className="course-all"></i> All</Link>
+                                <Link to="/courses"><i className="course-all"></i> All</Link>
                             </li>
 
                             <li>
-                                <Link to="/admin/product"><i className="course-create"></i> Create</Link>
+                                <Link to="/create/course"><i className="course-create"></i> Create</Link>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <Link to="/admin/users"><i className="admin-users"></i> Users</Link>
+                        <Link to="/users"><i className="admin-users"></i> Users</Link>
                     </li>
 
                     <li>

@@ -18,6 +18,7 @@ const UpdateUser = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { token } = useSelector(state => state.auth)
     const id = useParams();
 
     const { error, isUpdated } = useSelector(state => state.user);
@@ -27,9 +28,9 @@ const UpdateUser = () => {
 
     useEffect(() => {
 
-        console.log(user && user._id !== userId);
-        if (user && user._id !== userId) {
-            dispatch(getUserDetails(userId))
+        console.log(user && user.user_id !== userId);
+        if (user && user.user_id !== userId) {
+            dispatch(getUserDetails(userId, token))
         } else {
             setName(user.name);
             setEmail(user.email);
@@ -51,7 +52,7 @@ const UpdateUser = () => {
             })
         }
 
-    }, [dispatch, alert, error, navigate, id, isUpdated, userId, user])
+    }, [dispatch, alert, error, navigate, id, isUpdated, userId, user, token])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -61,7 +62,7 @@ const UpdateUser = () => {
         formData.set('email', email);
         formData.set('role', role);
 
-        dispatch(updateUser(user._id, formData))
+        dispatch(updateUser(user.user_id, formData, token))
     }
 
 

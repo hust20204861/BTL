@@ -43,20 +43,10 @@ export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch) =
     try {
 
         dispatch({ type: ALL_COURSES_REQUEST })
-        // const { token } = useSelector(state => state.auth)
-        // const config = {
-        //     headers: {
-           
-        //         'Authorization': `Bearer ${token}` 
-        //         }
-        //     }
+      
 
         const link = `/api/v1/course?keyword=${keyword}&page=${currentPage}`
-        // if(category) {
-        //     link = `/api/v1/course?keyword=${keyword}&page=${currentPage}`
-        // }
-
-        // const { data } = await axios.get(link, config)
+     
         const { data } = await axios.get('/api/v1/course')
       
         dispatch({
@@ -74,7 +64,7 @@ export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch) =
     }
 }
 
-export const newCourse = (courseData, token) => async (dispatch) => {
+export const newCourse = (formData, token) => async (dispatch) => {
     try {
 
         dispatch({ type: NEW_COURSE_REQUEST })
@@ -86,7 +76,7 @@ export const newCourse = (courseData, token) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(`/api/v1/course`, courseData, config)
+        const { data } = await axios.post(`/api/v1/course`, formData, config)
 
         dispatch({
             type: NEW_COURSE_SUCCESS,
@@ -164,7 +154,6 @@ export const getCourseDetails = (id, token) => async (dispatch) => {
                 'Authorization': `Bearer ${token}`
                 }
             }
-            console.log("asdasdasdasdasdsadasd",id)
         const { data } = await axios.get(`/api/v1/course/${id}`, config)
         dispatch({
             type: COURSE_DETAILS_SUCCESS,
@@ -178,7 +167,7 @@ export const getCourseDetails = (id, token) => async (dispatch) => {
     }
 
 }
-
+//create feedback
 export const newReview = (feedbackData, token) => async (dispatch) => {
     try {
 
@@ -260,11 +249,10 @@ export const getCourseReviews = (id, token) => async (dispatch) => {
 }
 
 // Delete course review
-export const deleteReview = (id) => async (dispatch) => {
+export const deleteReview = (id, token) => async (dispatch) => {
     try {
-
+ 
         dispatch({ type: DELETE_REVIEW_REQUEST })
-        const { token } = useSelector(state => state.auth)
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
