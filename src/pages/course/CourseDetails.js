@@ -17,7 +17,7 @@ const CourseDetails = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const {id} = useParams();
-
+console.log("adgdg", id)
     const { error, loading, course } = useSelector(state => state.courseDetails)
     useEffect(() => {
 

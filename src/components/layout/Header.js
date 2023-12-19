@@ -96,7 +96,6 @@ const { token, userId, loading } = useSelector(state => state.auth)
                                 <figure className="avatar avatar-nav">
 
                                     <img
-                                        // src={user.avatar && user.avatar.url}
                                         alt={userinfo && userinfo.name}
                                         className="rounded-circle"
                                     />

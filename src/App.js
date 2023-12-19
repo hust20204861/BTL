@@ -82,11 +82,11 @@ function App() {
  
           <Route path="/auth/login" element={<Login/>} />
           <Route path="auth/register" element={<Register/>} />
-          <Route path="/password/forgot" element={<ForgotPassword/>} exact />
-          <Route path="/user/reset_pass" element={<NewPassword/>} exact />
           <Route path="/user/:user_id" element={<Profile/>} exact />
           <Route path="/user/update/:id" element={<UpdateProfile/>} exact />
           <Route path="/user/update_pass" element={<UpdatePassword/>} exact />
+          <Route path="/password/forgot" element={<ForgotPassword/>} exact />
+          <Route path="/user/reset_pass" element={<NewPassword/>} exact />
  
           </Routes>
         </div>
@@ -96,11 +96,11 @@ function App() {
         <Route path="/create/course" isAdmin={true} element={<NewCourse/>} exact />
         <Route path="/update/course/:id" isAdmin={true} element={<UpdateCourse/>} exact />
         <Route path="/users" isAdmin={true} element={<UsersList/>} exact />
-        <Route path="/admin/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
+        <Route path="/admin/update/:userId" isAdmin={true} element={<UpdateUser/>} exact />
         <Route path="/course/create/list/:userId" element={<MyCourse/>} exact />
         <Route path="/mycourse/:id" element={<MyCourseDetails/>} exact />
         <Route path="/courses/enrolled/:userId" element={<MyEnrollCourse/>} exact />
-        <Route path="/course/enrolled/:userId" element={<MyEnrollCourse/>} exact />
+        <Route path="/course/enrolled/:userId" element={<MyEnrollCourseDetails/>} exact />
         </Routes>
 
           <Footer />

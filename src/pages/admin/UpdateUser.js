@@ -62,7 +62,7 @@ const UpdateUser = () => {
         formData.set('email', email);
         formData.set('role', role);
 
-        dispatch(updateUser(user.user_id, formData, token))
+        dispatch(updateUser(user.user_id, token,formData ))
     }
 
 
@@ -95,7 +95,7 @@ const UpdateUser = () => {
                                 <div className="form-group">
                                     <label htmlFor="email_field">Email</label>
                                     <input
-                                        type="email"
+                                        type="text"
                                         id="email_field"
                                         className="form-control"
                                         name='email'
