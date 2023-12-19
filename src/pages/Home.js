@@ -77,12 +77,14 @@ dispatch(getCourses())
           />
         </MDBCarouselItem>
       </MDBCarousel>
+
       {loading ? (
         <Loader />
       ) : (
         <Fragment>
           <MetaData title={"Home"} />
-          <h3>Học viên đang xem</h3>
+          
+          <p className="text-decoration-underline"><h4>Học viên đang xem</h4></p>
           <div>
             {(
               <Fragment>
