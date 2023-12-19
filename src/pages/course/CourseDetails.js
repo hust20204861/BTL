@@ -1,19 +1,19 @@
 import React, { Fragment, useState, useEffect } from 'react'
-import { Carousel } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Loader from '../../components/layout/Loader'
 import MetaData from '../../components/layout/MetaData'
-import { getCourseDetails, newReview, clearErrors } from '../../actions/courseActions'
+import { getCourseDetails, clearErrors } from '../../actions/courseActions'
 import { addItemToCart } from '../../actions/cartActions'
+import { enrollCourses } from '../../actions/courseActions'
 
 const CourseDetails = () => {
 
     const [quantity, setQuantity] = useState(1)
-    const { token } = useSelector(state => state.auth)
-
+    const { token, userId } = useSelector(state => state.auth)
+    // const { enrolled } = useSelector(state => state.enrollCourses)
     const dispatch = useDispatch();
     const alert = useAlert();
     const {id} = useParams();
@@ -31,6 +31,21 @@ const CourseDetails = () => {
         dispatch(addItemToCart(id, quantity));
         alert.success('Item Added to Cart')
     }
+
+    const [showConfirmation, setShowConfirmation] = useState(false);
+
+    const handleEnrollClick = () => {
+       setShowConfirmation(true);
+     };
+
+    const handleConfirm = () => {
+       dispatch(enrollCourses(id, userId, token));
+       setShowConfirmation(false);
+     };
+
+    const handleCancel = () => {
+       setShowConfirmation(false);
+    };
     
     return (
         <Fragment>
@@ -67,8 +82,15 @@ const CourseDetails = () => {
                             <p id="status">${course.status}</p>
 
                             <button type="button"  disabled={course.sale === 0} onClick={addToCart}>Add to Cart</button>
-                            <button type="button"  disabled={course.sale === 0} onClick={addToCart}>Enroll</button>
+                            <button type="button" onClick={handleEnrollClick}>Enroll</button>
 
+                            {showConfirmation && (
+                            <div>
+                                 <p>Are you sure you want to enroll?</p>
+                                 <button type="button" onClick={handleConfirm}>OK</button>
+                                 <button type="button" onClick={handleCancel}>Cancel</button>
+                            </div>
+                            )} 
                             <hr />
 
 

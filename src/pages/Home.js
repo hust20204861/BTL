@@ -14,23 +14,6 @@ import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [price, setPrice] = useState([1, 1000]);
-  const [category, setCategory] = useState("");
-  const [rating, setRating] = useState(0);
-  const categories = [
-    "English",
-    "Cameras",
-    "Laptops",
-    "Accessories",
-    "Headphones",
-    "Food",
-    "Books",
-    "Clothes/Shoes",
-    "Beauty/Health",
-    "Sports",
-    "Outdoor",
-    "Home",
-  ];
   const createSliderWithTooltip = () => {
     return Slider.createSliderWithTooltip;
   };
@@ -39,7 +22,7 @@ const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { keyword } = useParams();
-  const { loading, courses, error, coursesCount, resPerPage } = useSelector(state => state.courses) 
+  const { loading, courses, error } = useSelector(state => state.courses) 
 
 useEffect(() => {
 dispatch(getCourses())
@@ -103,82 +86,10 @@ dispatch(getCourses())
           <div>
             {(
               <Fragment>
-                {/* <div className="home">
-                                        <div className="range">
-                                            <Range
-                                                marks={{
-                                                    1: `$1`,
-                                                    1000: `$1000`
-                                                }}
-                                                min={1}
-                                                max={1000}
-                                                defaultValue={[1, 1000]}
-                                                tipFormatter={value => `$${value}`}
-                                                tipProps={{
-                                                    placement: "top",
-                                                    visible: true
-                                                }}
-                                                value={price}
-                                                onChange={price => setPrice(price)}
-                                            />                                       
-
-                                            <div className="categories">
-                                                <h4 >
-                                                    Categories
-                                                </h4>
-
-                                                <ul className="category">
-                                                    {categories.map(category => (
-                                                        <li
-                                                            style={{
-                                                                cursor: 'pointer',
-                                                                listStyleType: 'none'
-                                                            }}
-                                                            key={category}
-                                                            onClick={() => setCategory(category)}
-                                                        >
-                                                            {category}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-        
-                                
-
-                                            <div className="ratings">
-                                                <h4>
-                                                    Ratings
-                                                </h4>
-
-                                                <ul className="pl-0">
-                                                    {[5, 4, 3, 2, 1].map(star => (
-                                                        <li
-                                                            style={{
-                                                                cursor: 'pointer',
-                                                                listStyleType: 'none'
-                                                            }}
-                                                            key={star}
-                                                            onClick={() => setRating(star)}
-                                                        >
-                                                            <div className="rating-outer">
-                                                                <div className="rating-inner"
-                                                                    style={{
-                                                                        width: `${star * 20}%`
-                                                                    }}
-                                                                >
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                        </div>
-                                    </div> */}
 
                 <div className="course">
                   {courses?.map((course) => (
-                    <Course key={course._id} course={course} col={4} />
+                    <Course key={course.id} course={course} col={4} />
                   ))}
                 </div>
               </Fragment>

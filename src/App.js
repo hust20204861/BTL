@@ -9,7 +9,7 @@ import CourseDetails from './pages/course/CourseDetails'
 import MyCourse from './pages/course/MyCourse'
 import MyEnrollCourseDetails from './pages/course/MyEnrollCourseDetails'
 import MyCourseDetails from './pages/course/MyCourseDetails'
-// import { myEnrollCourses } from './actions/courseActions'
+import MyEnrollCourse from './pages/course/MyEnrollCourse'
 
 // Cart Imports
 import Cart from './pages/cart/Cart'
@@ -99,7 +99,8 @@ function App() {
         <Route path="/admin/update/:id" isAdmin={true} element={<UpdateUser/>} exact />
         <Route path="/course/create/list/:userId" element={<MyCourse/>} exact />
         <Route path="/mycourse/:id" element={<MyCourseDetails/>} exact />
-        {/* <Route path="/course/enrolled/:userId" element={<myEnrollCourses/>} exact /> */}
+        <Route path="/courses/enrolled/:userId" element={<MyEnrollCourse/>} exact />
+        <Route path="/course/enrolled/:userId" element={<MyEnrollCourse/>} exact />
         </Routes>
 
           <Footer />

@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import { coursesReducer, newCourseReducer, courseReducer, courseDetailsReducer,myCoursesReducer, newReviewReducer, courseReviewsReducer, reviewReducer } from './reducers/courseReducers'
+import { coursesReducer, newCourseReducer, courseReducer,enrollCoursesReducer, myEnrollCoursesReducer, courseDetailsReducer,myCoursesReducer, newReviewReducer, courseReviewsReducer, reviewReducer } from './reducers/courseReducers'
 import { authReducer, userReducer,infoReducer, forgotPasswordReducer, allUsersReducer,registerReducer, userDetailsReducer } from './reducers/userReducers'
 import { cartReducer } from './reducers/cartReducers'
 
@@ -22,7 +22,9 @@ const reducer = combineReducers({
     newReview: newReviewReducer,
     info:infoReducer,
     register: registerReducer,
-    mycourses: myCoursesReducer
+    mycourses: myCoursesReducer,
+    myenrollcourses: myEnrollCoursesReducer,
+    enrollcourse: enrollCoursesReducer
 })
 
 

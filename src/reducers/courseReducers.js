@@ -37,6 +37,9 @@ import {
     MY_ENROLL_COURSES_FAIL,
     MY_ENROLL_COURSES_REQUEST,
     MY_ENROLL_COURSES_SUCCESS,
+    ENROLL_COURSES_FAIL,
+    ENROLL_COURSES_REQUEST,
+    ENROLL_COURSES_SUCCESS,
     CLEAR_ERRORS
 
 } from '../constants/courseConstants'
@@ -349,3 +352,67 @@ export const myCoursesReducer = (state = { mycourses: [] }, action) => {
             return state;
     }
 }
+
+export const enrollCoursesReducer = (state = {}, action) => {
+    switch (action.type) {
+        case ENROLL_COURSES_REQUEST:
+            return {
+                loading: true,
+                enrolled: false
+            }
+
+        case ENROLL_COURSES_SUCCESS:  
+            return {
+                loading: false,
+                enrolled: true
+            }
+
+        case ENROLL_COURSES_FAIL:
+            return {
+                loading: false,
+                enrolled: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const myEnrollCoursesReducer = (state = { myenrollcourses: [] }, action) => {
+    switch (action.type) {
+        case MY_ENROLL_COURSES_REQUEST:
+            return {
+                loading: true,
+                myenrollcourses: []
+            }
+
+        case MY_ENROLL_COURSES_SUCCESS:  
+            return {
+                loading: false,
+                myenrollcourses: action.payload
+            }
+
+        case MY_ENROLL_COURSES_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+

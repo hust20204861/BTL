@@ -60,7 +60,7 @@ const MyCourseDetails = () => {
                             <p id="updatedAt">${course.updatedAt}</p>
                             <p id="status">${course.status}</p>
 
-                            <button type="button"  >discussion</button>
+                            <Link to='/feedback' > View all feedbacks</Link>
                             <Link to={`/update/course/${course.id}`} > Update</Link>
 
                             <hr />
