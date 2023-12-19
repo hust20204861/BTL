@@ -62,7 +62,7 @@ const CoursesList = () => {
                 },
                 {
                     label: 'Status',
-                    field: 'Status',
+                    field: 'status',
                     sort: 'asc'
                 },
                 {

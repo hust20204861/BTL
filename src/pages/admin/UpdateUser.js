@@ -25,7 +25,7 @@ const UpdateUser = () => {
     const { user } = useSelector(state => state.userDetails)
 
     const userId = id;
-
+console.log("afdgsdajfgksahfjs", userId)
     useEffect(() => {
 
         console.log(user && user.user_id !== userId);

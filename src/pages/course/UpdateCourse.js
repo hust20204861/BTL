@@ -37,34 +37,32 @@ const UpdateCourse = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const id = useParams();
-
     const { error, course } = useSelector(state => state.courseDetails)
     const { loading, error: updateError, isUpdated } = useSelector(state => state.course);
-    const courseId = id;
     useEffect(() => {
-        if (course && course.id !== courseId) {
-            dispatch(getCourseDetails(courseId, token));
-        } else {
-         setLearningObject(course.learningObject);
-         setRequiredSkills(course.requiredSkills);
-         setCourseFor(course.courseFor);
-         setTitle(course.title);
-         setSubTitle(course.subtitle);
-         setTotalEnroll(course.totalEnroll);
-         setCourseDescription(course.courseDescription);
-         setCategory(course.category);
-         setCongratulationMessage(course.congratulationMessage);
-         setCourseImageUrl(course.courseImageUrl);
-         setLanguage(course.language);
-         setLevel(course.level);
-         setPrimarilyTaught(course.primarilyTaught);
-         setPromotionalVideoUrl(course.promotionalVideoUrl);
-         setPrice(course.price);
-         setWelcomeMessage(course.welcomeMessage);
-         setStatus(course.status);
-         setRating(course.rating);
-         setSale(course.sale);
-        }
+        // if (course && course.id !== courseId) {
+        //     dispatch(getCourseDetails(courseId, token));
+        // } else {
+        //  setLearningObject(course.learningObject);
+        //  setRequiredSkills(course.requiredSkills);
+        //  setCourseFor(course.courseFor);
+        //  setTitle(course.title);
+        //  setSubTitle(course.subtitle);
+        //  setTotalEnroll(course.totalEnroll);
+        //  setCourseDescription(course.courseDescription);
+        //  setCategory(course.category);
+        //  setCongratulationMessage(course.congratulationMessage);
+        //  setCourseImageUrl(course.courseImageUrl);
+        //  setLanguage(course.language);
+        //  setLevel(course.level);
+        //  setPrimarilyTaught(course.primarilyTaught);
+        //  setPromotionalVideoUrl(course.promotionalVideoUrl);
+        //  setPrice(course.price);
+        //  setWelcomeMessage(course.welcomeMessage);
+        //  setStatus(course.status);
+        //  setRating(course.rating);
+        //  setSale(course.sale);
+        // }
 
         if (error) {
             alert.error(error);
@@ -83,7 +81,7 @@ const UpdateCourse = () => {
             dispatch({ type: UPDATE_COURSE_REQUEST })
         }
 
-    }, [dispatch, alert, error,courseId, isUpdated,id, updateError, navigate, course])
+    }, [dispatch, alert, error, isUpdated, updateError, navigate, course])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -115,8 +113,8 @@ const UpdateCourse = () => {
             jsonObject[pair[0]] = pair[1]
         }
         const jsonData = JSON.stringify(jsonObject);
-
-        dispatch(updateCourse(course.id, token, jsonData))
+        dispatch(updateCourse(id.id, token, jsonData));
+       
     }
 
 
@@ -153,7 +151,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">courseFor</label>
+                                    <label htmlFor="name_field">CourseFor</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -163,7 +161,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">title</label>
+                                    <label htmlFor="name_field">Title</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -173,7 +171,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">subtitle</label>
+                                    <label htmlFor="name_field">Subtitle</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -183,7 +181,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">courseDescription</label>
+                                    <label htmlFor="name_field">CourseDescription</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -193,7 +191,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">language</label>
+                                    <label htmlFor="name_field">Language</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -203,7 +201,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">level</label>
+                                    <label htmlFor="name_field">Level</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -213,7 +211,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">category</label>
+                                    <label htmlFor="name_field">Category</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -223,7 +221,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">primarilyTaught</label>
+                                    <label htmlFor="name_field">PrimarilyTaught</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -233,7 +231,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">courseImageUrl</label>
+                                    <label htmlFor="name_field">CourseImageUrl</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -243,7 +241,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">promotionalVideoUrl</label>
+                                    <label htmlFor="name_field">PromotionalVideoUrl</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -253,7 +251,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">price</label>
+                                    <label htmlFor="name_field">Price</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -263,7 +261,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">welcomeMessage</label>
+                                    <label htmlFor="name_field">WelcomeMessage</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -273,7 +271,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">congratulationMessage</label>
+                                    <label htmlFor="name_field">CongratulationMessage</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -283,7 +281,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">status</label>
+                                    <label htmlFor="name_field">Status</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -293,7 +291,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">rating</label>
+                                    <label htmlFor="name_field">Rating</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -303,7 +301,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">sale</label>
+                                    <label htmlFor="name_field">Sale</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -313,7 +311,7 @@ const UpdateCourse = () => {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="name_field">totalEnroll</label>
+                                    <label htmlFor="name_field">TotalEnroll</label>
                                     <input
                                         type="text"
                                         id="name_field"
@@ -324,7 +322,7 @@ const UpdateCourse = () => {
                                 </div>
 
                                 <button
-                                    id="login_button"
+                                    id="create_button"
                                     type="submit"
                                     className="btn btn-block py-3"
                                     disabled={loading ? true : false}

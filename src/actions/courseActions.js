@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
 import {
     ALL_COURSES_REQUEST,
@@ -42,15 +41,15 @@ import {
 
 } from '../constants/courseConstants'
 
-export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch) => {
+export const getCourses = (keyword = '') => async (dispatch) => {
     try {
 
         dispatch({ type: ALL_COURSES_REQUEST })
       
 
-        const link = `/api/v1/course?keyword=${keyword}&page=${currentPage}`
+        const link = `/api/v1/course?keyword=${keyword}`
      
-        const { data } = await axios.get('/api/v1/course')
+        const { data } = await axios.get(link)
       
         dispatch({
             type: ALL_COURSES_SUCCESS,
@@ -314,7 +313,9 @@ export const enrollCourses = (id, userId, token) => async (dispatch) => {
             'Authorization': `Bearer ${token}`
           }
         };
+       
         const { data } = await axios.post(`/api/v1/enroll/create/${id}/${userId}`, config)
+        console.log("agdgsdgaaewa", token)
       
         dispatch({
             type: ENROLL_COURSES_SUCCESS,
