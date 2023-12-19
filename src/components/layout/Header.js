@@ -13,8 +13,11 @@ import {
   MDBCollapse,
   MDBBtn,
   MDBNavbarBrand,
-  MDBInputGroup,
-  MDBInput,
+  MDBBadge,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
 } from "mdb-react-ui-kit";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -24,6 +27,7 @@ import { loadUser } from "../../actions/userActions";
 import { logout } from "../../actions/userActions";
 import { myCourses, myEnrollCourses } from "../../actions/courseActions";
 import { useEffect } from "react";
+import { MDBLink } from "mdbreact";
 
 const Header = () => {
   const alert = useAlert();
@@ -68,7 +72,7 @@ const Header = () => {
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
-              <MDBNavbar expand="lg" >
+              <MDBNavbar expand="lg">
                 <MDBContainer fluid>
                   <MDBNavbarBrand href="/">Home</MDBNavbarBrand>
                   <MDBNavbarToggler
@@ -103,77 +107,127 @@ const Header = () => {
               </MDBNavbarLink>
               <MDBNavbarLink href="notification">
                 <MDBIcon fas icon="bell" />
+                <MDBBadge pill notification color="danger">
+                  1
+                </MDBBadge>
               </MDBNavbarLink>
+              {token ? (
+                <MDBDropdown>
+                  <MDBDropdownToggle
+                    tag="a"
+                    className="hidden-arrow row d-flex align-items-center nav-link"
+                  >
+                    <img
+                      className="rounded-circle"
+                      height="22"
+                      width="50"
+                      alt={userinfo && userinfo.name}
+                      loading="lazy"
+                    />
+                    <Link
+                      to={`/course/create/list/${userId}`}
+                      id="create-course"
+                      onClick={myCourseHandle}
+                    >
+                      My Course
+                    </Link>
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu>
+                    {/* {userinfo && userinfo.role === "ADMIN" && (
+                          <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
+                        )} */}
 
-              <div className="user">
-                {token ? (
-                  <div>
-                    <div className="dropdown">
-                      <Link
-                        to={`/course/create/list/${userId}`}
-                        id="create-course"
-                        onClick={myCourseHandle}
-                      >
-                        My Course
-                      </Link>
-                      <figure className="avatar avatar-nav">
-                        <img
-                          alt={userinfo && userinfo.name}
-                          className="rounded-circle"
-                        />
-                      </figure>
-                      <span className="head-user-name">
-                        {userinfo && userinfo.name}
-                      </span>
-
-                      <div
-                        className="dropdown-menu"
-                        aria-labelledby="dropDownMenuButton"
-                      >
-                        {userinfo && userinfo.role === "ADMIN" && (
-                          <Link
-                            className="dropdown-item"
-                            id="head-item"
-                            to="/dashboard"
-                          >
-                            Dashboard
-                          </Link>
-                        )}
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="dropDownMenuButton"
+                    >
+                      {userinfo && userinfo.role === "ADMIN" && (
                         <Link
                           className="dropdown-item"
                           id="head-item"
-                          to={`/courses/enrolled/${userId}`}
-                          onClick={myEnrollCourseHandle}
+                          to="/dashboard"
                         >
-                          MyEnrollCourses
+                          Dashboard
                         </Link>
-                        <Link
-                          className="dropdown-item"
-                          id="head-item"
-                          to={`/user/${userId}`}
-                        >
-                          Profile
-                        </Link>
-                        <Link
-                          className="dropdown-item text-danger"
-                          id="head-item-logout"
-                          to="/"
-                          onClick={logoutHandler}
-                        >
-                          Logout
-                        </Link>
-                      </div>
+                      )}
                     </div>
+                    <MDBDropdownItem
+                      link
+                      onClick={myEnrollCourseHandle}
+                      to={`/courses/enrolled/${userId}`}
+                    >
+                      MyEnrollCourses
+                    </MDBDropdownItem>
+                    <MDBDropdownItem link to={`/user/${userId}`}>
+                      Profile
+                    </MDBDropdownItem>
+                    <MDBDropdownItem link>Setting</MDBDropdownItem>
+                    <MDBDropdownItem link onClick={logoutHandler} to="/">
+                      Logout
+                    </MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              ) : (
+                // {token ? (
+                //   <div>
+                //     <div className="dropdown">
+
+                //       <figure className="avatar avatar-nav">
+                //         <img
+                //           alt={userinfo && userinfo.name}
+                //           className="rounded-circle"
+                //         />
+                //       </figure>
+                //       <span className="head-user-name">
+                //         {userinfo && userinfo.name}
+                //       </span>
+
+                //       <div
+                //         className="dropdown-menu"
+                //         aria-labelledby="dropDownMenuButton"
+                //       >
+                //         {userinfo && userinfo.role === "ADMIN" && (
+                //           <Link
+                //             className="dropdown-item"
+                //             id="head-item"
+                //             to="/dashboard"
+                //           >
+                //             Dashboard
+                //           </Link>
+                //         )}
+                //         <Link
+                //           className="dropdown-item"
+                //           id="head-item"
+                //           to={`/courses/enrolled/${userId}`}
+                //           onClick={myEnrollCourseHandle}
+                //         >
+                //           MyEnrollCourses
+                //         </Link>
+                //         <Link
+                //           className="dropdown-item"
+                //           id="head-item"
+                //           to={`/user/${userId}`}
+                //         >
+                //           Profile
+                //         </Link>
+                //         <Link
+                //           className="dropdown-item text-danger"
+                //           id="head-item-logout"
+                //           to="/"
+                //           onClick={logoutHandler}
+                //         >
+                //           Logout
+                //         </Link>
+                //       </div>
+                //     </div>
+                //   </div>
+                !loading && (
+                  <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <MDBBtn href="/auth/login">LOGIN</MDBBtn>
+                    <MDBBtn href="/auth/Register">SIGNUP</MDBBtn>
                   </div>
-                ) : (
-                  !loading && (
-                    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <MDBBtn href="/auth/login">LOGIN</MDBBtn>
-                      <MDBBtn href="/auth/Register">SIGNUP</MDBBtn>
-                    </div>
-                  )
-                )}
-              </div>
+                )
+              )}
             </div>
           </MDBContainer>
         </MDBNavbar>
