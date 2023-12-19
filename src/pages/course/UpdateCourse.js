@@ -92,9 +92,7 @@ const UpdateCourse = () => {
         <Fragment>
             <MetaData title={'New Course'} />
             <div className="row">
-                {/* <div className="col-12 col-md-2">
-                    <Sidebar />
-                </div> */}
+             
 
                 <div className="col-12 col-md-10">
                     <Fragment>

@@ -108,7 +108,7 @@ const { token, userId, loading } = useSelector(state => state.auth)
                                 {userinfo && userinfo.role === 'ADMIN' && (
                                     <Link className="dropdown-item" id="head-item" to="/dashboard">Dashboard</Link>
                                 )}
-                                <Link className="dropdown-item" id="head-item" to={`/enroll/user/${userId}`}  onClick={myEnrollCourseHandle} >MyEnrollCourses</Link>
+                                <Link className="dropdown-item" id="head-item" to={`/courses/enrolled/${userId}`}  onClick={myEnrollCourseHandle} >MyEnrollCourses</Link>
                                 <Link className="dropdown-item" id="head-item" to={`/user/${userId}`} >Profile</Link>
                                 <Link className="dropdown-item text-danger" id="head-item-logout" to="/" onClick={logoutHandler}>
                                     Logout

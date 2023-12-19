@@ -35,7 +35,10 @@ import {
     CLEAR_ERRORS,
     MY_COURSES_REQUEST,
     MY_COURSES_SUCCESS,
-    MY_COURSES_FAIL
+    MY_COURSES_FAIL,
+    ENROLL_COURSES_FAIL,
+    ENROLL_COURSES_REQUEST,
+    ENROLL_COURSES_SUCCESS
 
 } from '../constants/courseConstants'
 
@@ -63,7 +66,7 @@ export const getCourses = (keyword = '', currentPage = 1 ) => async (dispatch) =
 
     }
 }
-
+//create course
 export const newCourse = (jsonData, token) => async (dispatch) => {
     try {
 
@@ -300,8 +303,32 @@ export const myCourses = (userId, token) => async (dispatch) => {
 
     }
 }
+// enroll course
+export const enrollCourses = (id, userId, token) => async (dispatch) => {
+    try {
+  
+        dispatch({ type: ENROLL_COURSES_REQUEST })
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        };
+        const { data } = await axios.post(`/api/v1/enroll/create/${id}/${userId}`, config)
+      
+        dispatch({
+            type: ENROLL_COURSES_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: ENROLL_COURSES_FAIL,
+            payload: error.response.data.message
+        })
+
+    }
+}
 //my enroll course
-export const myEnrollCourses = (id, token) => async (dispatch) => {
+export const myEnrollCourses = (userId, token) => async (dispatch) => {
     try {
   
         dispatch({ type: MY_ENROLL_COURSES_REQUEST })
@@ -310,7 +337,7 @@ export const myEnrollCourses = (id, token) => async (dispatch) => {
             'Authorization': `Bearer ${token}`
           }
         };
-        const { data } = await axios.get(`/api/v1/enroll/user/${id}`, config)
+        const { data } = await axios.get(`/api/v1/enroll/${userId}`, config)
       
         dispatch({
             type: MY_ENROLL_COURSES_SUCCESS,
