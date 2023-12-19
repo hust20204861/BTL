@@ -269,7 +269,7 @@ export const allUsers = (token) => async (dispatch) => {
 }
 
 // Update user - ADMIN
-export const updateUser = (userId,token, userData) => async (dispatch) => {
+export const updateUser = (userId, token, userData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_USER_REQUEST })
 

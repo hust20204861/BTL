@@ -80,10 +80,10 @@ const UsersList = () => {
                 role: user.role,
 
                 actions: <Fragment>
-                    <Link to={`/admin/user/${user.user_id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/admin/update/${user.user_id}`} className="btn btn-primary py-1 px-2">
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user.user_id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user.user_id, token)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>

@@ -2,10 +2,11 @@ import React, { Fragment, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import MetaData from '../../components/layout/MetaData'
-import { updateCourse, clearErrors } from '../../actions/courseActions'
-import { NEW_COURSE_RESET } from '../../constants/courseConstants'
+import { updateCourse, clearErrors, getCourseDetails } from '../../actions/courseActions'
+import { UPDATE_COURSE_REQUEST } from '../../constants/courseConstants'
 
 const UpdateCourse = () => {
 
@@ -35,23 +36,54 @@ const UpdateCourse = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const id = useParams();
 
-    const { loading, error, success } = useSelector(state => state.newCourse);
-
+    const { error, course } = useSelector(state => state.courseDetails)
+    const { loading, error: updateError, isUpdated } = useSelector(state => state.course);
+    const courseId = id;
     useEffect(() => {
+        if (course && course.id !== courseId) {
+            dispatch(getCourseDetails(courseId, token));
+        } else {
+         setLearningObject(course.learningObject);
+         setRequiredSkills(course.requiredSkills);
+         setCourseFor(course.courseFor);
+         setTitle(course.title);
+         setSubTitle(course.subtitle);
+         setTotalEnroll(course.totalEnroll);
+         setCourseDescription(course.courseDescription);
+         setCategory(course.category);
+         setCongratulationMessage(course.congratulationMessage);
+         setCourseImageUrl(course.courseImageUrl);
+         setLanguage(course.language);
+         setLevel(course.level);
+         setPrimarilyTaught(course.primarilyTaught);
+         setPromotionalVideoUrl(course.promotionalVideoUrl);
+         setPrice(course.price);
+         setWelcomeMessage(course.welcomeMessage);
+         setStatus(course.status);
+         setRating(course.rating);
+         setSale(course.sale);
+        }
 
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
         }
 
-        if (success) {
-            navigate('/course/create/list/:userId');
-            alert.success('Course created successfully');
-            dispatch({ type: NEW_COURSE_RESET })
+        if (updateError) {
+            alert.error(updateError);
+            dispatch(clearErrors())
         }
 
-    }, [dispatch, alert, error, success, navigate])
+
+        if (isUpdated) {
+            navigate('/courses');
+            alert.success('Course updated successfully');
+            dispatch({ type: UPDATE_COURSE_REQUEST })
+        }
+
+    }, [dispatch, alert, error,courseId, isUpdated,id, updateError, navigate, course])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -84,7 +116,7 @@ const UpdateCourse = () => {
         }
         const jsonData = JSON.stringify(jsonObject);
 
-        dispatch(updateCourse(jsonData, token))
+        dispatch(updateCourse(course.id, token, jsonData))
     }
 
 
@@ -98,7 +130,7 @@ const UpdateCourse = () => {
                     <Fragment>
                         <div className="wrapper my-5">
                             <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
-                                <h1 className="mb-4">New Course</h1>
+                                <h1 className="mb-4">Update Course</h1>
 
                                 <div className="form-group">
                                     <label htmlFor="name_field">LearningObject</label>
