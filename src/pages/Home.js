@@ -83,7 +83,7 @@ dispatch(getCourses())
       ) : (
         <Fragment>
           <MetaData title={"Home"} />
-          
+          <hr />
           <p className="text-decoration-underline"><h4>Học viên đang xem</h4></p>
           <div>
             {(
