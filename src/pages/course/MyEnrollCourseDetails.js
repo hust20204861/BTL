@@ -96,9 +96,16 @@ const MyEnrollCourseDetails = () => {
                             <p id="updatedAt">${course.updatedAt}</p>
                             <hr />
                            {/* khi click vào section thì thả xuống các lecture */}
-                           {/* {sections.map(section => (
-                              <p id="section">${section.name}</p>
-                           ))} */}
+                           {sections ? (
+                            <h5>
+                            {sections.map(section => (
+                            <p id="section">{section.name}</p>
+                            ))}
+                            </h5>):(
+                            <div>các bài giảng ở đây</div>
+                           )}
+
+                           
                             <button type="button"  >discussion</button>
 
 
