@@ -25,17 +25,17 @@ const UpdateUser = () => {
     const { user } = useSelector(state => state.userDetails)
 
     const userId = id;
-console.log("afdgsdajfgksahfjs", userId)
+console.log("afdgsdajfgksahfjs", id)
     useEffect(() => {
 
-        console.log(user && user.user_id !== userId);
-        if (user && user.user_id !== userId) {
-            dispatch(getUserDetails(userId, token))
-        } else {
-            setName(user.name);
-            setEmail(user.email);
-            setRole(user.role)
-        }
+        // console.log(user && user.user_id !== userId);
+        // if (user && user.user_id !== userId) {
+        //     dispatch(getUserDetails(userId, token))
+        // } else {
+        //     setName(user.name);
+        //     setEmail(user.email);
+        //     setRole(user.role)
+        // }
 
         if (error) {
             alert.error(error);

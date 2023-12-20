@@ -61,7 +61,19 @@ import {
     DELETE_LECTURE_FAIL,
     UPDATE_LECTURE_REQUEST,
     UPDATE_LECTURE_SUCCESS,
-    UPDATE_LECTURE_FAIL
+    UPDATE_LECTURE_FAIL,
+    NEW_DISCUSSION_REQUEST,
+    NEW_DISCUSSION_SUCCESS,
+    NEW_DISCUSSION_FAIL,
+    GET_DISCUSSIONS_REQUEST,
+    GET_DISCUSSIONS_SUCCESS,
+    GET_DISCUSSIONS_FAIL,
+    DELETE_DISCUSSION_REQUEST,
+    DELETE_DISCUSSION_SUCCESS,
+    DELETE_DISCUSSION_FAIL,
+    UPDATE_DISCUSSION_REQUEST,
+    UPDATE_DISCUSSION_SUCCESS,
+    UPDATE_DISCUSSION_FAIL
 
 } from '../constants/courseConstants'
 
@@ -248,31 +260,69 @@ export const getAdminCourses = (token) => async (dispatch) => {
     }
 }
 
-// Get course feedbacks
-export const getCourseFeedbacks = (id, token) => async (dispatch) => {
-    try {
 
+export const getCourseFeedbacks = (course_id , token) => async (dispatch) => {
+    try {
         dispatch({ type: GET_FEEDBACKS_REQUEST })
         const config = {
             headers: {
               'Authorization': `Bearer ${token}`
             }
-          };
-        const { data } = await axios.get(`/api/v1/feedback/${id}`, config)
+          }; 
 
+        // const link = `/api/v1/feedback/filter?page_size=10&page_number=0`
+        // if(course_id) {
+        //     link = `/api/v1/feedback/filter?page_size=10&page_number=0&course_id=${course_id}`
+        //     if(user_id) {
+        //         link =  `/api/v1/feedback/filter?page_size=10&page_number=0&course_id=${course_id}&user_id=${user_id}`
+        //     }
+        //     if(user_id) {
+        //         link = `/api/v1/feedback/filter?page_size=10&page_number=0&user_id=${user_id}`
+        //     } 
+        // }
+        //const { data } = await axios.get(link, config) 
+        const { data } = await axios.get(`/api/v1/feedback/filter?page_size=10&page_number=0&course_id=${course_id}`, config)
         dispatch({
             type: GET_FEEDBACKS_SUCCESS,
-            payload: data
+            payload: data,
         })
-
+        console.log("dataaaa", data)
     } catch (error) {
-
         dispatch({
             type: GET_FEEDBACKS_FAIL,
-            payload: error.response.data.message
+            payload:  error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
         })
+
     }
 }
+
+// Get course feedbacks
+// export const getAdminCourseFeedbacks = (id, token) => async (dispatch) => {
+//     try {
+
+//         dispatch({ type: GET_FEEDBACKS_REQUEST })
+//         const config = {
+//             headers: {
+//               'Authorization': `Bearer ${token}`
+//             }
+//           };
+//         const { data } = await axios.get(`/api/v1/feedback/${id}`, config)
+
+//         dispatch({
+//             type: GET_FEEDBACKS_SUCCESS,
+//             payload: data
+//         })
+
+//     } catch (error) {
+
+//         dispatch({
+//             type: GET_FEEDBACKS_FAIL,
+//             payload: error.response.data.message
+//         })
+//     }
+// }
 
 // Delete course review
 export const deleteFeedback = (id, token) => async (dispatch) => {
@@ -553,7 +603,7 @@ export const getLectures = (id, token) => async (dispatch) => {
     }
 }
 
-// Delete section 
+// Delete lecture 
 export const deleteLecture = (id, token) => async (dispatch) => {
     try {
 
@@ -602,6 +652,118 @@ export const updateLecture = (token, jsonData) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: UPDATE_LECTURE_FAIL,
+            payload: error.response.data.message
+        }) 
+    }
+}
+
+
+//new discussion
+export const newDiscussion = (json , lectureId, userId, token) => async (dispatch) => {
+    try {
+
+        dispatch({ type: NEW_DISCUSSION_REQUEST })
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+            }
+        }
+
+        const { data } = await axios.post(`/api/v1/discussion/${lectureId}/${userId}`, json, config)
+
+        dispatch({
+            type: NEW_DISCUSSION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: NEW_DISCUSSION_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+//get discussions
+export const getDiscussions = (lectureId, userId, token) => async (dispatch) => {
+
+    try {
+
+        dispatch({ type: GET_DISCUSSIONS_REQUEST })
+      
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            }
+
+        const { data } = await axios.get(`api/v1/discussion/${lectureId}/${userId}`, config)
+      
+        dispatch({
+            type: GET_DISCUSSIONS_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_DISCUSSIONS_FAIL,
+            payload:  error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+
+    }
+}
+
+// Delete lecture 
+export const deleteDiscussion = (discussionId, token) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_DISCUSSION_REQUEST })
+
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        };
+        const { data } = await axios.delete(`/api/v1/discussion/${discussionId}`, config)
+
+        dispatch({
+            type: DELETE_DISCUSSION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_DISCUSSION_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+// Update section
+export const updateDiscussion = (discussionId, token, jsonData) => async (dispatch) => {
+    try {
+     
+        dispatch({ type: UPDATE_DISCUSSION_REQUEST })
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+            }
+        }
+
+        const { data } = await axios.put(`/api/v1/discussion/${discussionId}`, jsonData, config)
+
+        dispatch({
+            type: UPDATE_DISCUSSION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_DISCUSSION_FAIL,
             payload: error.response.data.message
         }) 
     }

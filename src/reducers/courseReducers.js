@@ -70,7 +70,22 @@ import {
     DELETE_LECTURE_FAIL,
     UPDATE_LECTURE_FAIL,
     DELETE_LECTURE_RESET,
-    UPDATE_LECTURE_RESET
+    UPDATE_LECTURE_RESET,
+    NEW_DISCUSSION_REQUEST,
+    NEW_DISCUSSION_SUCCESS,
+    NEW_DISCUSSION_FAIL,
+    NEW_DISCUSSION_RESET,
+    GET_DISCUSSIONS_REQUEST,
+    GET_DISCUSSIONS_SUCCESS,
+    GET_DISCUSSIONS_FAIL,
+    DELETE_DISCUSSION_REQUEST,
+    UPDATE_DISCUSSION_REQUEST,
+    DELETE_DISCUSSION_SUCCESS,
+    UPDATE_DISCUSSION_SUCCESS,
+    DELETE_DISCUSSION_FAIL,
+    UPDATE_DISCUSSION_FAIL,
+    DELETE_DISCUSSION_RESET,
+    UPDATE_DISCUSSION_RESET
 
 } from '../constants/courseConstants'
 
@@ -241,7 +256,7 @@ export const courseDetailsReducer = (state = { course: [] }, action) => {
     }
 }
 
-export const newReviewReducer = (state = {}, action) => {
+export const newFeedbackReducer = (state = {}, action) => {
     switch (action.type) {
 
         case NEW_FEEDBACK_REQUEST:
@@ -311,7 +326,7 @@ export const courseFeedbacksReducer = (state = { feedback: [] }, action) => {
     }
 }
 
-export const reviewReducer = (state = {}, action) => {
+export const feedbackReducer = (state = {}, action) => {
     switch (action.type) {
 
         case DELETE_FEEDBACK_REQUEST:
@@ -684,6 +699,134 @@ export const lectureReducer = (state = {}, action) => {
             }
 
         case UPDATE_LECTURE_RESET:
+            return {
+                ...state,
+                isUpdated: false
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+
+
+//new lecture
+export const newDiscussionReducer = (state = { discussion: {} }, action) => {
+    switch (action.type) {
+
+        case NEW_DISCUSSION_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case NEW_DISCUSSION_SUCCESS:
+            return {
+                loading: false,
+                // success: action.payload.success,
+                discussion: action.payload
+            }
+
+        case NEW_DISCUSSION_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case NEW_DISCUSSION_RESET:
+            return {
+                ...state,
+                success: false
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+//get lectures
+export const discussionsReducer = (state = { discussions: [] }, action) => {
+    switch (action.type) {
+        case GET_DISCUSSIONS_REQUEST:
+            return {
+                loading: true,
+                lectures: []
+            }
+
+        case GET_DISCUSSIONS_SUCCESS:  
+            return {
+                loading: false,
+                discussions: action.payload
+            }
+
+        case GET_DISCUSSIONS_FAIL:  
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const discussionReducer = (state = {}, action) => {
+    switch (action.type) {
+
+        case DELETE_DISCUSSION_REQUEST:
+        case UPDATE_DISCUSSION_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case DELETE_DISCUSSION_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload
+            }
+
+        case UPDATE_DISCUSSION_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload
+            }
+
+
+        case DELETE_DISCUSSION_FAIL:
+        case UPDATE_DISCUSSION_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case DELETE_DISCUSSION_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+
+        case UPDATE_DISCUSSION_RESET:
             return {
                 ...state,
                 isUpdated: false

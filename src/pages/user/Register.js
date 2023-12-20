@@ -21,7 +21,9 @@ const Register = () => {
 
     useEffect(() => {
         if (!isError) {
-            navigate('/')
+            alert.success('Đăng kí thành công, hãy đăng nhập để trải nghiệm')
+            navigate('/auth/login')
+
         }
 
         if (error) {
