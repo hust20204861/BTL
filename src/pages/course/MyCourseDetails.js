@@ -3,28 +3,33 @@ import { Carousel } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
+//import { useNavigate } from 'react-router-dom'
 
 import Loader from '../../components/layout/Loader'
 import MetaData from '../../components/layout/MetaData'
-import { getCourseDetails, clearErrors, getCourseFeedbacks } from '../../actions/courseActions'
+import { getCourseDetails, clearErrors, getCourseFeedbacks, deleteFeedback } from '../../actions/courseActions'
 const MyCourseDetails = () => {
 
     const { token } = useSelector(state => state.auth)
 
     const dispatch = useDispatch();
     const alert = useAlert();
+    //const navigate = useNavigate();
     const {id} = useParams();
     const { feedbacks} = useSelector(state => state.courseFeedbacks)
+    const { isDelete } = useSelector(state => state.feedback)
     const { error, loading, course } = useSelector(state => state.courseDetails)
     useEffect(() => {
 
         dispatch(getCourseDetails(id, token))
-        
+        // if(isDelete) {
+        //     navigate(`/`);
+        // }
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
         }
-    }, [dispatch, id, token])
+    }, [dispatch, id, token, isDelete])
 
     const [showFeedbacks, setShowFeedbacks] = useState(false);
     //show and hide feedbacks
@@ -32,9 +37,12 @@ const MyCourseDetails = () => {
         dispatch(getCourseFeedbacks(id, token));
         setShowFeedbacks(true);
       };
-     const handleCancelFeedbacks = () => {
+    const handleCancelFeedbacks = () => {
         setShowFeedbacks(false);
      };
+    const handleDeleteFeedbacks = (idd, token) => {
+        dispatch(deleteFeedback(idd, token));
+    }
      
     return (
         <Fragment>
@@ -75,12 +83,12 @@ const MyCourseDetails = () => {
                             {showFeedbacks && feedbacks? (
                             <div>
                             {feedbacks.data.map((feedback) => (
-                               <div key={feedback.id}>
-                               <p>Đánh giá: {feedback.feed_back} </p>
-                               <p>Star: {feedback.rating} sao </p>
-                               </div>
-                           ))}
-                                 <button type="button" onClick={handleCancelFeedbacks}>Cancel</button>
+                            <div key={feedback.id}>
+                            <p>Star: {feedback.rating}sao ------- Đánh giá: {feedback.feed_back}  <button type="button" onClick={() => handleDeleteFeedbacks(feedback.id, token)}>Delete this feedback</button></p> 
+                            </div>
+                            ))}
+                         
+                            <button type="button" onClick={handleCancelFeedbacks}>Cancel</button>
                             </div>
                             ): ( 
                                 <div>Xem đánh giá của bạn ở đây!</div>

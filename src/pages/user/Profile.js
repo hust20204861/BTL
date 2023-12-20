@@ -31,15 +31,22 @@ const { userId } = useSelector(state => state.auth)
                         <div className="ifnomation">
                             <h4>Full Name</h4>
                             <p>{userinfo.name}</p>
-
+                            <hr/>
                             <h4>Email Address</h4>
                             <p>{userinfo.email}</p>
-
+                            <hr/>
+                            <h4>Your Website</h4>
                             <p>{userinfo.website}</p>
+                            <hr/>
+                            <h4>Avatar</h4>
                             <p>{userinfo.avatar}</p>
+                            <hr/>
+                            <h4>Description</h4>
                             <p>{userinfo.description}</p>
-                            <p>{userinfo.money}</p>
-
+                            <hr/>
+                            <h4>Your Money</h4>
+                            <p>${userinfo.money}</p>
+                            <hr/>
                             <h4>Joined On</h4>
                             <p>{String(userinfo.createdAt).substring(0, 10)}</p>
                          

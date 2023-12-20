@@ -67,11 +67,16 @@ const MyEnrollCourseDetails = () => {
 
                             <div className="course-rating">
                                 <div className="star" style={{ width: `${(course.rating / 5) * 100}%` }}></div>
+                             {/* {[...Array(course.rating)].map((_, index) => (
+                             <i key={index} className="fas fa-star"></i>
+                            ))} */}
                             </div>
 
                             <hr />
 
                             <p id="course_price">${course.price}</p>
+                            <hr />
+
                             <p id="requiredSkills">${course.requiredSkills}</p>
                             <p id="courseFor">${course.courseFor}</p>
                             <p id="title">${course.title}</p>
@@ -82,27 +87,48 @@ const MyEnrollCourseDetails = () => {
                             <p id="primarilyTaught">${course.primarilyTaught}</p>
                             <p id="welcomeMessage">${course.welcomeMessage}</p>
                             <p id="congratulationMessage">${course.congratulationMessage}</p>
+                            <hr />
+                            <p id="status">${course.status}</p>
+                            <h4 className="mt-2">Description:</h4>
+                            <p>{course.courseDescription}</p>
+                            <hr />
                             <p id="createdAt">${course.createdAt}</p>
                             <p id="updatedAt">${course.updatedAt}</p>
-                            <p id="status">${course.status}</p>
-
+                            <hr />
                            {/* khi click vào section thì thả xuống các lecture */}
                            {/* {sections.map(section => (
                               <p id="section">${section.name}</p>
                            ))} */}
-                          
-
-                            <button type="button" onClick={feedback} >feedback</button>
                             <button type="button"  >discussion</button>
 
+
+
+
+
+                          <div className="form-group">
+                                    <label htmlFor="name_field">Đánh giá của bạn</label>
+                                    <input
+                                        type="text"
+                                        value={feed_back}
+                                        onChange={(e) => setFeed_back(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="name_field">Khóa học được đánh giá bao nhiêu sao?</label>
+                                    <input
+                                        type="text"
+                                        value={rating}
+                                        onChange={(e) => setRating(e.target.value)}
+                                    />
+                                </div>
+                            <button type="button" onClick={feedback} >feedback</button>
+        
+
                             <hr />
 
 
-                            <hr />
 
-                            <h4 className="mt-2">Description:</h4>
-                            <p>{course.courseDescription}</p>
-                            <hr />
+                          
 
                         </div>
                     </div>

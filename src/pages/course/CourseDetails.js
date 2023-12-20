@@ -88,6 +88,7 @@ const CourseDetails = () => {
                             <p id="congratulationMessage">${course.congratulationMessage}</p>
                             <h4 className="mt-2">Description:</h4>
                             <p>{course.courseDescription}</p>
+                            <hr />
                             <p id="status">${course.status}</p>
                             <p id="createdAt">${course.createdAt}</p>
                             <p id="updatedAt">${course.updatedAt}</p>
@@ -108,12 +109,11 @@ const CourseDetails = () => {
                             {showFeedbacks && feedbacks? (
                             <div>
                             {feedbacks.data.map((feedback) => (
-                               <div key={feedback.id}>
-                               <p>Đánh giá: {feedback.feed_back} </p>
-                               <p>Star: {feedback.rating} sao </p>
-                               </div>
-                           ))}
-                                 <button type="button" onClick={handleCancelFeedbacks}>Cancel</button>
+                            <div key={feedback.id}>
+                            <p>Star: {feedback.rating}sao ------- Đánh giá: {feedback.feed_back}    </p>
+                            </div>
+                            ))}
+                            <button type="button" onClick={handleCancelFeedbacks}>Đóng</button>
                             </div>
                             ): ( 
                                 <div>Xem đánh giá của bạn ở đây!</div>

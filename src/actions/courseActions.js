@@ -334,7 +334,7 @@ export const deleteFeedback = (id, token) => async (dispatch) => {
             'Authorization': `Bearer ${token}`
           }
         };
-        const { data } = await axios.delete(`/api/v1/feedbacks/${id}`, config)
+        const { data } = await axios.delete(`/api/v1/feedback/${id}`, config)
 
         dispatch({
             type: DELETE_FEEDBACK_SUCCESS,
