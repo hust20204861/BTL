@@ -100,7 +100,7 @@ dispatch(getCourses())
                 <Course key={course.id} course={course} />
               ))}
           </div>
-
+ 
           {/* {resPerPage <= coursesCount && (
   <div className="pagination-container">
                             <Pagination

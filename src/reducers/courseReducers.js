@@ -140,7 +140,7 @@ export const newCourseReducer = (state = { course: {} }, action) => {
         case NEW_COURSE_SUCCESS:
             return {
                 loading: false,
-                success: action.payload.success,
+                success: true,
                 course: action.payload.course
             }
 
