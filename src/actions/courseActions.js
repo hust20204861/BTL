@@ -473,7 +473,7 @@ export const getSections = (id, token) => async (dispatch) => {
             }
         console.log("before", id, token)
 
-        const { data } = await axios.get(`api/v1/section/course-id/${id}`, config)
+        const { data } = await axios.get(`/api/v1/section/course-id/${id}`, config)
         console.log("after", id, token)
       
         dispatch({

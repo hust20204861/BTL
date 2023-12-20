@@ -86,6 +86,9 @@ const MyEnrollCourseDetails = () => {
                 {/* {[...Array(course.rating)].map((_, index) => (
                              <i key={index} className="fas fa-star"></i>
                             ))} */}
+
+
+
               </div>
 
               <hr />
@@ -143,6 +146,7 @@ const MyEnrollCourseDetails = () => {
                 </MDBBtn>
               </form>
               {/* <div className="form-group">
+
                                     <label htmlFor="name_field">Đánh giá của bạn</label>
                                     <input
                                         type="text"

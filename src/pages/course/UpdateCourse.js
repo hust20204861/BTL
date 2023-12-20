@@ -329,7 +329,7 @@ const UpdateCourse = () => {
         <MDBCheckbox
           wrapperClass="d-flex justify-content-center mb-4"
           id="form6Example8"
-          label="Create an Course?"
+          label="Update Course?"
           defaultChecked
         />
 
@@ -339,7 +339,7 @@ const UpdateCourse = () => {
           block
           disabled={loading ? true : false}
         >
-          CREATE Course
+          UPDATE COURSE
         </MDBBtn>
       </form>
       {/* 
