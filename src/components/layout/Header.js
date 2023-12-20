@@ -33,13 +33,14 @@ const Header = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { token, userId, loading } = useSelector((state) => state.auth);
+
   //lấy token được lưu gọi hàm loadUser và lấy dữ liệu
 
   useEffect(() => {
     dispatch(loadUser(userId, token));
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
-
+console.log("Adfsdafasdfh", userinfo)
   const logoutHandler = () => {
     dispatch(logout());
     alert.success("Logged out successfully");
@@ -52,6 +53,7 @@ const Header = () => {
     dispatch(myCourses(userId, token));
     alert.success("Here is your courses");
   };
+
   const [openNav, setOpenNav] = useState(false);
 
   return (
@@ -121,7 +123,7 @@ const Header = () => {
                       to={`/course/create/list/${userId}`}
                       id="create-course"
                       onClick={myCourseHandle}
-                    >
+                    > 
                       My Course
                     </Link>
                     <img
@@ -133,10 +135,7 @@ const Header = () => {
                     />
                  
                   </MDBDropdownToggle>
-                  <MDBDropdownMenu>
-                    {/* {userinfo && userinfo.role === "ADMIN" && (
-                          <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
-                        )} */}               
+                  <MDBDropdownMenu>              
                     <Link  to={`/courses/enrolled/${userId}`}
                            onClick={myEnrollCourseHandle}>
                     <MDBDropdownItem>MyEnrollCourses</MDBDropdownItem>
@@ -145,9 +144,8 @@ const Header = () => {
                     <Link to={`/user/${userId}`}>  
                     <MDBDropdownItem >Profile</MDBDropdownItem>
                     </Link>
-                  
 
-                    {userinfo && userinfo.role === "ADMIN" && (
+                    {(userinfo && userinfo.role === "ADMIN") && (
                         <Link to="/dashboard"
                               className="dropdown-item"
                               id="head-item"
@@ -165,7 +163,7 @@ const Header = () => {
 
                   </MDBDropdownMenu>
                 </MDBDropdown>
-              ) : (
+              ) : ( 
                 // {token ? (
                 //   <div>
                 //     <div className="dropdown">
