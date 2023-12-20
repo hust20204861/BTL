@@ -40,7 +40,6 @@ const Header = () => {
     dispatch(loadUser(userId, token));
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
-console.log("Adfsdafasdfh", userinfo)
   const logoutHandler = () => {
     dispatch(logout());
     alert.success("Logged out successfully");

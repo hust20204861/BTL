@@ -20,7 +20,6 @@ const CourseDetails = () => {
     const {id} = useParams();
     const { error, loading, course } = useSelector(state => state.courseDetails)
     const { feedbacks} = useSelector(state => state.courseFeedbacks)
-    console.log("fedddd", feedbacks )
 
     useEffect(() => {
 
@@ -106,18 +105,18 @@ const CourseDetails = () => {
                         
                             <hr />
                             <Link onClick={handleFeedbacksClick}>View feedbacks</Link>
-                            {showFeedbacks && (
+                            {showFeedbacks && feedbacks? (
                             <div>
-
                             {feedbacks.data.map((feedback) => (
                                <div key={feedback.id}>
                                <p>Đánh giá: {feedback.feed_back} </p>
                                <p>Star: {feedback.rating} sao </p>
                                </div>
                            ))}
-                                
                                  <button type="button" onClick={handleCancelFeedbacks}>Cancel</button>
                             </div>
+                            ): ( 
+                                <div>Xem đánh giá của bạn ở đây!</div>
                             )} 
 
                             {showConfirmation && (

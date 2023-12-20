@@ -19,6 +19,10 @@ const MyEnrollCourseDetails = () => {
    console.log("df", course)
    console.log("ssss", sections)
 
+   const [rating, setRating] = useState('');
+   const [time, setTime] = useState('');
+   const [feed_back, setFeed_back] = useState('');
+
     useEffect(() => {
         dispatch(getCourseDetails(id, token));
         if (error) {
@@ -30,10 +34,23 @@ const MyEnrollCourseDetails = () => {
         dispatch(getSections(id, token));
         console.log('ffff', id, token);
         }, [dispatch, id, token])
-    const feedback = () => {
-        dispatch(newFeedback(id));
+    const feedback = (e) => {
+        const formData = new FormData();
+        formData.set('rating', rating);
+        formData.set('time', time);
+        formData.set('feed_back', feed_back);
+        formData.set('course_id', id);
+
+        const jsonObject = {};
+        for (const pair of formData.entries()) {
+            jsonObject[pair[0]] = pair[1]
+        }
+        const jsonData = JSON.stringify(jsonObject);
+
+        dispatch(newFeedback(jsonData, token));
         alert.success('Sent your feedback')
     }
+
     
     return (
         <Fragment>
