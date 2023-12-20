@@ -35,7 +35,6 @@ const Header = () => {
     dispatch(loadUser(userId, token));
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
-  console.log("dsfdfds", userinfo);
 
   const logoutHandler = () => {
     dispatch(logout());

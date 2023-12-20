@@ -20,17 +20,17 @@ import {
     COURSE_DETAILS_REQUEST,
     COURSE_DETAILS_SUCCESS,
     COURSE_DETAILS_FAIL,
-    NEW_REVIEW_REQUEST,
-    NEW_REVIEW_SUCCESS,
-    NEW_REVIEW_RESET,
-    NEW_REVIEW_FAIL,
-    GET_REVIEWS_REQUEST,
-    GET_REVIEWS_SUCCESS,
-    GET_REVIEWS_FAIL,
-    DELETE_REVIEW_REQUEST,
-    DELETE_REVIEW_SUCCESS,
-    DELETE_REVIEW_RESET,
-    DELETE_REVIEW_FAIL,
+    NEW_FEEDBACK_REQUEST,
+    NEW_FEEDBACK_SUCCESS,
+    NEW_FEEDBACK_RESET,
+    NEW_FEEDBACK_FAIL,
+    GET_FEEDBACKS_REQUEST,
+    GET_FEEDBACKS_SUCCESS,
+    GET_FEEDBACKS_FAIL,
+    DELETE_FEEDBACK_REQUEST,
+    DELETE_FEEDBACK_SUCCESS,
+    DELETE_FEEDBACK_RESET,
+    DELETE_FEEDBACK_FAIL,
     MY_COURSES_FAIL,
     MY_COURSES_REQUEST,
     MY_COURSES_SUCCESS,
@@ -214,25 +214,25 @@ export const courseDetailsReducer = (state = { course: [] }, action) => {
 export const newReviewReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case NEW_REVIEW_REQUEST:
+        case NEW_FEEDBACK_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case NEW_REVIEW_SUCCESS:
+        case NEW_FEEDBACK_SUCCESS:
             return {
                 loading: false,
                 success: action.payload
             }
 
-        case NEW_REVIEW_FAIL:
+        case NEW_FEEDBACK_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case NEW_REVIEW_RESET:
+        case NEW_FEEDBACK_RESET:
             return {
                 ...state,
                 success: false
@@ -252,19 +252,19 @@ export const newReviewReducer = (state = {}, action) => {
 export const courseReviewsReducer = (state = { review: [] }, action) => {
     switch (action.type) {
 
-        case GET_REVIEWS_REQUEST:
+        case GET_FEEDBACKS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case GET_REVIEWS_SUCCESS:
+        case GET_FEEDBACKS_SUCCESS:
             return {
                 loading: false,
                 reviews: action.payload
             }
 
-        case GET_REVIEWS_FAIL:
+        case GET_FEEDBACKS_FAIL:
             return {
                 ...state,
                 error: action.payload
@@ -284,26 +284,26 @@ export const courseReviewsReducer = (state = { review: [] }, action) => {
 export const reviewReducer = (state = {}, action) => {
     switch (action.type) {
 
-        case DELETE_REVIEW_REQUEST:
+        case DELETE_FEEDBACK_REQUEST:
             return {
                 ...state,
                 loading: true
             }
 
-        case DELETE_REVIEW_SUCCESS:
+        case DELETE_FEEDBACK_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isDeleted: action.payload
             }
 
-        case DELETE_REVIEW_FAIL:
+        case DELETE_FEEDBACK_FAIL:
             return {
                 ...state,
                 error: action.payload
             }
 
-        case DELETE_REVIEW_RESET:
+        case DELETE_FEEDBACK_RESET:
             return {
                 ...state,
                 isDeleted: false

@@ -327,7 +327,7 @@ const UpdateCourse = () => {
                                     className="btn btn-block py-3"
                                     disabled={loading ? true : false}
                                 >
-                                    CREATE
+                                    UPDATE
                                 </button>
 
                             </form>

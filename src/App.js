@@ -100,7 +100,7 @@ function App() {
         <Route path="/course/create/list/:userId" element={<MyCourse/>} exact />
         <Route path="/mycourse/:id" element={<MyCourseDetails/>} exact />
         <Route path="/courses/enrolled/:userId" element={<MyEnrollCourse/>} exact />
-        <Route path="/course/enrolled/:userId" element={<MyEnrollCourseDetails/>} exact />
+        <Route path="/course/enrolled/:userId/:id" element={<MyEnrollCourseDetails/>} exact />
         </Routes>
 
           <Footer />

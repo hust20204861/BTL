@@ -14,8 +14,8 @@ const MyEnrollCourseDetails = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const {id} = useParams();
-
-    const { error, loading, myenrollcourses } = useSelector(state => state.myenrollcourses)
+    const { error, loading, course } = useSelector(state => state.courseDetails)
+    
     useEffect(() => {
 
         dispatch(getCourseDetails(id, token))
@@ -33,35 +33,35 @@ const MyEnrollCourseDetails = () => {
         <Fragment>
             {loading ? <Loader /> : (
                 <Fragment>
-                    <MetaData title={myenrollcourses.learningObject} />
+                    <MetaData title={course.learningObject} />
                     <div className="courses-details">
 
                         <div className="course-details-name">
-                            <h3>{myenrollcourses.learningObject}</h3>
-                            <p id="course_id">Course # {myenrollcourses.id}</p>
+                            <h3>{course.learningObject}</h3>
+                            <p id="course_id">Course # {course.id}</p>
 
                             <hr />
 
                             <div className="course-rating">
-                                <div className="star" style={{ width: `${(myenrollcourses.rating / 5) * 100}%` }}></div>
+                                <div className="star" style={{ width: `${(course.rating / 5) * 100}%` }}></div>
                             </div>
 
                             <hr />
 
-                            <p id="course_price">${myenrollcourses.price}</p>
-                            <p id="requiredSkills">${myenrollcourses.requiredSkills}</p>
-                            <p id="courseFor">${myenrollcourses.courseFor}</p>
-                            <p id="title">${myenrollcourses.title}</p>
-                            <p id="subtitle">${myenrollcourses.subtitle}</p>
-                            <p id="language">${myenrollcourses.language}</p>
-                            <p id="level">${myenrollcourses.level}</p>
-                            <p id="category">${myenrollcourses.category}</p>
-                            <p id="primarilyTaught">${myenrollcourses.primarilyTaught}</p>
-                            <p id="welcomeMessage">${myenrollcourses.welcomeMessage}</p>
-                            <p id="congratulationMessage">${myenrollcourses.congratulationMessage}</p>
-                            <p id="createdAt">${myenrollcourses.createdAt}</p>
-                            <p id="updatedAt">${myenrollcourses.updatedAt}</p>
-                            <p id="status">${myenrollcourses.status}</p>
+                            <p id="course_price">${course.price}</p>
+                            <p id="requiredSkills">${course.requiredSkills}</p>
+                            <p id="courseFor">${course.courseFor}</p>
+                            <p id="title">${course.title}</p>
+                            <p id="subtitle">${course.subtitle}</p>
+                            <p id="language">${course.language}</p>
+                            <p id="level">${course.level}</p>
+                            <p id="category">${course.category}</p>
+                            <p id="primarilyTaught">${course.primarilyTaught}</p>
+                            <p id="welcomeMessage">${course.welcomeMessage}</p>
+                            <p id="congratulationMessage">${course.congratulationMessage}</p>
+                            <p id="createdAt">${course.createdAt}</p>
+                            <p id="updatedAt">${course.updatedAt}</p>
+                            <p id="status">${course.status}</p>
 
                             <button type="button" onClick={feedback} >feedback</button>
                             <button type="button"  >discussion</button>
@@ -72,14 +72,14 @@ const MyEnrollCourseDetails = () => {
                             <hr />
 
                             <h4 className="mt-2">Description:</h4>
-                            <p>{myenrollcourses.courseDescription}</p>
+                            <p>{course.courseDescription}</p>
                             <hr />
 
                         </div>
                     </div>
 
-                    {myenrollcourses.reviews && myenrollcourses.reviews.length > 0 && (
-                        <ListReviews reviews={myenrollcourses.reviews} />
+                    {course.reviews && course.reviews.length > 0 && (
+                        <ListReviews reviews={course.reviews} />
                     )}
 
                 </Fragment>
