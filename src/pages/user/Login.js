@@ -44,19 +44,6 @@ const Login = () => {
     dispatch(login(email, password));
   };
 
-//   const [formValue, setFormValue] = useState({
-//     fname: "Mark",
-//     lname: "Otto",
-//     email: "",
-//     city: "",
-//     state: "",
-//     zip: "",
-//   });
-
-//   const onChange = (e: any) => {
-//     setFormValue({ ...formValue, [e.target.name]: e.target.value });
-//   };
-
   return (
     <Fragment>
       {loading ? (

@@ -69,6 +69,7 @@ const CourseDetails = () => {
         <Loader />
       ) : (
         <Fragment>
+
           <MetaData title={course.learningObject} />
           <div className="courses-details">
             <div className="course-details-name">
@@ -126,6 +127,7 @@ const CourseDetails = () => {
                     <div key={feedback.id}>
                       <p>Đánh giá: {feedback.feed_back} </p>
                       <p>Star: {feedback.rating} sao </p>
+
                     </div>
                   ))}
                   <MDBBtn onClick={handleCancelFeedbacks}>Cancel</MDBBtn>

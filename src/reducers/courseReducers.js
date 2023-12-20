@@ -339,7 +339,7 @@ export const feedbackReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: true
             }
 
         case DELETE_FEEDBACK_FAIL:
