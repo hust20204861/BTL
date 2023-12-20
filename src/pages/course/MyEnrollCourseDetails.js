@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import ListReviews from '../review/ListReviews'
 import Loader from '../../components/layout/Loader'
 import MetaData from '../../components/layout/MetaData'
-import { getCourseDetails, newReview, clearErrors } from '../../actions/courseActions'
+import { getCourseDetails, newFeedback, clearErrors, getSections } from '../../actions/courseActions'
 const MyEnrollCourseDetails = () => {
 
     const { token } = useSelector(state => state.auth)
@@ -15,18 +15,24 @@ const MyEnrollCourseDetails = () => {
     const alert = useAlert();
     const {id} = useParams();
     const { error, loading, course } = useSelector(state => state.courseDetails)
-    
-    useEffect(() => {
+    const { sections } = useSelector(state => state.sections)
+   console.log("df", course)
+   console.log("ssss", sections)
 
-        dispatch(getCourseDetails(id, token))
+    useEffect(() => {
+        dispatch(getCourseDetails(id, token));
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
         }
     }, [dispatch, id, token])
+    useEffect(() => {
+        dispatch(getSections(id, token));
+        console.log('ffff', id, token);
+        }, [dispatch, id, token])
     const feedback = () => {
-        dispatch(newReview(id));
-        alert.success('Item Added to Cart')
+        dispatch(newFeedback(id));
+        alert.success('Sent your feedback')
     }
     
     return (
@@ -62,6 +68,12 @@ const MyEnrollCourseDetails = () => {
                             <p id="createdAt">${course.createdAt}</p>
                             <p id="updatedAt">${course.updatedAt}</p>
                             <p id="status">${course.status}</p>
+
+                           {/* khi click vào section thì thả xuống các lecture */}
+                           {/* {sections.map(section => (
+                              <p id="section">${section.name}</p>
+                           ))} */}
+                          
 
                             <button type="button" onClick={feedback} >feedback</button>
                             <button type="button"  >discussion</button>

@@ -2,7 +2,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import { coursesReducer, newCourseReducer, courseReducer,enrollCoursesReducer, myEnrollCoursesReducer, courseDetailsReducer,myCoursesReducer, newReviewReducer, courseReviewsReducer, reviewReducer } from './reducers/courseReducers'
+import { coursesReducer, newCourseReducer, courseReducer,enrollCoursesReducer, myEnrollCoursesReducer, courseDetailsReducer,myCoursesReducer, newReviewReducer,
+     courseFeedbacksReducer, reviewReducer, newSectionReducer, sectionsReducer, sectionReducer,
+     lectureReducer, lecturesReducer, newLectureReducer } from './reducers/courseReducers'
 import { authReducer, userReducer,infoReducer, forgotPasswordReducer, allUsersReducer,registerReducer, userDetailsReducer } from './reducers/userReducers'
 import { cartReducer } from './reducers/cartReducers'
 
@@ -11,7 +13,7 @@ const reducer = combineReducers({
     courseDetails: courseDetailsReducer,
     newCourse: newCourseReducer,
     course: courseReducer,
-    courseReviews: courseReviewsReducer,
+    courseFeedbacks: courseFeedbacksReducer,
     review: reviewReducer,
     auth: authReducer,
     user: userReducer,
@@ -24,7 +26,13 @@ const reducer = combineReducers({
     register: registerReducer,
     mycourses: myCoursesReducer,
     myenrollcourses: myEnrollCoursesReducer,
-    enrollcourse: enrollCoursesReducer
+    enrollcourse: enrollCoursesReducer,
+    newSection: newSectionReducer,
+    sections: sectionsReducer,
+    section: sectionReducer,
+    newLecture: newLectureReducer,
+    lectures: lecturesReducer,
+    lecture: lectureReducer
 })
 
 

@@ -116,13 +116,7 @@ const Header = () => {
                     tag="a"
                     className="hidden-arrow row d-flex align-items-center nav-link"
                   >
-                    <img
-                      className="rounded-circle"
-                      height="22"
-                      width="50"
-                      alt={userinfo && userinfo.name}
-                      loading="lazy"
-                    />
+
                     <Link
                       to={`/course/create/list/${userId}`}
                       id="create-course"
@@ -130,40 +124,45 @@ const Header = () => {
                     >
                       My Course
                     </Link>
+                    <img
+                      className="rounded-circle"
+                      height="22"
+                      width="50"
+                      alt={userinfo && userinfo.name}
+                      loading="lazy"
+                    />
+                 
                   </MDBDropdownToggle>
                   <MDBDropdownMenu>
                     {/* {userinfo && userinfo.role === "ADMIN" && (
                           <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
-                        )} */}
+                        )} */}               
+                    <Link  to={`/courses/enrolled/${userId}`}
+                           onClick={myEnrollCourseHandle}>
+                    <MDBDropdownItem>MyEnrollCourses</MDBDropdownItem>
+                    </Link>
+                 
+                    <Link to={`/user/${userId}`}>  
+                    <MDBDropdownItem >Profile</MDBDropdownItem>
+                    </Link>
+                  
 
-                    <div
-                      className="dropdown-menu"
-                      aria-labelledby="dropDownMenuButton"
-                    >
-                      {userinfo && userinfo.role === "ADMIN" && (
-                        <Link
-                          className="dropdown-item"
-                          id="head-item"
-                          to="/dashboard"
+                    {userinfo && userinfo.role === "ADMIN" && (
+                        <Link to="/dashboard"
+                              className="dropdown-item"
+                              id="head-item"
                         >
-                          Dashboard
+                        <MDBDropdownItem>Setting</MDBDropdownItem>
                         </Link>
                       )}
-                    </div>
-                    <MDBDropdownItem
-                      link
-                      onClick={myEnrollCourseHandle}
-                      to={`/courses/enrolled/${userId}`}
-                    >
-                      MyEnrollCourses
-                    </MDBDropdownItem>
-                    <MDBDropdownItem link to={`/user/${userId}`}>
-                      Profile
-                    </MDBDropdownItem>
-                    <MDBDropdownItem link>Setting</MDBDropdownItem>
-                    <MDBDropdownItem link onClick={logoutHandler} to="/">
-                      Logout
-                    </MDBDropdownItem>
+                   
+
+                    <Link to="/"
+                          onClick={logoutHandler}> 
+                    <MDBDropdownItem >Logout</MDBDropdownItem>
+                    </Link>
+                    
+
                   </MDBDropdownMenu>
                 </MDBDropdown>
               ) : (

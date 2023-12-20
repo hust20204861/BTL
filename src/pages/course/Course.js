@@ -35,7 +35,7 @@ const Course = ({ course }) => {
             <MDBCardTitle>{course.learningObject}</MDBCardTitle>
             <MDBCardText>${course.price}</MDBCardText>
             <Link to={`/course/${course.id}`} className="course-details">
-              View Details
+              Xem khóa học
             </Link>
           </MDBCardBody>
         </MDBCard>

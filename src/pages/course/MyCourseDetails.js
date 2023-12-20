@@ -20,6 +20,7 @@ const MyCourseDetails = () => {
     useEffect(() => {
 
         dispatch(getCourseDetails(id, token))
+        
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
