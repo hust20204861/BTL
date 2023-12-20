@@ -19,15 +19,15 @@ import {
     COURSE_DETAILS_REQUEST,
     COURSE_DETAILS_SUCCESS,
     COURSE_DETAILS_FAIL,
-    NEW_REVIEW_REQUEST,
-    NEW_REVIEW_SUCCESS,
-    NEW_REVIEW_FAIL,
-    GET_REVIEWS_REQUEST,
-    GET_REVIEWS_SUCCESS,
-    GET_REVIEWS_FAIL,
-    DELETE_REVIEW_REQUEST,
-    DELETE_REVIEW_SUCCESS,
-    DELETE_REVIEW_FAIL,
+    NEW_FEEDBACK_REQUEST,
+    NEW_FEEDBACK_SUCCESS,
+    NEW_FEEDBACK_FAIL,
+    GET_FEEDBACKS_REQUEST,
+    GET_FEEDBACKS_SUCCESS,
+    GET_FEEDBACKS_FAIL,
+    DELETE_FEEDBACK_REQUEST,
+    DELETE_FEEDBACK_SUCCESS,
+    DELETE_FEEDBACK_FAIL,
     MY_ENROLL_COURSES_FAIL,
     MY_ENROLL_COURSES_REQUEST,
     MY_ENROLL_COURSES_SUCCESS,
@@ -173,7 +173,7 @@ export const getCourseDetails = (id, token) => async (dispatch) => {
 export const newReview = (feedbackData, token) => async (dispatch) => {
     try {
 
-        dispatch({ type: NEW_REVIEW_REQUEST })
+        dispatch({ type: NEW_FEEDBACK_REQUEST })
 
     const config = {
         headers: {
@@ -185,13 +185,13 @@ export const newReview = (feedbackData, token) => async (dispatch) => {
         const { data } = await axios.post(`/api/v1/feedback`, feedbackData, config)
 
         dispatch({
-            type: NEW_REVIEW_SUCCESS,
+            type: NEW_FEEDBACK_SUCCESS,
             payload: data
         })
 
     } catch (error) {
         dispatch({
-            type: NEW_REVIEW_FAIL,
+            type: NEW_FEEDBACK_FAIL,
             payload: error.response.data.message
         })
     }
@@ -225,10 +225,10 @@ export const getAdminCourses = (token) => async (dispatch) => {
 }
 
 // Get course feedbacks
-export const getCourseReviews = (id, token) => async (dispatch) => {
+export const getCourseFeedbacks = (id, token) => async (dispatch) => {
     try {
 
-        dispatch({ type: GET_REVIEWS_REQUEST })
+        dispatch({ type: GET_FEEDBACKS_REQUEST })
         const config = {
             headers: {
               'Authorization': `Bearer ${token}`
@@ -237,14 +237,14 @@ export const getCourseReviews = (id, token) => async (dispatch) => {
         const { data } = await axios.get(`/api/v1/feedback/${id}`, config)
 
         dispatch({
-            type: GET_REVIEWS_SUCCESS,
+            type: GET_FEEDBACKS_SUCCESS,
             payload: data
         })
 
     } catch (error) {
 
         dispatch({
-            type: GET_REVIEWS_FAIL,
+            type: GET_FEEDBACKS_FAIL,
             payload: error.response.data.message
         })
     }
@@ -254,7 +254,7 @@ export const getCourseReviews = (id, token) => async (dispatch) => {
 export const deleteReview = (id, token) => async (dispatch) => {
     try {
  
-        dispatch({ type: DELETE_REVIEW_REQUEST })
+        dispatch({ type: DELETE_FEEDBACK_REQUEST })
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -263,7 +263,7 @@ export const deleteReview = (id, token) => async (dispatch) => {
         const { data } = await axios.delete(`/api/v1/feedbacks/${id}`, config)
 
         dispatch({
-            type: DELETE_REVIEW_SUCCESS,
+            type: DELETE_FEEDBACK_SUCCESS,
             payload: data
         })
 
@@ -272,7 +272,7 @@ export const deleteReview = (id, token) => async (dispatch) => {
         console.log(error.response);
 
         dispatch({
-            type: DELETE_REVIEW_FAIL,
+            type: DELETE_FEEDBACK_FAIL,
             payload: error.response.data.message
         })
     }
@@ -305,22 +305,24 @@ export const myCourses = (userId, token) => async (dispatch) => {
 }
 // enroll course
 export const enrollCourses = (id, userId, token) => async (dispatch) => {
+
     try {
-  
+
         dispatch({ type: ENROLL_COURSES_REQUEST })
+
         const config = {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         };
-       
-        const { data } = await axios.post(`/api/v1/enroll/create/${id}/${userId}`, config)
-        console.log("agdgsdgaaewa", token)
+
+        const { data } = await axios.post(`/api/v1/enroll/create/${id}/${userId}`, null, config)
       
         dispatch({
             type: ENROLL_COURSES_SUCCESS,
             payload: data,
         })
+        
     } catch (error) {
         dispatch({
             type: ENROLL_COURSES_FAIL,
