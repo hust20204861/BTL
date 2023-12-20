@@ -37,7 +37,31 @@ import {
     MY_COURSES_FAIL,
     ENROLL_COURSES_FAIL,
     ENROLL_COURSES_REQUEST,
-    ENROLL_COURSES_SUCCESS
+    ENROLL_COURSES_SUCCESS,
+    GET_SECTIONS_REQUEST,
+    NEW_SECTION_REQUEST,
+    NEW_SECTION_FAIL,
+    NEW_SECTION_SUCCESS,
+    GET_SECTIONS_SUCCESS,
+    GET_SECTIONS_FAIL,
+    DELETE_SECTION_REQUEST,
+    DELETE_SECTION_SUCCESS,
+    DELETE_SECTION_FAIL,
+    UPDATE_SECTION_REQUEST,
+    UPDATE_SECTION_SUCCESS,
+    UPDATE_SECTION_FAIL,
+    NEW_LECTURE_REQUEST,
+    NEW_LECTURE_SUCCESS,
+    NEW_LECTURE_FAIL,
+    GET_LECTURES_REQUEST,
+    GET_LECTURES_SUCCESS,
+    GET_LECTURES_FAIL,
+    DELETE_LECTURE_REQUEST,
+    DELETE_LECTURE_SUCCESS,
+    DELETE_LECTURE_FAIL,
+    UPDATE_LECTURE_REQUEST,
+    UPDATE_LECTURE_SUCCESS,
+    UPDATE_LECTURE_FAIL
 
 } from '../constants/courseConstants'
 
@@ -170,7 +194,7 @@ export const getCourseDetails = (id, token) => async (dispatch) => {
 
 }
 //create feedback
-export const newReview = (feedbackData, token) => async (dispatch) => {
+export const newFeedback = (feedbackData, token) => async (dispatch) => {
     try {
 
         dispatch({ type: NEW_FEEDBACK_REQUEST })
@@ -251,7 +275,7 @@ export const getCourseFeedbacks = (id, token) => async (dispatch) => {
 }
 
 // Delete course review
-export const deleteReview = (id, token) => async (dispatch) => {
+export const deleteFeedback = (id, token) => async (dispatch) => {
     try {
  
         dispatch({ type: DELETE_FEEDBACK_REQUEST })
@@ -289,7 +313,6 @@ export const myCourses = (userId, token) => async (dispatch) => {
           }
         };
         const { data } = await axios.get(`/api/v1/course/create/list/${userId}`, config)
-      
         dispatch({
             type: MY_COURSES_SUCCESS,
             payload: data,
@@ -358,7 +381,232 @@ export const myEnrollCourses = (userId, token) => async (dispatch) => {
     }
 }
 
-// Clear Errors
+
+//new section
+export const newSection = (id, title, token) => async (dispatch) => {
+    try {
+
+        dispatch({ type: NEW_SECTION_REQUEST })
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+            }
+        }
+
+        const { data } = await axios.post(`/api/v1/section/${id}`, title, config)
+
+        dispatch({
+            type: NEW_SECTION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: NEW_SECTION_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+//get sections
+export const getSections = (id, token) => async (dispatch) => {
+
+    try {
+
+        dispatch({ type: GET_SECTIONS_REQUEST })
+      
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            }
+        console.log("before", id, token)
+
+        const { data } = await axios.get(`api/v1/section/course-id/${id}`, config)
+        console.log("after", id, token)
+      
+        dispatch({
+            type: GET_SECTIONS_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_SECTIONS_FAIL,
+            payload:  error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+
+    }
+}
+
+// Delete section 
+export const deleteSection = (id, token) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_SECTION_REQUEST })
+
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        };
+        const { data } = await axios.delete(`/api/v1/section/${id}`, config)
+
+        dispatch({
+            type: DELETE_SECTION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_SECTION_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+// Update section
+export const updateSection = ( id, token, jsonData) => async (dispatch) => {
+    try {
+     
+        dispatch({ type: UPDATE_SECTION_REQUEST })
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+            }
+        }
+
+        const { data } = await axios.put(`/api/v1/section/${id}`, jsonData, config)
+
+        dispatch({
+            type: UPDATE_SECTION_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_SECTION_FAIL,
+            payload: error.response.data.message
+        }) 
+    }
+}
+
+
+//new lecture
+export const newLecture = (json , token) => async (dispatch) => {
+    try {
+
+        dispatch({ type: NEW_LECTURE_REQUEST })
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` 
+            }
+        }
+
+        const { data } = await axios.post(`/api/v1/lecture`, json, config)
+
+        dispatch({
+            type: NEW_LECTURE_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: NEW_LECTURE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+//get lectures
+export const getLectures = (id, token) => async (dispatch) => {
+
+    try {
+
+        dispatch({ type: GET_LECTURES_REQUEST })
+      
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            }
+
+        const { data } = await axios.get(`api/v1/lecture`, config)
+      
+        dispatch({
+            type: GET_LECTURES_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_LECTURES_FAIL,
+            payload:  error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+
+    }
+}
+
+// Delete section 
+export const deleteLecture = (id, token) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_LECTURE_REQUEST })
+
+        const config = {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        };
+        const { data } = await axios.delete(`/api/v1/lecture/${id}`, config)
+
+        dispatch({
+            type: DELETE_LECTURE_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_LECTURE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+// Update section
+export const updateLecture = (token, jsonData) => async (dispatch) => {
+    try {
+     
+        dispatch({ type: UPDATE_LECTURE_REQUEST })
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+            }
+        }
+
+        const { data } = await axios.put(`/api/v1/lecture`, jsonData, config)
+
+        dispatch({
+            type: UPDATE_LECTURE_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_LECTURE_FAIL,
+            payload: error.response.data.message
+        }) 
+    }
+}
+//Clear Errors
 export const clearErrors = () => async (dispatch) => {
     dispatch({
         type: CLEAR_ERRORS

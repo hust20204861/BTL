@@ -40,7 +40,37 @@ import {
     ENROLL_COURSES_FAIL,
     ENROLL_COURSES_REQUEST,
     ENROLL_COURSES_SUCCESS,
-    CLEAR_ERRORS
+    NEW_SECTION_FAIL,
+    NEW_SECTION_REQUEST,
+    NEW_SECTION_RESET,
+    NEW_SECTION_SUCCESS,
+    GET_SECTIONS_FAIL,
+    GET_SECTIONS_REQUEST,
+    GET_SECTIONS_SUCCESS,
+    UPDATE_SECTION_FAIL,
+    UPDATE_SECTION_REQUEST,
+    UPDATE_SECTION_RESET,
+    UPDATE_SECTION_SUCCESS,
+    DELETE_SECTION_FAIL,
+    DELETE_SECTION_REQUEST,
+    DELETE_SECTION_RESET,
+    DELETE_SECTION_SUCCESS,
+    CLEAR_ERRORS,
+    NEW_LECTURE_REQUEST,
+    NEW_LECTURE_SUCCESS,
+    NEW_LECTURE_FAIL,
+    NEW_LECTURE_RESET,
+    GET_LECTURES_REQUEST,
+    GET_LECTURES_SUCCESS,
+    GET_LECTURES_FAIL,
+    DELETE_LECTURE_REQUEST,
+    UPDATE_LECTURE_REQUEST,
+    DELETE_LECTURE_SUCCESS,
+    UPDATE_LECTURE_SUCCESS,
+    DELETE_LECTURE_FAIL,
+    UPDATE_LECTURE_FAIL,
+    DELETE_LECTURE_RESET,
+    UPDATE_LECTURE_RESET
 
 } from '../constants/courseConstants'
 
@@ -249,7 +279,7 @@ export const newReviewReducer = (state = {}, action) => {
     }
 }
 
-export const courseReviewsReducer = (state = { review: [] }, action) => {
+export const courseFeedbacksReducer = (state = { feedback: [] }, action) => {
     switch (action.type) {
 
         case GET_FEEDBACKS_REQUEST:
@@ -261,7 +291,7 @@ export const courseReviewsReducer = (state = { review: [] }, action) => {
         case GET_FEEDBACKS_SUCCESS:
             return {
                 loading: false,
-                reviews: action.payload
+                feedbacks: action.payload
             }
 
         case GET_FEEDBACKS_FAIL:
@@ -416,3 +446,256 @@ export const myEnrollCoursesReducer = (state = { myenrollcourses: [] }, action) 
     }
 }
 
+//new section
+export const newSectionReducer = (state = { section: {} }, action) => {
+    switch (action.type) {
+
+        case NEW_SECTION_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case NEW_SECTION_SUCCESS:
+            return {
+                loading: false,
+                // success: action.payload.success,
+                section: action.payload
+            }
+
+        case NEW_SECTION_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case NEW_SECTION_RESET:
+            return {
+                ...state,
+                success: false
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+//get sections
+export const sectionsReducer = (state = { sections: [] }, action) => {
+    switch (action.type) {
+        case GET_SECTIONS_REQUEST:
+            return {
+                loading: true,
+                sections: []
+            }
+
+        case GET_SECTIONS_SUCCESS:  
+            return {
+                loading: false,
+                sections: action.payload
+            }
+
+        case GET_SECTIONS_FAIL:  
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const sectionReducer = (state = {}, action) => {
+    switch (action.type) {
+
+        case DELETE_SECTION_REQUEST:
+        case UPDATE_SECTION_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case DELETE_SECTION_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload
+            }
+
+        case UPDATE_SECTION_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload
+            }
+
+
+        case DELETE_SECTION_FAIL:
+        case UPDATE_SECTION_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case DELETE_SECTION_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+
+        case UPDATE_SECTION_RESET:
+            return {
+                ...state,
+                isUpdated: false
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
+
+
+//new lecture
+export const newLectureReducer = (state = { lecture: {} }, action) => {
+    switch (action.type) {
+
+        case NEW_LECTURE_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case NEW_LECTURE_SUCCESS:
+            return {
+                loading: false,
+                // success: action.payload.success,
+                lecture: action.payload
+            }
+
+        case NEW_LECTURE_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case NEW_LECTURE_RESET:
+            return {
+                ...state,
+                success: false
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+//get lectures
+export const lecturesReducer = (state = { lectures: [] }, action) => {
+    switch (action.type) {
+        case GET_LECTURES_REQUEST:
+            return {
+                loading: true,
+                lectures: []
+            }
+
+        case GET_LECTURES_SUCCESS:  
+            return {
+                loading: false,
+                lectures: action.payload
+            }
+
+        case GET_LECTURES_FAIL:  
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const lectureReducer = (state = {}, action) => {
+    switch (action.type) {
+
+        case DELETE_LECTURE_REQUEST:
+        case UPDATE_LECTURE_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case DELETE_LECTURE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isDeleted: action.payload
+            }
+
+        case UPDATE_LECTURE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload
+            }
+
+
+        case DELETE_LECTURE_FAIL:
+        case UPDATE_LECTURE_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case DELETE_LECTURE_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+
+        case UPDATE_LECTURE_RESET:
+            return {
+                ...state,
+                isUpdated: false
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
