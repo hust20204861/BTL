@@ -5,14 +5,13 @@ import { Link } from 'react-router-dom'
 const MyEnrollCourse = () => {  
 const { myenrollcourses } = useSelector(state => state.myenrollcourses)
 const { userId } = useSelector(state => state.auth)
-console.log("rsgdfgdfshfgnsgfgfsgf", myenrollcourses)
     return (      
         <div className='mycourses'>
             {myenrollcourses.map(course => (
                 <div className="course" key={course.id}>
                     <div className="course-name">
                         <h5 className="cart-title">
-                            <Link to={`/course/enrolled/${userId}`}>{course.learningObject}</Link>
+                            <Link to={`/course/enrolled/${userId}/${course.id}`}>{course.learningObject}</Link>
                         </h5>
                     </div>
                 </div>

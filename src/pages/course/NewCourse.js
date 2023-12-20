@@ -46,8 +46,8 @@ const NewCourse = () => {
         }
 
         if (success) {
-            navigate('/mycourses');
             alert.success('Course created successfully');
+            navigate('/');
             dispatch({ type: NEW_COURSE_RESET })
         }
 

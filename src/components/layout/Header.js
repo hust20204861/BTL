@@ -33,14 +33,13 @@ const Header = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { token, userId, loading } = useSelector((state) => state.auth);
+
   //lấy token được lưu gọi hàm loadUser và lấy dữ liệu
 
   useEffect(() => {
     dispatch(loadUser(userId, token));
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
-  console.log("dsfdfds", userinfo);
-
   const logoutHandler = () => {
     dispatch(logout());
     alert.success("Logged out successfully");
@@ -53,6 +52,7 @@ const Header = () => {
     dispatch(myCourses(userId, token));
     alert.success("Here is your courses");
   };
+
   const [openNav, setOpenNav] = useState(false);
 
   return (
@@ -117,6 +117,14 @@ const Header = () => {
                     tag="a"
                     className="hidden-arrow row d-flex align-items-center nav-link"
                   >
+
+                    <Link
+                      to={`/course/create/list/${userId}`}
+                      id="create-course"
+                      onClick={myCourseHandle}
+                    > 
+                      My Course
+                    </Link>
                     <img
                       className="rounded-circle"
                       height="22"
@@ -124,50 +132,37 @@ const Header = () => {
                       alt={userinfo && userinfo.name}
                       loading="lazy"
                     />
-                    <Link
-                      to={`/course/create/list/${userId}`}
-                      id="create-course"
-                      onClick={myCourseHandle}
-                    >
-                      My Course
-                    </Link>
+                 
                   </MDBDropdownToggle>
-                  <MDBDropdownMenu>
-                    {/* {userinfo && userinfo.role === "ADMIN" && (
-                          <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
-                        )} */}
+                  <MDBDropdownMenu>              
+                    <Link  to={`/courses/enrolled/${userId}`}
+                           onClick={myEnrollCourseHandle}>
+                    <MDBDropdownItem>MyEnrollCourses</MDBDropdownItem>
+                    </Link>
+                 
+                    <Link to={`/user/${userId}`}>  
+                    <MDBDropdownItem >Profile</MDBDropdownItem>
+                    </Link>
 
-                    <div
-                      className="dropdown-menu"
-                      aria-labelledby="dropDownMenuButton"
-                    >
-                      {userinfo && userinfo.role === "ADMIN" && (
-                        <Link
-                          className="dropdown-item"
-                          id="head-item"
-                          to="/dashboard"
+                    {(userinfo && userinfo.role === "ADMIN") && (
+                        <Link to="/dashboard"
+                              className="dropdown-item"
+                              id="head-item"
                         >
-                          Dashboard
+                        <MDBDropdownItem>Setting</MDBDropdownItem>
                         </Link>
                       )}
-                    </div>
-                    <MDBDropdownItem
-                      link
-                      onClick={myEnrollCourseHandle}
-                      to={`/courses/enrolled/${userId}`}
-                    >
-                      MyEnrollCourses
-                    </MDBDropdownItem>
-                    <MDBDropdownItem link to={`/user/${userId}`}>
-                      Profile
-                    </MDBDropdownItem>
-                    <MDBDropdownItem link>Setting</MDBDropdownItem>
-                    <MDBDropdownItem link onClick={logoutHandler} to="/">
-                      Logout
-                    </MDBDropdownItem>
+                   
+
+                    <Link to="/"
+                          onClick={logoutHandler}> 
+                    <MDBDropdownItem >Logout</MDBDropdownItem>
+                    </Link>
+                    
+
                   </MDBDropdownMenu>
                 </MDBDropdown>
-              ) : (
+              ) : ( 
                 // {token ? (
                 //   <div>
                 //     <div className="dropdown">
