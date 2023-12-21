@@ -8,4 +8,15 @@ const getCourses = async () => {
   return data;
 };
 
-export { getCourses };
+const getCourse = async (id, accessToken) => {
+  const { data } = await api({
+    method: "GET",
+    url: `/course/${id}`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return data;
+};
+
+export { getCourses, getCourse };
