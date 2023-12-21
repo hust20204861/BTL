@@ -74,7 +74,7 @@ const Header = () => {
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
-                  <MDBNavbarBrand to="/">Home</MDBNavbarBrand>
+                  <Link to="/">Home</Link>
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -102,15 +102,15 @@ const Header = () => {
                 <Search />
               </div>
 
-              <MDBNavbarLink href="cart">
+              <Link to="cart">
                 <MDBIcon fas icon="shopping-cart" />
-              </MDBNavbarLink>
-              <MDBNavbarLink href="notification">
+              </Link>
+              <Link to="notification">
                 <MDBIcon fas icon="bell" />
                 <MDBBadge pill notification color="danger">
                   1
                 </MDBBadge>
-              </MDBNavbarLink>
+              </Link>
               {token ? (
                 <MDBDropdown>
                   <MDBDropdownToggle

@@ -66,7 +66,7 @@ const Login = () => {
               >
                 <MDBInput
                   className="mb-4"
-                  type="email"
+                  type="text"
                   id="validationCustom01"
                   label="Email address"
                   required

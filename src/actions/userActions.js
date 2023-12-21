@@ -269,7 +269,7 @@ export const allUsers = (token) => async (dispatch) => {
 }
 
 // Update user - ADMIN
-export const updateUser = (userId, token, userData) => async (dispatch) => {
+export const updateUser = (userId, token, jsonData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_USER_REQUEST })
 
@@ -280,11 +280,11 @@ export const updateUser = (userId, token, userData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.put(`/api/v1/user/${userId}`, userData, config)
+        const { data } = await axios.put(`/api/v1/user/update/${userId}`, jsonData, config)
 
         dispatch({
             type: UPDATE_USER_SUCCESS,
-            payload: data.success
+            payload: data
         })
 
     } catch (error) {
