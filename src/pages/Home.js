@@ -1,35 +1,42 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Pagination from "react-js-pagination";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { useParams } from "react-router-dom";
 
 import MetaData from "../components/layout/MetaData";
-import { getCourses } from "../actions/courseActions";
 import Course from "./course/Course";
 import Loader from "../components/layout/Loader";
 import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import { getCourses } from "../apis/courses";
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [courses, setCourses] = useState([]);
   const createSliderWithTooltip = () => {
     return Slider.createSliderWithTooltip;
   };
   const Range = createSliderWithTooltip(Slider.Range);
 
   const alert = useAlert();
-  const dispatch = useDispatch();
   const { keyword } = useParams();
-  const { loading, courses, error } = useSelector(state => state.courses) 
 
-useEffect(() => {
-dispatch(getCourses())
-  if(error) {
-    return alert.error(error)
-  }
-},[dispatch])
+  const fetchApiGetCourse = async () => {
+    try {
+      setIsLoading(true);
+      const res = await getCourses();
+      console.log("response", res);
+      // setCourses(json);
+      setIsLoading(false);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchApiGetCourse();
+  }, []);
 
   return (
     <Fragment>
@@ -78,17 +85,18 @@ dispatch(getCourses())
         </MDBCarouselItem>
       </MDBCarousel>
 
-      {loading ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <Fragment>
           <MetaData title={"Home"} />
-          
-          <p className="text-decoration-underline"><h4>Học viên đang xem</h4></p>
+
+          <p className="text-decoration-underline">
+            <h4>Học viên đang xem</h4>
+          </p>
           <div>
             {(
               <Fragment>
-
                 <div className="course">
                   {courses?.map((course) => (
                     <Course key={course.id} course={course} col={4} />
@@ -100,7 +108,7 @@ dispatch(getCourses())
                 <Course key={course.id} course={course} />
               ))}
           </div>
- 
+
           {/* {resPerPage <= coursesCount && (
   <div className="pagination-container">
                             <Pagination
