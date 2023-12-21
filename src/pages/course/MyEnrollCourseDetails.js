@@ -29,9 +29,9 @@ const MyEnrollCourseDetails = () => {
     (state) => state.courseDetails
   );
   const { sections } = useSelector((state) => state.sections);
-  console.log("df", course);
-  console.log("ssss", sections);
-
+  const { lectures } = useSelector(state => state.lectures);
+  const { discussions } = useSelector(state => state.discussions)
+ 
   const [rating, setRating] = useState("");
   const [time, setTime] = useState("");
   const [feed_back, setFeed_back] = useState("");
@@ -45,9 +45,10 @@ const MyEnrollCourseDetails = () => {
   }, [dispatch, id, token]);
   useEffect(() => {
     dispatch(getSections(id, token));
-    console.log("ffff", id, token);
   }, [dispatch, id, token]);
   const feedback = (e) => {
+    e.preventDefault();
+
     const formData = new FormData();
     formData.set("rating", rating);
     formData.set("time", time);
@@ -63,7 +64,10 @@ const MyEnrollCourseDetails = () => {
     dispatch(newFeedback(jsonData, token));
     alert.success("Sent your feedback");
   };
-
+  const [ visible, setVisible ] = useState(false);
+  const handleClick = () => {
+    setVisible(!visible);
+  }
   return (
     <Fragment>
       {loading ? (
@@ -86,6 +90,9 @@ const MyEnrollCourseDetails = () => {
                 {/* {[...Array(course.rating)].map((_, index) => (
                              <i key={index} className="fas fa-star"></i>
                             ))} */}
+
+
+
               </div>
 
               <hr />
@@ -109,11 +116,22 @@ const MyEnrollCourseDetails = () => {
               <p id="createdAt">${course.createdAt}</p>
               <p id="updatedAt">${course.updatedAt}</p>
               <hr />
-              {/* khi click vào section thì thả xuống các lecture */}
-              {/* {sections.map(section => (
-                              <p id="section">${section.name}</p>
-                           ))} */}
-              <MDBBtn>Discussion</MDBBtn>
+               {/* khi click vào section thì thả xuống các lecture */}
+              {sections ? (
+              <div>
+                    <h5 onClick={handleClick}>
+                      {sections.map(section => (
+                      <p id="section">{section.name}</p>
+                      ))}
+                    </h5>
+                      {visible?  (<div>a  
+                                 <MDBBtn>Discussion</MDBBtn>
+                                 </div>) : (<div>bài giảng</div>)}
+              </div>) : (<div>các bài giảng ở đây</div>
+              )}
+
+            
+              <hr/>
               <form>
                 <h4>Đánh giá của bạn</h4>
                 <MDBInput
@@ -143,6 +161,7 @@ const MyEnrollCourseDetails = () => {
                 </MDBBtn>
               </form>
               {/* <div className="form-group">
+
                                     <label htmlFor="name_field">Đánh giá của bạn</label>
                                     <input
                                         type="text"
@@ -164,10 +183,6 @@ const MyEnrollCourseDetails = () => {
                             <hr /> */}
             </div>
           </div>
-
-          {course.reviews && course.reviews.length > 0 && (
-            <ListReviews reviews={course.reviews} />
-          )}
         </Fragment>
       )}
     </Fragment>

@@ -11,7 +11,7 @@ import { allUsers } from '../../actions/userActions'
 const Dashboard = () => {
 
     const dispatch = useDispatch();
-
+    const { adminfeedbacks } = useSelector(state => state.adminFeedbacks)
     const { courses } = useSelector(state => state.courses)
     const { users, loading } = useSelector(state => state.allUsers)
     const { token } = useSelector(state => state.auth)
@@ -57,7 +57,20 @@ const Dashboard = () => {
                                             <div className="user-length">Users<br /> <b>{users && users.length}</b></div>
                                         </div>
                                         <Link className="to-admin-users" to="/users">
-                                            <span className="float-left">View Details</span>
+                                            <span className="view-details">View Details</span>
+                                            <span className="float-right">
+                                                <i className="fa fa-angle-right"></i>
+                                            </span>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div className="cards">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="user-length">Feedbacks<br /> <b>{adminfeedbacks && adminfeedbacks.data.length}</b></div>
+                                        </div>
+                                        <Link className="to-admin-users" to="/feedbacks">
+                                            <span className="view-details">View Details</span>
                                             <span className="float-right">
                                                 <i className="fa fa-angle-right"></i>
                                             </span>

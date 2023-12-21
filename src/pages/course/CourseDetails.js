@@ -123,8 +123,7 @@ const CourseDetails = () => {
                 <div>
                   {feedbacks.data.map((feedback) => (
                     <div key={feedback.id}>
-                      <p>Đánh giá: {feedback.feed_back} </p>
-                      <p>Star: {feedback.rating} sao </p>
+                      <p>Star: {feedback.rating}sao ------ Đánh giá: {feedback.feed_back} </p>
 
                     </div>
                   ))}

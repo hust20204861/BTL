@@ -74,7 +74,7 @@ const Header = () => {
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
-                  <MDBNavbarBrand href="/">Home</MDBNavbarBrand>
+                  <MDBNavbarBrand to="/">Home</MDBNavbarBrand>
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -86,7 +86,7 @@ const Header = () => {
                   <MDBCollapse navbar open={openNav}>
                     <MDBNavbarNav>
                       <MDBNavbarItem>
-                        <MDBNavbarLink href="/course">Course</MDBNavbarLink>
+                        <MDBNavbarLink to="/course">Course</MDBNavbarLink>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
                         <MDBNavbarLink href="blog">Blog</MDBNavbarLink>
@@ -137,33 +137,24 @@ const Header = () => {
                           <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
                         )} */}
 
-                    <div
-                      className="dropdown-menu"
-                      aria-labelledby="dropDownMenuButton"
-                    >
-                      {userinfo && userinfo.role === "ADMIN" && (
-                        <Link
-                          className="dropdown-item"
-                          id="head-item"
-                          to="/dashboard"
-                        >
-                          Dashboard
-                        </Link>
-                      )}
-                    </div>
+                   
                     <MDBDropdownItem
                       link
-                      onClick={myEnrollCourseHandle}
-                      to={`/courses/enrolled/${userId}`}
                     >
-                      MyEnrollCourses
+                     <Link  to={`/courses/enrolled/${userId}`}  onClick={myEnrollCourseHandle}>MyEnrollCourses</Link> 
                     </MDBDropdownItem>
-                    <MDBDropdownItem link to={`/user/${userId}`}>
-                      Profile
+                    <MDBDropdownItem link >
+                     <Link to={`/user/${userId}`}>Profile</Link> 
                     </MDBDropdownItem>
-                    <MDBDropdownItem link>Setting</MDBDropdownItem>
-                    <MDBDropdownItem link onClick={logoutHandler} to="/">
-                      Logout
+                    <div>
+                      {userinfo && userinfo.role === "ADMIN" && (
+                    <MDBDropdownItem> 
+                    <Link to="/dashboard">---Dashboard</Link>
+                    </MDBDropdownItem>
+                      )}
+                    </div>
+                    <MDBDropdownItem link >
+                     <Link to="/" onClick={logoutHandler}>Logout</Link> 
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
@@ -224,7 +215,7 @@ const Header = () => {
                 !loading && (
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <MDBBtn href="/auth/login">LOGIN</MDBBtn>
-                    <MDBBtn href="/auth/Register">SIGNUP</MDBBtn>
+                    <MDBBtn href="/auth/register">SIGNUP</MDBBtn>
                   </div>
                 )
               )}

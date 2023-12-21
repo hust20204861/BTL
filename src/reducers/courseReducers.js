@@ -85,7 +85,10 @@ import {
     DELETE_DISCUSSION_FAIL,
     UPDATE_DISCUSSION_FAIL,
     DELETE_DISCUSSION_RESET,
-    UPDATE_DISCUSSION_RESET
+    UPDATE_DISCUSSION_RESET,
+    GET_ADMIN_FEEDBACKS_REQUEST,
+    GET_ADMIN_FEEDBACKS_SUCCESS,
+    GET_ADMIN_FEEDBACKS_FAIL
 
 } from '../constants/courseConstants'
 
@@ -325,6 +328,39 @@ export const courseFeedbacksReducer = (state = { feedback: [] }, action) => {
             return state
     }
 }
+
+export const adminFeedbacksReducer = (state = { adminfeedback: [] }, action) => {
+    switch (action.type) {
+
+        case GET_ADMIN_FEEDBACKS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case GET_ADMIN_FEEDBACKS_SUCCESS:
+            return {
+                loading: false,
+                adminfeedbacks: action.payload
+            }
+
+        case GET_ADMIN_FEEDBACKS_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state
+    }
+}
+
 
 export const feedbackReducer = (state = {}, action) => {
     switch (action.type) {

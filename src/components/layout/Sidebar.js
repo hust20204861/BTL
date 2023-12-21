@@ -6,32 +6,36 @@ const Sidebar = () => {
         <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a
-          href="dashboard"
-          class="list-group-item list-group-item-action py-2 ripple"
-          aria-current="true"
+
+        <Link to="/dashboard"
+           class="list-group-item list-group-item-action py-2 ripple"
+           aria-current="true"
         >
           <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
-        </a>
-        <a href="#courseSubmenu" class="list-group-item list-group-item-action py-2 ripple active">
+
+        </Link>
+        <a class="list-group-item list-group-item-action py-2 ripple active">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Courses</span>
           <ul id="courseSubmenu" class="collapse show list-group list-group-flush">
+
           <li >
-            <a href="/courses" class="text-reset">All</a>
+            <Link to="/courses" class="text-reset">All</Link>
           </li>
-          <li class="list-group-item py-1">
-            <a href="create/course" class="text-reset">create</a>
+
+          <li >
+            <Link to="/create/course" class="text-reset">create</Link>
           </li>
+
         </ul>
+
         </a>
-        <a href="/users" class="list-group-item list-group-item-action py-2 ripple active">
+        <Link to="/users" class="list-group-item list-group-item-action py-2 ripple active">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Users</span>
           
-        </a>
-        <a href="/admin/reviews" class="list-group-item list-group-item-action py-2 ripple active">
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Reviews</span>
-          
-        </a>
+        </Link>
+        <Link to="/feedbacks" class="list-group-item list-group-item-action py-2 ripple active">
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>Feedbacks</span>
+        </Link>
        
       </div>
     </div>
