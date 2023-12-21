@@ -265,10 +265,9 @@ import CourseDetail from "../../containers/CourseDetail";
 //     </Fragment>
 //   );
 // };
+
 const CourseDetailScreen = () => {
   return <CourseDetail />;
 };
 
 export default CourseDetailScreen;
-
-// export default CourseDetails;
