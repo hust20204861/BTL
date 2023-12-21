@@ -45,12 +45,9 @@ const UpdateCourse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = useParams();
+  console.log("fffff", id)
   const { error, course } = useSelector((state) => state.courseDetails);
-  const {
-    loading,
-    error: updateError,
-    isUpdated,
-  } = useSelector((state) => state.course);
+  const { loading, error: updateError, isUpdated } = useSelector((state) => state.course);
   useEffect(() => {
     // if (course && course.id !== courseId) {
     //     dispatch(getCourseDetails(courseId, token));

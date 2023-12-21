@@ -12,8 +12,8 @@ const Sidebar = () => {
            aria-current="true"
         >
           <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Dashboard</span>
-
         </Link>
+        
         <a class="list-group-item list-group-item-action py-2 ripple active">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Courses</span>
           <ul id="courseSubmenu" class="collapse show list-group list-group-flush">

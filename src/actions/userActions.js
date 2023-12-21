@@ -278,34 +278,33 @@ export const allUsers = (token) => async (dispatch) => {
 };
 
 // Update user - ADMIN
-export const updateUser = (userId, token, userData) => async (dispatch) => {
-  try {
-    dispatch({ type: UPDATE_USER_REQUEST });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
+export const updateUser = (userId, token, jsonData) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_USER_REQUEST })
 
-    const { data } = await axios.put(
-      `/api/v1/user/${userId}`,
-      userData,
-      config
-    );
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }
 
-    dispatch({
-      type: UPDATE_USER_SUCCESS,
-      payload: data.success,
-    });
-  } catch (error) {
-    dispatch({
-      type: UPDATE_USER_FAIL,
-      payload: error.response.data.message,
-    });
-  }
-};
+        const { data } = await axios.put(`/api/v1/user/update/${userId}`, jsonData, config)
+
+        dispatch({
+            type: UPDATE_USER_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: UPDATE_USER_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
 
 // Get user details - ADMIN
 export const getUserDetails = (userId, token) => async (dispatch) => {
