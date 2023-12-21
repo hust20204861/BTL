@@ -14,6 +14,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState([]);
+  console.log("dfgfd", courses)
   const createSliderWithTooltip = () => {
     return Slider.createSliderWithTooltip;
   };
@@ -27,7 +28,7 @@ const Home = () => {
       setIsLoading(true);
       const res = await getCourses();
       console.log("response", res);
-      // setCourses(json);
+      setCourses(res);
       setIsLoading(false);
     } catch (error) {
       console.log("error: ", error);

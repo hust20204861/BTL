@@ -1,5 +1,6 @@
 import React from "react";
 import CourseDetail from "../../containers/CourseDetail";
+import { useState, useSelector, useDispatch, useAlert, useParams, useEffect, Fragment, Link, } from "react";
 
 // HEAD
 import Loader from "../../components/layout/Loader";
@@ -198,9 +199,9 @@ const CourseDetails = () => {
     </Fragment>
   );
 
-// const CourseDetailScreen = () => {
-//   return <CourseDetail />;
-// //>>>>>>> 47697ed52f6e771b0c0f68a56dcc06fce65f95a3
-// };
+//  const CourseDetailScreen = () => {
+//    return <CourseDetail />;
 
-export default CourseDetailScreen;
+//  };
+}
+export default CourseDetails
