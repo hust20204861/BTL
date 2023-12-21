@@ -9,12 +9,14 @@ import { login, clearErrors } from "../../actions/userActions";
 import Loader from "../../components/layout/Loader";
 import {
   MDBInput,
-  MDBInputGroup,
-  MDBBtn,
+  MDBCol,
+  MDBRow,
   MDBCheckbox,
+  MDBBtn,
+  MDBIcon,
   MDBValidation,
   MDBValidationItem,
-  MDBTooltip,
+  MDBInputGroup,
 } from "mdb-react-ui-kit";
 import { MDBLink } from "mdbreact";
 
@@ -51,8 +53,87 @@ const Login = () => {
       ) : (
         <Fragment>
           <MetaData title={"Login"} />
+          <form
+            onSubmit={submitHandler}
+            className="square rounded-9 shadow-lg mb-4 mt-5 p-4 w-40 center"
+            style={{ margin: "360px", paddingLeft: "300px" }}
+          >
+            <h1>Login</h1>
+            <MDBValidation breakpoint="sm">
+              <MDBValidationItem
+                feedback="Please your email or username"
+                invalid
+              >
+                <MDBInput
+                  className="mb-4"
+                  type="email"
+                  id="validationCustom01"
+                  label="Email address"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </MDBValidationItem>
+              <MDBValidationItem
+                tooltip
+                feedback="Please your password"
+                invalid
+              >
+                <MDBInput
+                  className="mb-4"
+                  type="password"
+                  id="validationCustom02"
+                  required
+                  label="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />{" "}
+              </MDBValidationItem>
+              <MDBValidationItem tooltip invalid>
+                <MDBRow className="mb-4">
+                  <MDBCol className="d-flex justify-content-center">
+                    <MDBCheckbox
+                      id="form2Example3"
+                      label="Remember me"
+                      defaultChecked
+                    />
+                  </MDBCol>
 
-          <div className="login">
+                  <MDBCol>
+                    <a href="/password/forgot">Forgot password?</a>
+                  </MDBCol>
+                </MDBRow>
+              </MDBValidationItem>
+            </MDBValidation>
+            <MDBBtn type="submit" className="mb-4" block>
+              Sign in
+            </MDBBtn>
+
+            <div className="text-center">
+              <p>
+                Not a member? <a href="/auth/register">Register</a>
+              </p>
+              <p>or sign up with:</p>
+
+              <MDBBtn floating color="secondary" className="mx-1">
+                <MDBIcon fab icon="facebook-f" />
+              </MDBBtn>
+
+              <MDBBtn floating color="secondary" className="mx-1">
+                <MDBIcon fab icon="google" />
+              </MDBBtn>
+
+              <MDBBtn floating color="secondary" className="mx-1">
+                <MDBIcon fab icon="twitter" />
+              </MDBBtn>
+
+              <MDBBtn floating color="secondary" className="mx-1">
+                <MDBIcon fab icon="github" />
+              </MDBBtn>
+            </div>
+          </form>
+
+          {/* <div className="login">
             <div className="login-form">
               <form className="form" onSubmit={submitHandler}>
                 <h1>Login</h1>
@@ -93,12 +174,10 @@ const Login = () => {
             </div>
           </div>
           <div className="border d-flex align-items-center justify-content-center">
-          {/* <MDBValidation breakpoint='sm'>
+            <MDBValidation breakpoint='sm'>
             <MDBValidationItem tooltip className="col-md-4">
               <MDBInput
-                value={formValue.fname}
-                name="fname"
-                onChange={onChange}
+                
                 id="validationCustom01"
                 required
                 label="Email"
@@ -106,9 +185,7 @@ const Login = () => {
             </MDBValidationItem>
             <MDBValidationItem tooltip className="col-md-4">
               <MDBInput
-                value={formValue.lname}
-                name="lname"
-                onChange={onChange}
+                
                 id="validationCustom02"
                 required
                 label="Password"
@@ -136,8 +213,8 @@ const Login = () => {
             <div className="col-12">
               <MDBBtn type="submit">Login</MDBBtn>
             </div>
-          </MDBValidation> */}
-    </div>
+          </MDBValidation>
+          </div> */}
         </Fragment>
       )}
     </Fragment>

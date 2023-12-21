@@ -101,8 +101,6 @@ const CourseDetails = () => {
               <p id="primarilyTaught">${course.primarilyTaught}</p>
               <p id="welcomeMessage">${course.welcomeMessage}</p>
               <p id="congratulationMessage">${course.congratulationMessage}</p>
-              <h4 className="mt-2">Description:</h4>
-              <p>{course.courseDescription}</p>
               <p id="status">${course.status}</p>
               <p id="createdAt">${course.createdAt}</p>
               <p id="updatedAt">${course.updatedAt}</p>
