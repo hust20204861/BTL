@@ -72,22 +72,51 @@ const Header = () => {
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
+<<<<<<< HEAD
             <Link to="/">
                   <h4>Web Learning</h4>
                 </Link>
+=======
+              <MDBNavbar expand="lg">
+                <MDBContainer fluid>
+                  <Link to="/">Home</Link>
+                  <MDBNavbarToggler
+                    type="button"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                    onClick={() => setOpenNav(!openNav)}
+                  >
+                    <MDBIcon icon="bars" fas />
+                  </MDBNavbarToggler>
+                  <MDBCollapse navbar open={openNav}>
+                    <MDBNavbarNav>
+                      <MDBNavbarItem>
+                        <Link to="/course">Course</Link>
+                      </MDBNavbarItem>
+                      <MDBNavbarItem>
+                        <Link to="/blog">Blog</Link>
+                      </MDBNavbarItem>
+                      <MDBNavbarItem>
+                        <Link to="/website">Website</Link>
+                      </MDBNavbarItem>
+                    </MDBNavbarNav>
+                  </MDBCollapse>
+                </MDBContainer>
+              </MDBNavbar>
+>>>>>>> 47697ed52f6e771b0c0f68a56dcc06fce65f95a3
               <div>
                 <Search />
               </div>
 
-              <MDBNavbarLink href="cart">
+              <Link to="cart">
                 <MDBIcon fas icon="shopping-cart" />
-              </MDBNavbarLink>
-              <MDBNavbarLink href="notification">
+              </Link>
+              <Link to="notification">
                 <MDBIcon fas icon="bell" />
                 <MDBBadge pill notification color="danger">
-                  1
+                  9
                 </MDBBadge>
-              </MDBNavbarLink>
+              </Link>
               {token ? (
                 <MDBDropdown>
                   <MDBDropdownToggle

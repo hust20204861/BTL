@@ -3,7 +3,7 @@ import { Carousel } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-//import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Loader from '../../components/layout/Loader'
 import MetaData from '../../components/layout/MetaData'
@@ -14,7 +14,7 @@ const MyCourseDetails = () => {
 
     const dispatch = useDispatch();
     const alert = useAlert();
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const {id} = useParams();
     const { feedbacks} = useSelector(state => state.courseFeedbacks)
     const { isDelete } = useSelector(state => state.feedback)
@@ -22,9 +22,7 @@ const MyCourseDetails = () => {
     useEffect(() => {
 
         dispatch(getCourseDetails(id, token))
-        // if(isDelete) {
-        //     navigate(`/`);
-        // }
+       
         if (error) {
             alert.error(error);
             dispatch(clearErrors())
@@ -42,6 +40,9 @@ const MyCourseDetails = () => {
      };
     const handleDeleteFeedbacks = (idd, token) => {
         dispatch(deleteFeedback(idd, token));
+            alert.success("Đã xóa feedback")
+            navigate(`/mycourse/${id}`);
+        
     }
      
     return (

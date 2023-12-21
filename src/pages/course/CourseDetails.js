@@ -1,9 +1,7 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useAlert } from "react-alert";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React from "react";
+import CourseDetail from "../../containers/CourseDetail";
 
+// HEAD
 import Loader from "../../components/layout/Loader";
 import MetaData from "../../components/layout/MetaData";
 import {
@@ -199,6 +197,10 @@ const CourseDetails = () => {
       )}
     </Fragment>
   );
-};
 
-export default CourseDetails;
+// const CourseDetailScreen = () => {
+//   return <CourseDetail />;
+// //>>>>>>> 47697ed52f6e771b0c0f68a56dcc06fce65f95a3
+// };
+
+export default CourseDetailScreen;
