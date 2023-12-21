@@ -74,16 +74,16 @@ const UsersList = () => {
 
         users.forEach(user => {
             data.rows.push({
-                id: user.user_id,
+                id: user.id,
                 name: user.name,
                 email: user.email,
                 role: user.role,
 
                 actions: <Fragment>
-                    <Link to={`/admin/update/${user.user_id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/admin/update/${user.id}`} className="btn btn-primary py-1 px-2">
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user.user_id, token)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user.id, token)}>
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>

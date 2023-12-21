@@ -24,7 +24,7 @@ const MyCourse = () => {
       <MDBCardHeader>My Course</MDBCardHeader>
       <MDBCardBody>
         <MDBCardTitle>Create Your Course</MDBCardTitle>
-        <MDBBtn href="/create/course">CREATE</MDBBtn>
+        <Link to="/create/course">CREATE</Link>
         {mycourses.map((course) => (
           <div className="course" key={course.id}>
             <div className="course-name">

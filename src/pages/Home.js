@@ -91,9 +91,9 @@ const Home = () => {
         <Fragment>
           <MetaData title={"Home"} />
 
-          <p className="text-decoration-underline">
-            <h4>Học viên đang xem</h4>
-          </p>
+          <hr />
+          <p><h3>Các khóa học đang hot hiện nay</h3></p>
+
           <div>
             {(
               <Fragment>

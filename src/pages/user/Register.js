@@ -68,7 +68,7 @@ const Register = () => {
           <MDBValidationItem feedback='Please enter your email' >
             <MDBInput
               className="mb-4"
-              type="email"
+              type="text"
               id="form3Example3"
               label="Email address"
               value={email}
@@ -128,7 +128,7 @@ const Register = () => {
         <hr />
       </form>
 
-      <div className="row wrapper">
+      {/* <div className="row wrapper">
         <div className="col-10 col-lg-5">
           <form
             className="shadow-lg"
@@ -183,7 +183,7 @@ const Register = () => {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
     </Fragment>
   );
 };

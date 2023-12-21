@@ -74,7 +74,7 @@ const Header = () => {
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
-                  <MDBNavbarBrand to="/">Home</MDBNavbarBrand>
+                  <Link to="/">Home</Link>
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -86,13 +86,13 @@ const Header = () => {
                   <MDBCollapse navbar open={openNav}>
                     <MDBNavbarNav>
                       <MDBNavbarItem>
-                        <MDBNavbarLink to="/course">Course</MDBNavbarLink>
+                        <Link to="/course">Course</Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
-                        <MDBNavbarLink href="blog">Blog</MDBNavbarLink>
+                        <Link to="/blog">Blog</Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
-                        <MDBNavbarLink href="contact">Contact</MDBNavbarLink>
+                        <Link to="/website">Website</Link>
                       </MDBNavbarItem>
                     </MDBNavbarNav>
                   </MDBCollapse>
@@ -102,15 +102,15 @@ const Header = () => {
                 <Search />
               </div>
 
-              <MDBNavbarLink href="cart">
+              <Link to="cart">
                 <MDBIcon fas icon="shopping-cart" />
-              </MDBNavbarLink>
-              <MDBNavbarLink href="notification">
+              </Link>
+              <Link to="notification">
                 <MDBIcon fas icon="bell" />
                 <MDBBadge pill notification color="danger">
-                  1
+                  9
                 </MDBBadge>
-              </MDBNavbarLink>
+              </Link>
               {token ? (
                 <MDBDropdown>
                   <MDBDropdownToggle

@@ -13,6 +13,10 @@ const UpdateUser = () => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [website, setWebsite] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [description, setDescription] = useState('')
+    const [money, setMoney] = useState('')
     const [role, setRole] = useState('')
 
     const alert = useAlert();
@@ -24,7 +28,7 @@ const UpdateUser = () => {
     const { error, isUpdated } = useSelector(state => state.user);
     const { user } = useSelector(state => state.userDetails)
 
-    const userId = id;
+    // const userId = id;
 console.log("afdgsdajfgksahfjs", id)
     useEffect(() => {
 
@@ -45,14 +49,14 @@ console.log("afdgsdajfgksahfjs", id)
         if (isUpdated) {
             alert.success('User updated successfully')
 
-            navigate('/admin/users')
+            navigate('/users')
 
             dispatch({
                 type: UPDATE_USER_RESET
             })
         }
 
-    }, [dispatch, alert, error, navigate, id, isUpdated, userId, user, token])
+    }, [dispatch, alert, error, navigate, isUpdated])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -60,9 +64,18 @@ console.log("afdgsdajfgksahfjs", id)
         const formData = new FormData();
         formData.set('name', name);
         formData.set('email', email);
+        formData.set('website', website);
+        formData.set('avatar', avatar);
+        formData.set('description', description);
+        formData.set('money', money);
         formData.set('role', role);
 
-        dispatch(updateUser(user.user_id, token,formData ))
+        const jsonObject = {};
+        for (const pair of formData.entries()) {
+          jsonObject[pair[0]] = pair[1];
+        }
+        const jsonData = JSON.stringify(jsonObject);
+        dispatch(updateUser(id.userId, token,jsonData ))
     }
 
 
@@ -81,33 +94,75 @@ console.log("afdgsdajfgksahfjs", id)
                                 <h1 className="mt-2 mb-5">Update User</h1>
 
                                 <div className="form-group">
-                                    <label htmlFor="name_field">Name</label>
-                                    <input
-                                        type="name"
-                                        id="name_field"
-                                        className="form-control"
-                                        name='name'
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
-                                </div>
+                            <label htmlFor="email_field">Name</label>
+                            <input
+                                type="name"
+                                id="name_field"
+                                className="form-control"
+                                name='name'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="email_field">Email</label>
-                                    <input
-                                        type="text"
-                                        id="email_field"
-                                        className="form-control"
-                                        name='email'
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                    />
-                                </div>
-
-                                <div className="form-group">
-                                    <label htmlFor="role_field">Role</label>
-
-                                    <select
+                        <div className="form-group">
+                            <label htmlFor="email_field">Email</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Website</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={website}
+                                onChange={(e) => setWebsite(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Avatar</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={avatar}
+                                onChange={(e) => setAvatar(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Description</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Money</label>
+                            <input
+                                type="text"
+                                id="email_field"
+                                className="form-control"
+                                name='email'
+                                value={money}
+                                onChange={(e) => setMoney(e.target.value)}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="email_field">Role</label>
+                            <select
                                         id="role_field"
                                         className="form-control"
                                         name='role'
@@ -117,7 +172,8 @@ console.log("afdgsdajfgksahfjs", id)
                                         <option value="user">user</option>
                                         <option value="admin">admin</option>
                                     </select>
-                                </div>
+                        </div>
+
 
                                 <button type="submit" className="btn update-btn btn-block mt-4 mb-3" >Update</button>
                             </form>

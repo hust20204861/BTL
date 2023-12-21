@@ -89,6 +89,7 @@ export const getCourses = (keyword = '') => async (dispatch) => {
         const link = `/api/v1/course?keyword=${keyword}`
      
         const { data } = await axios.get(link)
+       // const { data } = await axios.get( `/api/v1/course`)
       
         dispatch({
             type: ALL_COURSES_SUCCESS,

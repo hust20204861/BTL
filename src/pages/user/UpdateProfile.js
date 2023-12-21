@@ -55,7 +55,7 @@ const UpdateProfile = () => {
             })
         }
 
-    }, [dispatch, alert, error, navigate, isUpdated])
+    }, [dispatch, alert, error, navigate, isUpdated, userinfo, token, userId])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -156,14 +156,16 @@ const UpdateProfile = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="email_field">Role</label>
-                            <input
-                                type="text"
-                                id="email_field"
-                                className="form-control"
-                                name='email'
-                                value={role}
-                                onChange={(e) => setRole(e.target.value)}
-                            />
+                            <select
+                                        id="role_field"
+                                        className="form-control"
+                                        name='role'
+                                        value={role}
+                                        onChange={(e) => setRole(e.target.value)}
+                                    >
+                                        <option value="user">user</option>
+                                        <option value="admin">admin</option>
+                                    </select>
                         </div>
 
 
