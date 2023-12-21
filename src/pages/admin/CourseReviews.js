@@ -5,21 +5,20 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import MetaData from '../../components/layout/MetaData'
 import Sidebar from '../../components/layout/Sidebar'
-import { DELETE_REVIEW_RESET } from '../../constants/courseConstants'
-import Loader from '../../components/layout/Loader'
-import { getCourseReviews, deleteReview, clearErrors } from '../../actions//courseActions'
+import { DELETE_FEEDBACK_RESET } from '../../constants/courseConstants'
+import { getAdminCourseFeedbacks, deleteFeedback, clearErrors } from '../../actions/courseActions'
 
-const CourseReviews = () => {
-
-    const [courseId, setCourseId] = useState('')
+const CourseFeedbacks = () => {
 
     const alert = useAlert();
     const dispatch = useDispatch();
-
-    const { error, reviews } = useSelector(state => state.courseReviews);
-    const { isDeleted, error: deleteError } = useSelector(state => state.review)
-
+    const { token } = useSelector(state => state.auth);
+    const { error, adminfeedbacks } = useSelector(state => state.adminFeedbacks);
+    const { isDeleted, error: deleteError } = useSelector(state => state.feedback)
+console.log("sgsdgds", adminfeedbacks)
     useEffect(() => {
+
+        dispatch(getAdminCourseFeedbacks(token));
 
         if (error) {
             alert.error(error);
@@ -31,33 +30,24 @@ const CourseReviews = () => {
             dispatch(clearErrors())
         }
 
-        if (courseId !== '') {
-            dispatch(getCourseReviews(courseId))
-        }
-
         if (isDeleted) {
-            alert.success('Review deleted successfully');
-            dispatch({ type: DELETE_REVIEW_RESET })
+            alert.success('Feedback deleted successfully');
+            dispatch({ type: DELETE_FEEDBACK_RESET })
         }
 
 
 
-    }, [dispatch, alert, error, courseId, isDeleted, deleteError])
+    }, [dispatch, alert, error, token,  isDeleted, deleteError])
 
-    const deleteReviewHandler = (id) => {
-        dispatch(deleteReview(id, courseId))
+    const deleteFeedbackHandler = (id) => {
+        dispatch(deleteFeedback(id, token))
     }
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-        dispatch(getCourseReviews(courseId))
-    }
-
-    const setReviews = () => {
+    const setFeedbacks = () => {
         const data = {
             columns: [
                 {
-                    label: 'Review ID',
+                    label: 'Feedback ID',
                     field: 'id',
                     sort: 'asc'
                 },
@@ -67,13 +57,13 @@ const CourseReviews = () => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Comment',
-                    field: 'comment',
+                    label: 'Feedback',
+                    field: 'feed_back',
                     sort: 'asc'
                 },
                 {
-                    label: 'User',
-                    field: 'user',
+                    label: 'Time',
+                    field: 'time',
                     sort: 'asc'
                 },
                 {
@@ -84,15 +74,15 @@ const CourseReviews = () => {
             rows: []
         }
 
-        reviews.forEach(review => {
+        adminfeedbacks.data.forEach(feedback => {
             data.rows.push({
-                id: review._id,
-                rating: review.rating,
-                comment: review.comment,
-                user: review.name,
+                id: feedback.id,
+                rating: feedback.rating,
+                feed_back: feedback.feed_back,
+                time: feedback.time,
 
                 actions:
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteReviewHandler(review._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteFeedbackHandler(feedback.id, token)}>
                         <i className="fa fa-trash"></i>
                     </button>
             })
@@ -103,7 +93,7 @@ const CourseReviews = () => {
 
     return (
         <Fragment>
-            <MetaData title={'Course Reviews'} />
+            <MetaData title={'Course Feedbacks'} />
             <div className="row">
                 <div className="col-12 col-md-2">
                     <Sidebar />
@@ -111,42 +101,17 @@ const CourseReviews = () => {
 
                 <div className="col-12 col-md-10">
                     <Fragment>
-                        <div className="row justify-content-center mt-5">
-                            <div className="col-5">
-                                <form onSubmit={submitHandler}>
-                                    <div className="form-group">
-                                        <label htmlFor="courseId_field">Enter Course ID</label>
-                                        <input
-                                            type="text"
-                                            id="courseId_field"
-                                            className="form-control"
-                                            value={courseId}
-                                            onChange={(e) => setCourseId(e.target.value)}
-                                        />
-                                    </div>
-
-                                    <button
-                                        id="search_button"
-                                        type="submit"
-                                        className="btn btn-primary btn-block py-2"
-                                    >
-                                        SEARCH
-								    </button>
-                                </ form>
-                            </div>
-
-                        </div>
-
-                        {reviews && reviews.length > 0 ? (
+                       
+                        {adminfeedbacks ? (
                             <MDBDataTable
-                                data={setReviews()}
+                                data={setFeedbacks()}
                                 className="px-3"
                                 bordered
                                 striped
                                 hover
                             />
                         ) : (
-                                <p className="mt-5 text-center">No Reviews.</p>
+                                <p className="mt-5 text-center">No Feedbacks.</p>
                             )}
 
 
@@ -158,4 +123,4 @@ const CourseReviews = () => {
     )
 }
 
-export default CourseReviews
+export default CourseFeedbacks

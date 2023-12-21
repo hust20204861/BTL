@@ -33,10 +33,9 @@ const Sidebar = () => {
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Users</span>
           
         </Link>
-        <a href="/admin/reviews" class="list-group-item list-group-item-action py-2 ripple active">
-          <i class="fas fa-chart-area fa-fw me-3"></i><span>Reviews</span>
-          
-        </a>
+        <Link to="/feedbacks" class="list-group-item list-group-item-action py-2 ripple active">
+          <i class="fas fa-chart-area fa-fw me-3"></i><span>Feedbacks</span>
+        </Link>
        
       </div>
     </div>
