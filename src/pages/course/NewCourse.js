@@ -92,7 +92,8 @@ const NewCourse = () => {
   return (
     <Fragment>
       <MetaData title={"New Course"} />
-      <form onSubmit={submitHandler} encType="multipart/form-data">
+      <form onSubmit={submitHandler} encType="multipart/form-data" className="square rounded-9 shadow-lg mb-4 mt-5 p-4 w-50 center" style={{margin:"360px"}}>
+        
         <hr />
         <h1 className="mb-4">New Course</h1>
         <MDBRow className="mb-4">

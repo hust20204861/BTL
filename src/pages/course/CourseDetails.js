@@ -13,7 +13,8 @@ import {
 } from "../../actions/courseActions";
 import { addItemToCart } from "../../actions/cartActions";
 import { enrollCourses } from "../../actions/courseActions";
-import { MDBTypography, MDBBtn, MDBTextArea } from "mdb-react-ui-kit";
+import { MDBTypography, MDBBtn,MDBIcon, MDBTextArea, MDBNavbar, MDBContainer, MDBRow, MDBCol , MDBAccordion, MDBAccordionItem} from "mdb-react-ui-kit";
+import { MDBLink } from "mdbreact";
 
 const CourseDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -71,53 +72,80 @@ const CourseDetails = () => {
         <Fragment>
 
           <MetaData title={course.learningObject} />
-          <div className="courses-details">
-            <div className="course-details-name">
-            <div className="p-3 mb-2 bg-primary bg-gradient text-white rounded-5">
-              <h3>{course.learningObject}</h3>
-              <p id="course_id">Course # {course.id}</p>
-              </div>
-              <hr />
-              <hr />
-              <div className="course-rating">
-                <div
+          <MDBContainer className=" p-4">
+         
+        
+          <MDBNavbar dark bgColor='dark' className="d-flex " style={{width:"100%", marginLeft:"0"}}>
+        <MDBContainer className="px-4 white">
+        <h3 style={{color:"white"}}>{course.learningObject}</h3>
+        </MDBContainer>
+        <MDBContainer  className="px-4">
+        <p id="course_id" style={{color:"white"}}>Course # {course.id}</p>
+        </MDBContainer>
+        <MDBContainer  className="px-4">
+        <p style={{color:"white"}}>{course.courseDescription}</p>
+        </MDBContainer>
+        <MDBContainer  className="px-4">
+        <div 
                   className="star"
                   style={{ width: `${(course.rating / 5) * 100}%` }}
                 ></div>
-              </div>
-              <MDBTypography className="lead mb-0 border">
-                <p>Description:</p>
+        </MDBContainer>
+      </MDBNavbar>
+      <br/>
+      <MDBRow className="gx-5 ">
+        <MDBCol md='7'>
+              <MDBTypography className="square border rounded-8 px-4">
+                <br/>
+                <MDBTypography tag='strong'>Nội dung bài học:</MDBTypography>
                 <p>{course.courseDescription}</p>
               </MDBTypography>
-              <hr />
-              <p id="course_price">${course.price}</p>
-              <p id="requiredSkills">${course.requiredSkills}</p>
-              <p id="courseFor">${course.courseFor}</p>
-              <p id="title">${course.title}</p>
-              <p id="subtitle">${course.subtitle}</p>
-              <p id="language">${course.language}</p>
-              <p id="level">${course.level}</p>
-              <p id="category">${course.category}</p>
-              <p id="primarilyTaught">${course.primarilyTaught}</p>
-              <p id="welcomeMessage">${course.welcomeMessage}</p>
-              <p id="congratulationMessage">${course.congratulationMessage}</p>
-              <p id="status">${course.status}</p>
-              <p id="createdAt">${course.createdAt}</p>
-              <p id="updatedAt">${course.updatedAt}</p>
-              <hr />
-              {/* <button type="button"  disabled={course.sale === 0} onClick={addToCart}>Add to Cart</button> Thêm vào giỏ hàng của bạn 
-                            <hr />
-                          <button type="button" onClick={handleEnrollClick}>Enroll</button>  Tham gia khóa học  
+              <MDBTypography className="square border rounded-8 px-4">
+                <br/>
+                <MDBTypography tag='strong'>Các công ty hàng đầu cung cấp khóa học cho nhân viên:</MDBTypography>
+              
+                <p>{course.courseDescription}</p>
+              </MDBTypography>
+              <br />
+              <h3 className="px-4">NỘI DUNG KHÓA HỌC</h3>
+              <br/>
+              <MDBAccordion borderless initialActive={1} className="square border rounded-8">
+      <MDBAccordionItem collapseId={1} headerTitle='Chương 1'>
+        <p>intro</p>
+        <p>saleforce</p>
+        <p>intro</p>
+        <p>intro</p>
+      </MDBAccordionItem>
+      <MDBAccordionItem collapseId={2} headerTitle='Chương 2'>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </MDBAccordionItem>
+      <MDBAccordionItem collapseId={3} headerTitle='Chương 3'>
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf
+        moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
+        shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+        proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+        aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </MDBAccordionItem>
+    </MDBAccordion>
+    <br/>
+    <h3 className="px-4">Mô tả</h3>
+    <br/>
+    <p className="px-4">{course.courseDescription}</p>
 
-                        //   
-                         */}
-              <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+
+              {/* <div className="d-grid gap-2 d-md-flex justify-content-md-start">
                 <MDBBtn disabled={course.sale === 0} onClick={addToCart}>
                   Add to Cart
                 </MDBBtn>
                 <MDBBtn onClick={handleEnrollClick}>Enroll</MDBBtn>
               </div>
-              <hr />
+              <hr /> */}
               <Link onClick={handleFeedbacksClick}>View feedbacks</Link>
               {showFeedbacks && feedbacks ? (
                 <div>
@@ -140,8 +168,33 @@ const CourseDetails = () => {
                   <MDBBtn onClick={handleCancel}>Cancel</MDBBtn>
                 </div>
               )}
-            </div>
-          </div>
+              </MDBCol>
+              <MDBCol md='5' className="mt-0 ">
+               <form className=" border px-3 shadow-4 mt-0">
+                  <h3 className="mt-4">  {course.price}</h3>
+                  <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <MDBBtn disabled={course.sale === 0} onClick={addToCart} style={{backgroundColor:"#9C27B0", width:"500px"}}>
+                  <MDBTypography tag='strong'>Add to Cart</MDBTypography>
+                  </MDBBtn>
+                   
+                    <MDBBtn className="border center"  style={{color:"#9C27B0", backgroundColor:"white"}}>
+                    <MDBIcon far size="2x" icon="heart" />
+                </MDBBtn>
+                   </div>
+                   <MDBBtn className="border" style={{backgroundColor:"white", color:"black" ,width:"100%", fontWeight:"18px", marginTop:"12px"}}>
+                   <MDBTypography tag='strong'> Mua ngay</MDBTypography>   
+                  </MDBBtn>
+                  <p style={{fontSize:"12px", textAlign:"center", marginTop:"6px"}}>Đảm bảo hoàn tiền trong 30 ngày</p>
+                  <MDBTypography tag='strong'>Khóa học bao gồm:</MDBTypography>
+                  <div className="d-grid gap-4 d-md-flex justify-content-md-center px-4">
+                  <MDBTypography tag='u'  className=" stretched-link">Chia sẻ</MDBTypography>
+                  <MDBTypography tag='u' className=" stretched-link">Tặng khóa học này</MDBTypography>
+                  </div>
+                  <MDBTypography tag='u' className="d-md-flex justify-content-md-center stretched-link mb-4">Áp dụng coupon</MDBTypography>
+               </form>
+              </MDBCol>
+      </MDBRow>
+    </MDBContainer>
         </Fragment>
       )}
     </Fragment>

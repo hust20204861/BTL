@@ -10,6 +10,7 @@ import {
   MDBRipple,
   MDBRow,
   MDBCol,
+  MDBNavbar
 } from "mdb-react-ui-kit";
 
 const Course = ({ course }) => {
@@ -41,6 +42,8 @@ const Course = ({ course }) => {
         </MDBCard>
       </MDBCol>
     </MDBRow>
+
+
 
     /* <div className='courses'>
             <div className="course">
