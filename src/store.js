@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { 
     coursesReducer, newCourseReducer, courseReducer, courseDetailsReducer,
     enrollCoursesReducer, myEnrollCoursesReducer, myCoursesReducer,
-    newFeedbackReducer,courseFeedbacksReducer, feedbackReducer,
+    newFeedbackReducer,courseFeedbacksReducer, feedbackReducer, adminFeedbacksReducer,
     newSectionReducer, sectionsReducer, sectionReducer,
     lectureReducer, lecturesReducer, newLectureReducer,
     newDiscussionReducer, discussionReducer, discussionsReducer
@@ -14,19 +14,20 @@ import { authReducer, userReducer,infoReducer, forgotPasswordReducer, allUsersRe
 import { cartReducer } from './reducers/cartReducers'
 
 const reducer = combineReducers({
-    courses: coursesReducer,
-    courseDetails: courseDetailsReducer,
-    newCourse: newCourseReducer,
-    course: courseReducer,
-    courseFeedbacks: courseFeedbacksReducer,
-    feedback: feedbackReducer,
     auth: authReducer,
     user: userReducer,
     allUsers: allUsersReducer,
     userDetails: userDetailsReducer,
+    courses: coursesReducer,
+    courseDetails: courseDetailsReducer,
+    newCourse: newCourseReducer,
+    course: courseReducer,
+    newFeedback: newFeedbackReducer,
+    courseFeedbacks: courseFeedbacksReducer,
+    feedback: feedbackReducer,
+    adminFeedbacks: adminFeedbacksReducer,
     forgotPassword: forgotPasswordReducer,
     cart: cartReducer,
-    newFeedback: newFeedbackReducer,
     info:infoReducer,
     register: registerReducer,
     mycourses: myCoursesReducer,

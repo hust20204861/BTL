@@ -73,7 +73,10 @@ import {
     DELETE_DISCUSSION_FAIL,
     UPDATE_DISCUSSION_REQUEST,
     UPDATE_DISCUSSION_SUCCESS,
-    UPDATE_DISCUSSION_FAIL
+    UPDATE_DISCUSSION_FAIL,
+    GET_ADMIN_FEEDBACKS_REQUEST,
+    GET_ADMIN_FEEDBACKS_SUCCESS,
+    GET_ADMIN_FEEDBACKS_FAIL
 
 } from '../constants/courseConstants'
 
@@ -298,31 +301,31 @@ export const getCourseFeedbacks = (course_id , token) => async (dispatch) => {
     }
 }
 
-// Get course feedbacks
-// export const getAdminCourseFeedbacks = (id, token) => async (dispatch) => {
-//     try {
+// Get admin course feedbacks
+export const getAdminCourseFeedbacks = (token) => async (dispatch) => {
+    try {
 
-//         dispatch({ type: GET_FEEDBACKS_REQUEST })
-//         const config = {
-//             headers: {
-//               'Authorization': `Bearer ${token}`
-//             }
-//           };
-//         const { data } = await axios.get(`/api/v1/feedback/${id}`, config)
+        dispatch({ type: GET_ADMIN_FEEDBACKS_REQUEST })
+        const config = {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          };
+        const { data } = await axios.get(`/api/v1/feedback`, config)
 
-//         dispatch({
-//             type: GET_FEEDBACKS_SUCCESS,
-//             payload: data
-//         })
+        dispatch({
+            type: GET_ADMIN_FEEDBACKS_SUCCESS,
+            payload: data
+        })
 
-//     } catch (error) {
+    } catch (error) {
 
-//         dispatch({
-//             type: GET_FEEDBACKS_FAIL,
-//             payload: error.response.data.message
-//         })
-//     }
-// }
+        dispatch({
+            type: GET_ADMIN_FEEDBACKS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 // Delete course review
 export const deleteFeedback = (id, token) => async (dispatch) => {

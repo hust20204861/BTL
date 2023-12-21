@@ -31,6 +31,7 @@ import NewCourse from './pages/course/NewCourse'
 import UpdateCourse from './pages/course/UpdateCourse'
 import UsersList from './pages/admin/UsersList'
 import UpdateUser from './pages/admin/UpdateUser'
+import CourseFeedbacks from './pages/admin/CourseReviews'
 
 
 import { loadUser } from './actions/userActions'
@@ -93,6 +94,7 @@ function App() {
         <Routes>
         <Route path="/dashboard" isAdmin={true} element={<Dashboard/>} exact />
         <Route path="/courses" isAdmin={true} element={<CoursesList/>} exact />
+        <Route path="/feedbacks" isAdmin={true} element={<CourseFeedbacks/>} exact />
         <Route path="/create/course" isAdmin={true} element={<NewCourse/>} exact />
         <Route path="/update/course/:id" isAdmin={true} element={<UpdateCourse/>} exact />
         <Route path="/users" isAdmin={true} element={<UsersList/>} exact />

@@ -7,6 +7,8 @@ const { myenrollcourses } = useSelector(state => state.myenrollcourses)
 const { userId } = useSelector(state => state.auth)
     return (      
         <div className='mycourses'>
+            <h1>Đây là các khóa học của bạn</h1>
+            
             {myenrollcourses.map(course => (
                 <div className="course" key={course.id}>
                     <div className="course-name">
