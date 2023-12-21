@@ -86,13 +86,13 @@ const Header = () => {
                   <MDBCollapse navbar open={openNav}>
                     <MDBNavbarNav>
                       <MDBNavbarItem>
-                        <MDBNavbarLink to="/course">Course</MDBNavbarLink>
+                        <Link to="/course">Course</Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
-                        <MDBNavbarLink href="blog">Blog</MDBNavbarLink>
+                        <Link to="/blog">Blog</Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
-                        <MDBNavbarLink href="contact">Contact</MDBNavbarLink>
+                        <Link to="/website">Website</Link>
                       </MDBNavbarItem>
                     </MDBNavbarNav>
                   </MDBCollapse>
@@ -108,7 +108,7 @@ const Header = () => {
               <Link to="notification">
                 <MDBIcon fas icon="bell" />
                 <MDBBadge pill notification color="danger">
-                  1
+                  9
                 </MDBBadge>
               </Link>
               {token ? (

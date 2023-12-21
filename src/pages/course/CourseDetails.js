@@ -91,19 +91,19 @@ const CourseDetails = () => {
               </MDBTypography>
               <hr />
               <p id="course_price">${course.price}</p>
-              <p id="requiredSkills">${course.requiredSkills}</p>
-              <p id="courseFor">${course.courseFor}</p>
-              <p id="title">${course.title}</p>
-              <p id="subtitle">${course.subtitle}</p>
-              <p id="language">${course.language}</p>
-              <p id="level">${course.level}</p>
-              <p id="category">${course.category}</p>
-              <p id="primarilyTaught">${course.primarilyTaught}</p>
-              <p id="welcomeMessage">${course.welcomeMessage}</p>
-              <p id="congratulationMessage">${course.congratulationMessage}</p>
-              <p id="status">${course.status}</p>
-              <p id="createdAt">${course.createdAt}</p>
-              <p id="updatedAt">${course.updatedAt}</p>
+              <p id="requiredSkills">{course.requiredSkills}</p>
+              <p id="courseFor">{course.courseFor}</p>
+              <p id="title">{course.title}</p>
+              <p id="subtitle">{course.subtitle}</p>
+              <p id="language">{course.language}</p>
+              <p id="level">{course.level}</p>
+              <p id="category">{course.category}</p>
+              <p id="primarilyTaught">{course.primarilyTaught}</p>
+              <p id="welcomeMessage">{course.welcomeMessage}</p>
+              <p id="congratulationMessage">{course.congratulationMessage}</p>
+              <p id="status">{course.status}</p>
+              <p id="createdAt">{course.createdAt}</p>
+              <p id="updatedAt">{course.updatedAt}</p>
               <hr />
               {/* <button type="button"  disabled={course.sale === 0} onClick={addToCart}>Add to Cart</button> Thêm vào giỏ hàng của bạn 
                             <hr />
