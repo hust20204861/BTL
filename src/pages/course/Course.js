@@ -1,64 +1,75 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCardImage,
-  MDBBtn,
-  MDBRipple,
-  MDBRow,
-  MDBCol,
-} from "mdb-react-ui-kit";
+import { Box, Button, List, ListItem, Rating, Typography } from "@mui/material";
+import { COLOR } from "../../styles/color";
 
 const Course = ({ course }) => {
   return (
-    <MDBRow className="d-inline flex-cols-2 row-cols-lg-5 g-2 g-lg-3">
-      <MDBCol className="d-inline-flex p-3">
-        <MDBCard>
-          <MDBRipple rippleColor="light" rippleTag="div" className="bg-image ">
-            <MDBCardImage
-              src="https://mdbootstrap.com/img/new/textures/small/52.jpg"
-              className="rounded-4 shadow-4"
-              alt=""
-              style={{ width: "200px", height: "200px" }}
-            />
-            <a>
-              <div
-                className="mask"
-                style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-              ></div>
-            </a>
-          </MDBRipple>
-          <MDBCardBody>
-            <MDBCardTitle>{course.learningObject}</MDBCardTitle>
-            <MDBCardText>${course.price}</MDBCardText>
-            <Link to={`/course/${course.id}`} className="course-details">
+      <Box 
+      display={"flex"} 
+      flexDirection="row"
+      flexWrap="wrap"
+      justifyContent="space-between">
+        <Box
+          position={"sticky"}
+          top={80}
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          border={2}
+          borderColor={COLOR.gray}
+          borderRadius={2}
+          padding={2}
+          marginLeft={2}
+        >
+            <Typography variant={"h4"} color={COLOR.black}>
+              {course.learningObject}
+            </Typography>
+          <Box
+            component="img"
+            sx={{
+              height: 192,
+              width: 300,
+            }}
+            alt="Course Image"
+            src={course.courseImageUrl}
+          />
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            textAlign={"left"}
+            width={"100%"}
+          >
+            <Box display={"flex"} alignItems={"center"} marginTop={4}>
+              <Typography
+                variant={"body1"}
+                color={COLOR.functionYellow.default}
+                fontWeight={600}
+                marginRight={1}
+              >
+                {course.rating}
+              </Typography>
+              <Rating
+                name="half-rating"
+                defaultValue={parseFloat(course.rating)}
+                precision={0.5}
+                readOnly
+              />
+            </Box>
+          </Box>
+          <Link to={`/course/${course.id}`}>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ marginTop: "12px" }}
+          >
+            <Typography variant={"body1"} color={COLOR.white}>
               Xem khóa học
-            </Link>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBCol>
-    </MDBRow>
-
-    /* <div className='courses'>
-            <div className="course">
-              
-                <div className="course-title">
-                    <h5 className="cart-name">
-                        <Link to={`/course/${course.id}`}>{course.learningObject}</Link>
-                    </h5>
-                    <div className="course-ratings">
-                        <div className="course-rating">
-                            <div className="star" style={{ width: `${(course.rating / 5) * 100}%` }}></div>
-                        </div>
-                    </div>
-                    <p className="course-price">${course.price}</p>
-                    <Link to={`/course/${course.id}`}  className="course-details">View Details</Link>
-                </div>
-            </div>
-        </div> */
+            </Typography>
+          </Button>
+          </Link>
+        </Box>
+      </Box>
   );
 };
 

@@ -87,12 +87,7 @@ const MyEnrollCourseDetails = () => {
                   className="star"
                   style={{ width: `${(course.rating / 5) * 100}%` }}
                 ></div>
-                {/* {[...Array(course.rating)].map((_, index) => (
-                             <i key={index} className="fas fa-star"></i>
-                            ))} */}
-
-
-
+              
               </div>
 
               <hr />

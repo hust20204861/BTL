@@ -13,7 +13,7 @@ const login = async (email, password) => {
 };
 
 const getAccessToken = async () => {
-  const { access_token } = await login("minhtuyenvp02@gmail.com", "123456");
+  const { access_token } = await login("string", "string");
 
   return access_token;
 };
