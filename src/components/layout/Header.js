@@ -73,9 +73,10 @@ const Header = () => {
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
 
-            <Link to="/">
-                  <h4>Web Learning</h4>
-                </Link>
+
+  
+
+
 
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
@@ -143,24 +144,28 @@ const Header = () => {
                           <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
                         )} */}
 
-                   
-                    <MDBDropdownItem
-                      link
-                    >
-                     <Link  to={`/courses/enrolled/${userId}`}  onClick={myEnrollCourseHandle}>MyEnrollCourses</Link> 
+                    <MDBDropdownItem link>
+                      <Link
+                        to={`/courses/enrolled/${userId}`}
+                        onClick={myEnrollCourseHandle}
+                      >
+                        MyEnrollCourses
+                      </Link>
                     </MDBDropdownItem>
-                    <MDBDropdownItem link >
-                     <Link to={`/user/${userId}`}>Profile</Link> 
+                    <MDBDropdownItem link>
+                      <Link to={`/user/${userId}`}>Profile</Link>
                     </MDBDropdownItem>
                     <div>
                       {userinfo && userinfo.role === "ADMIN" && (
-                    <MDBDropdownItem> 
-                    <Link to="/dashboard">---Dashboard</Link>
-                    </MDBDropdownItem>
+                        <MDBDropdownItem>
+                          <Link to="/dashboard">---Dashboard</Link>
+                        </MDBDropdownItem>
                       )}
                     </div>
-                    <MDBDropdownItem link >
-                     <Link to="/" onClick={logoutHandler}>Logout</Link> 
+                    <MDBDropdownItem link>
+                      <Link to="/" onClick={logoutHandler}>
+                        Logout
+                      </Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
@@ -225,7 +230,7 @@ const Header = () => {
                   </div>
                 )
               )}
-               </div>
+            </div>
           </MDBContainer>
         </MDBNavbar>
       </div>
