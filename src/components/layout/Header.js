@@ -73,10 +73,9 @@ const Header = () => {
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
 
-
-  
-
-
+            <Link to="/">
+                  <h4>Web Learning</h4>
+                </Link>
 
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
@@ -104,7 +103,6 @@ const Header = () => {
                   </MDBCollapse>
                 </MDBContainer>
               </MDBNavbar>
-
               <div>
                 <Search />
               </div>
