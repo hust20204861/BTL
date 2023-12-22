@@ -40,8 +40,9 @@ import axios from "axios";
 // Payment
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import CourseScreen from "./pages/course/Course";
-import CourseDetailScreen from "./pages/course/CourseDetails";
+import CourseScreen from "./pages/CourseVideo/Course";
+import CourseDetailScreen from "./pages/CourseDetail/CourseDetails";
+import TeacherCoursesPage from "./pages/teacher/TeacherCourses";
 
 function App() {
   // const [stripeApiKey, setStripeApiKey] = useState('');
@@ -60,18 +61,24 @@ function App() {
   // }, [])
 
   const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
+  const currentUrl = window.location.href;
 
   return (
     <Router>
-      <div className="App">
-        <Header />
-        <div className="container container-fluid">
-          <Routes>
-            <Route path="/" element={<Home />} exact />
-            <Route path="/search/:keyword" element={<Home />} />
-            <Route path="/course/:id" element={<CourseDetailScreen />} exact />
-            <Route path="/cart" element={<Cart />} exact />
-            {/* {stripeApiKey &&
+      {!currentUrl.includes("instructor") ? (
+        <div className="App">
+          <Header />
+          <div className="container container-fluid">
+            <Routes>
+              <Route path="/" element={<Home />} exact />
+              <Route path="/search/:keyword" element={<Home />} />
+              <Route
+                path="/course/:id"
+                element={<CourseDetailScreen />}
+                exact
+              />
+              <Route path="/cart" element={<Cart />} exact />
+              {/* {stripeApiKey &&
             <Elements stripe={loadStripe(stripeApiKey)}>
               <Routes>
            <Route path="/payment" element={<Payment/>} />
@@ -79,82 +86,99 @@ function App() {
             </Elements>
           }  */}
 
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="auth/register" element={<Register />} />
-            <Route path="/user/:user_id" element={<Profile />} exact />
-            <Route path="/user/update/:id" element={<UpdateProfile />} exact />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="auth/register" element={<Register />} />
+              <Route path="/user/:user_id" element={<Profile />} exact />
+              <Route
+                path="/user/update/:id"
+                element={<UpdateProfile />}
+                exact
+              />
+              <Route
+                path="/user/update_pass"
+                element={<UpdatePassword />}
+                exact
+              />
+              <Route
+                path="/password/forgot"
+                element={<ForgotPassword />}
+                exact
+              />
+              <Route path="/user/reset_pass" element={<NewPassword />} exact />
+            </Routes>
+          </div>
+          <Routes>
             <Route
-              path="/user/update_pass"
-              element={<UpdatePassword />}
+              path="/course/:courseId/:lectureId"
+              element={<CourseScreen />}
               exact
             />
-            <Route path="/password/forgot" element={<ForgotPassword />} exact />
-            <Route path="/user/reset_pass" element={<NewPassword />} exact />
+            <Route
+              path="/dashboard"
+              isAdmin={true}
+              element={<Dashboard />}
+              exact
+            />
+            <Route
+              path="/courses"
+              isAdmin={true}
+              element={<CoursesList />}
+              exact
+            />
+            <Route
+              path="/feedbacks"
+              isAdmin={true}
+              element={<CourseFeedbacks />}
+              exact
+            />
+            <Route
+              path="/create/course"
+              isAdmin={true}
+              element={<NewCourse />}
+              exact
+            />
+            <Route
+              path="/update/course/:id"
+              isAdmin={true}
+              element={<UpdateCourse />}
+              exact
+            />
+            <Route path="/users" isAdmin={true} element={<UsersList />} exact />
+            <Route
+              path="/admin/update/:userId"
+              isAdmin={true}
+              element={<UpdateUser />}
+              exact
+            />
+            <Route
+              path="/course/create/list/:userId"
+              element={<MyCourse />}
+              exact
+            />
+            <Route path="/mycourse/:id" element={<MyCourseDetails />} exact />
+            <Route
+              path="/courses/enrolled/:userId"
+              element={<MyEnrollCourse />}
+              exact
+            />
+            <Route
+              path="/course/enrolled/:userId/:id"
+              element={<MyEnrollCourseDetails />}
+              exact
+            />
           </Routes>
+
+          <Footer />
         </div>
+      ) : (
         <Routes>
           <Route
-            path="/course/:courseId/:lectureId"
-            element={<CourseScreen />}
-            exact
-          />
-          <Route
-            path="/dashboard"
-            isAdmin={true}
-            element={<Dashboard />}
-            exact
-          />
-          <Route
-            path="/courses"
-            isAdmin={true}
-            element={<CoursesList />}
-            exact
-          />
-          <Route
-            path="/feedbacks"
-            isAdmin={true}
-            element={<CourseFeedbacks />}
-            exact
-          />
-          <Route
-            path="/create/course"
-            isAdmin={true}
-            element={<NewCourse />}
-            exact
-          />
-          <Route
-            path="/update/course/:id"
-            isAdmin={true}
-            element={<UpdateCourse />}
-            exact
-          />
-          <Route path="/users" isAdmin={true} element={<UsersList />} exact />
-          <Route
-            path="/admin/update/:userId"
-            isAdmin={true}
-            element={<UpdateUser />}
-            exact
-          />
-          <Route
-            path="/course/create/list/:userId"
-            element={<MyCourse />}
-            exact
-          />
-          <Route path="/mycourse/:id" element={<MyCourseDetails />} exact />
-          <Route
-            path="/courses/enrolled/:userId"
-            element={<MyEnrollCourse />}
-            exact
-          />
-          <Route
-            path="/course/enrolled/:userId/:id"
-            element={<MyEnrollCourseDetails />}
+            path="/instructor/courses"
+            element={<TeacherCoursesPage />}
             exact
           />
         </Routes>
-
-        <Footer />
-      </div>
+      )}
     </Router>
   );
 }

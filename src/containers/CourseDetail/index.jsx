@@ -31,7 +31,7 @@ const DummyData = {
 };
 
 const CourseDetail = () => {
-  const [courseDetail, setCourseDetail] = useState(DummyData);
+  const [courseDetail, setCourseDetail] = useState({});
   const courseId = window.location.pathname.split("/")[2];
 
   const fetchCourseData = async () => {
@@ -39,14 +39,15 @@ const CourseDetail = () => {
       const accessToken = await getAccessToken();
 
       const res = await getCourse(courseId, accessToken);
-      console.log("response", res);
+      setCourseDetail(res);
+      console.log("res: ", res);
     } catch (error) {
       console.log("error: ", error);
     }
   };
 
   useEffect(() => {
-    // fetchCourseData();
+    fetchCourseData();
   }, []);
 
   return (
@@ -71,7 +72,7 @@ const CourseDetail = () => {
               </Typography>
               <Rating
                 name="half-rating"
-                defaultValue={courseDetail.rating}
+                defaultValue={parseFloat(courseDetail.rating)}
                 precision={0.5}
                 readOnly
               />
@@ -89,7 +90,7 @@ const CourseDetail = () => {
             What you'll learn
           </Typography>
           <List>
-            {courseDetail.learningObject.split(".").map((item, index) => (
+            {courseDetail.learningObject?.split(".").map((item, index) => (
               <Box key={index} marginTop={1} display={"flex"}>
                 <Check color={COLOR.primary} />
                 <Typography variant={"body1"} color={COLOR.text} marginLeft={2}>
@@ -105,7 +106,7 @@ const CourseDetail = () => {
           </Typography>
 
           <List>
-            {courseDetail.requiredSkills.split(".").map((item, index) => (
+            {courseDetail.requiredSkills?.split(".").map((item, index) => (
               <Box key={index} marginTop={1} display={"flex"}>
                 <Add color={COLOR.primary} />
                 <Typography variant={"body1"} color={COLOR.text} marginLeft={2}>
