@@ -39,8 +39,8 @@ const Header = () => {
     dispatch(loadUser(userId, token));
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
-  //console.log("dskkkfdfds", userinfo.avatar);
-  //const avatar =  userinfo.avatar
+  console.log("dsfdfds", userinfo);
+
   const logoutHandler = () => {
     dispatch(logout());
     alert.success("Logged out successfully");
@@ -67,14 +67,14 @@ const Header = () => {
             <MDBNavbarNav className="d-flex flex-row">
               <MDBNavbarBrand href="/" className="row flex">
                 <Link to="/">
-                  <MDBIcon className="ms-1" size="4x" fab icon="aviato" />
+                  <MDBIcon className="ms-1" size="2x" fab icon="aviato" />
                 </Link>
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
-                  <Link to="/home">Home</Link>
+                  <Link to="/">Home</Link>
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -85,14 +85,14 @@ const Header = () => {
                   </MDBNavbarToggler>
                   <MDBCollapse navbar open={openNav}>
                     <MDBNavbarNav>
-                      {/* <MDBNavbarItem>
+                      <MDBNavbarItem>
                         <Link to="/course">Course</Link>
-                      </MDBNavbarItem> */}
-                      <MDBNavbarItem marginLeft={2}>
+                      </MDBNavbarItem>
+                      <MDBNavbarItem>
                         <Link to="/blog">Blog</Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
-                        <Link to="/">Website</Link>
+                        <Link to="/website">Website</Link>
                       </MDBNavbarItem>
                     </MDBNavbarNav>
                   </MDBCollapse>
@@ -112,39 +112,25 @@ const Header = () => {
                 </MDBBadge>
               </Link>
               {token ? (
-                <MDBDropdown display={"flex"}>
-                     <Link
+                <MDBDropdown>
+                  <MDBDropdownToggle
+                    tag="a"
+                    className="hidden-arrow row d-flex align-items-center nav-link"
+                  >
+                    <img
+                      className="rounded-circle"
+                      height="22"
+                      width="50"
+                      alt={userinfo && userinfo.name}
+                      loading="lazy"
+                    />
+                    <Link
                       to={`/course/create/list/${userId}`}
                       id="create-course"
                       onClick={myCourseHandle}
                     >
                       My Course
                     </Link>
-                  <MDBDropdownToggle
-                    tag="a"
-                    className="hidden-arrow row d-flex align-items-center nav-link"
-                  >
-                    {/* {avatar !== undefined? (
-                    <img
-                      className="rounded-circle"
-                      height="50"
-                      width="40"
-                      alt={userinfo && userinfo.name}
-                     //src={avatar}
-                      loading="lazy"
-                    />
-                    ):( */}
-                      <img
-                      className="rounded-circle"
-                      height="50"
-                      width="40"
-                      alt={userinfo && userinfo.name}
-                      src={"https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg"}
-                      loading="lazy"
-                    />
-                    {/* )} */}
-                    
-                 
                   </MDBDropdownToggle>
                   <MDBDropdownMenu>
                     {/* {userinfo && userinfo.role === "ADMIN" && (
