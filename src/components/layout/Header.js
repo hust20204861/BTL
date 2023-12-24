@@ -112,18 +112,21 @@ const Header = () => {
                 </MDBBadge>
               </Link>
               {token ? (
-                <MDBDropdown>
-                  <MDBDropdownToggle
-                    tag="a"
-                    className="hidden-arrow row d-flex align-items-center nav-link"
-                  >
-                    <img
+                
+                <MDBDropdown className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
+                  <Link>
+                  <img
                       className="rounded-circle"
                       height="22"
                       width="50"
                       alt={userinfo && userinfo.name}
                       loading="lazy"
                     />
+                    </Link>
+                  <MDBDropdownToggle
+                    tag="a"
+                    className="hidden-arrow row d-flex align-items-center nav-link"
+                  >
                     <Link
                       to={`/course/create/list/${userId}`}
                       id="create-course"
