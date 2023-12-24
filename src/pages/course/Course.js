@@ -9,10 +9,15 @@ const Course = ({ course }) => {
       display={"flex"} 
       flexDirection="row"
       flexWrap="wrap"
-      justifyContent="space-between">
+      justifyContent="space-between"
+      width="30%">
+      <Link to={`/course/${course.id}`}>
         <Box
-          position={"sticky"}
-          top={80}
+         backgroundColor={COLOR.gray}
+         position={"stricky"}
+         marginTop={5}
+         marginBottom={5}
+         width="90%"
           display={"flex"}
           flexDirection={"column"}
           alignItems={"center"}
@@ -57,7 +62,6 @@ const Course = ({ course }) => {
               />
             </Box>
           </Box>
-          <Link to={`/course/${course.id}`}>
           <Button
             variant="contained"
             fullWidth
@@ -67,8 +71,8 @@ const Course = ({ course }) => {
               Xem khóa học
             </Typography>
           </Button>
-          </Link>
         </Box>
+        </Link>
       </Box>
   );
 };

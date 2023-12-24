@@ -32,7 +32,7 @@ const Login = () => {
   );
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/home");
     }
 
     if (error) {
