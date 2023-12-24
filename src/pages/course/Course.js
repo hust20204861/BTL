@@ -6,18 +6,13 @@ import { COLOR } from "../../styles/color";
 const Course = ({ course }) => {
   return (
       <Box 
-      display="flex"
+      display={"flex"} 
       flexDirection="row"
       flexWrap="wrap"
-      justifyContent="space-between"
-      width="30%">
-        <Link to={`/course/${course.id}`}>
+      justifyContent="space-between">
         <Box
-        backgroundColor={COLOR.gray}
-          position={"stricky"}
-          marginTop={5}
-          marginBottom={5}
-          width="90%"
+          position={"sticky"}
+          top={80}
           display={"flex"}
           flexDirection={"column"}
           alignItems={"center"}
@@ -34,7 +29,7 @@ const Course = ({ course }) => {
             component="img"
             sx={{
               height: 192,
-              width: 340,
+              width: 300,
             }}
             alt="Course Image"
             src={course.courseImageUrl}
@@ -62,6 +57,7 @@ const Course = ({ course }) => {
               />
             </Box>
           </Box>
+          <Link to={`/course/${course.id}`}>
           <Button
             variant="contained"
             fullWidth
@@ -71,8 +67,8 @@ const Course = ({ course }) => {
               Xem khóa học
             </Typography>
           </Button>
+          </Link>
         </Box>
-        </Link>
       </Box>
   );
 };
