@@ -45,7 +45,7 @@ const Register = () => {
   };
 
   return (
-    <Fragment>
+    <Fragment >
       <MetaData title={"Register User"} />
       <form
         className="shadow-lg mb-4 mt-4 p-4 w-50 center"

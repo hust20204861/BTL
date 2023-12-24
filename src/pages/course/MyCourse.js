@@ -18,6 +18,7 @@ const MyCourse = () => {
     flexDirection="row"
     flexWrap="wrap"
     justifyContent="space-between"
+    border= "none"
   >
    
     {mycourses.map((course, index) => (

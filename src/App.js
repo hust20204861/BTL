@@ -9,6 +9,8 @@ import MyCourse from "./pages/course/MyCourse";
 import MyEnrollCourseDetails from "./pages/course/MyEnrollCourseDetails";
 import MyCourseDetails from "./pages/course/MyCourseDetails";
 import MyEnrollCourse from "./pages/course/MyEnrollCourse";
+import Blog from "./pages/review/Blog";
+import Website from "./pages/review/Website";
 
 // Cart Imports
 import Cart from "./pages/cart/Cart";
@@ -71,7 +73,9 @@ function App() {
           <Header />
           <div className="container container-fluid">
             <Routes>
-              <Route path="/" element={<Home />} exact />
+              <Route path="/home" element={<Home />} exact />
+              <Route path="/blog" element={<Blog />} exact />
+              <Route path="/" element={<Website />} exact />
               <Route path="/search/:keyword" element={<Home />} />
               <Route
                 path="/course/:id"
