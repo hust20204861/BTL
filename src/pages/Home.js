@@ -123,7 +123,7 @@ const Home = () => {
               borderRadius={2}
               padding={2}
               marginBottom={2}>
-                <Box  width="25%" >
+                <Box  width="25%">
                   {courses?.map((course) => (
                     <Course key={course.id} course={course} />
                   ))}

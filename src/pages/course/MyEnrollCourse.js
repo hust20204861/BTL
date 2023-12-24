@@ -9,7 +9,7 @@ const { myenrollcourses } = useSelector(state => state.myenrollcourses)
 const { userId } = useSelector(state => state.auth)
     return (      
         <div className='mycourses'>
-           <Typography variant='h3' textAlign='center'>Khóa học bạn đã tham gia</Typography>
+    <Typography variant='h3' textAlign='center'>Khóa học bạn đã tham gia</Typography>
  <Box
   display="flex"
   flexDirection="row"
