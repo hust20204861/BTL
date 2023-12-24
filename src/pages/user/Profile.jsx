@@ -46,7 +46,7 @@ const Profile = () => {
                 </Link>
               </Typography>
             <div className="information">
-            <Typography variant="h5">Tiểu sử</Typography>
+            <Typography variant="h5" style={{marginTop:'20px'}}>Tiểu sử</Typography>
               <Typography>{userinfo.description}</Typography>
               <hr />
               <Typography variant="h5">Website</Typography>
@@ -62,14 +62,14 @@ const Profile = () => {
               <Typography>{String(userinfo.createdAt).substring(0, 10)}</Typography>
               <div>
                 <Link to="/user/update_pass">
-                  <Button variant="contained" color="primary">
+                  <Button variant="contained" color="primary" style={{marginTop:'10px'}}>
                     Change Password
                   </Button>
                 </Link>
               </div>
               <div>
-                <Link to={`/courses/enrolled/${userId}`}>
-                  <Button variant="contained" color="primary">
+                <Link to={`/courses/enrolled/${userId}`} >
+                  <Button variant="contained" color="primary" style={{marginTop:'10px'}}>
                     Khóa học đã tham gia
                   </Button>
                 </Link>

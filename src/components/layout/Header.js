@@ -156,6 +156,13 @@ const Header = () => {
                   </MDBDropdownToggle>
                   </Box>
                   <MDBDropdownMenu>
+                  <MDBDropdownItem link>
+                      {userinfo && userinfo.role === "ADMIN" && (
+                        <MDBDropdownItem style={{marginTop:'10px'}}>
+                          <Link to="/dashboard"  >Dashboard</Link>
+                        </MDBDropdownItem>
+                      )}
+                    </MDBDropdownItem>
                     <MDBDropdownItem link>
                       <Link
                         to={`/courses/enrolled/${userId}`}
@@ -167,15 +174,9 @@ const Header = () => {
                     <MDBDropdownItem link>
                       <Link to={`/user/${userId}`}>Profile</Link>
                     </MDBDropdownItem>
-                    <div>
-                      {userinfo && userinfo.role === "ADMIN" && (
-                        <MDBDropdownItem>
-                          <Link to="/dashboard" >---Dashboard</Link>
-                        </MDBDropdownItem>
-                      )}
-                    </div>
+                    
                     <MDBDropdownItem link>
-                      <Link to="/" onClick={logoutHandler}>
+                      <Link to="/" style={{color:'red'}} onClick={logoutHandler}>
                         Logout
                       </Link>
                     </MDBDropdownItem>
