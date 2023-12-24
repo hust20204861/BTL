@@ -21,6 +21,7 @@ import {
 } from "mdb-react-ui-kit";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Box, Typography } from "@mui/material";
 
 import Search from "./Search";
 import { loadUser } from "../../actions/userActions";
@@ -39,8 +40,13 @@ const Header = () => {
     dispatch(loadUser(userId, token));
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
-  //console.log("dskkkfdfds", userinfo.avatar);
-  //const avatar =  userinfo.avatar
+
+   console.log("dskkkfdfds", userinfo);
+  //  if(userinfo.avatar) {
+  //   const avatar =  userinfo.avatar;
+  //  }
+  //console.log("bbbb", avatar)
+
   const logoutHandler = () => {
     dispatch(logout());
     alert.success("Logged out successfully");
@@ -63,18 +69,19 @@ const Header = () => {
           light
           style={{ backgroundColor: "#e3f2fd", width: "100%" }}
         >
-          <MDBContainer className="inline-row d-flex justify-content-between">
+          <MDBContainer className="inline-row d-flex justify-content-between" >
             <MDBNavbarNav className="d-flex flex-row">
-              <MDBNavbarBrand href="/" className="row flex">
-                <Link to="/">
-                  <MDBIcon className="ms-1" size="4x" fab icon="aviato" />
+              <MDBNavbarBrand href="/home" className="row flex">
+                <Link to="/home">
+                  <MDBIcon className="ms-1" size="4x" fab icon="react" />
+                 
                 </Link>
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
-                  <Link to="/home">Home</Link>
+                  <Link to="/home" style={{color:'#386bc0', fontWeight:'bold', padding:'2px'}}>Home</Link>
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -89,10 +96,10 @@ const Header = () => {
                         <Link to="/course">Course</Link>
                       </MDBNavbarItem> */}
                       <MDBNavbarItem marginLeft={2}>
-                        <Link to="/blog">Blog</Link>
+                        <Link to="/blog" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Blog</Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
-                        <Link to="/">Website</Link>
+                        <Link to="/" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Website</Link>
                       </MDBNavbarItem>
                     </MDBNavbarNav>
                   </MDBCollapse>
@@ -102,10 +109,11 @@ const Header = () => {
                 <Search />
               </div>
 
-              <Link to="cart">
+
+              <Link to="cart" style={{marginLeft: '10px'}}>
                 <MDBIcon fas icon="shopping-cart" />
               </Link>
-              <Link to="notification">
+              <Link to="notification" style={{marginLeft: '10px'}}>
                 <MDBIcon fas icon="bell" />
                 <MDBBadge pill notification color="danger">
                   9
@@ -113,18 +121,18 @@ const Header = () => {
               </Link>
               {token ? (
                 <MDBDropdown display={"flex"}>
+                  <Box display={'flex'}>
                      <Link
                       to={`/course/create/list/${userId}`}
                       id="create-course"
                       onClick={myCourseHandle}
+                      style={{ padding:'20px' }}
+                      
                     >
-                      My Course
+                      MyCourse
                     </Link>
-                  <MDBDropdownToggle
-                    tag="a"
-                    className="hidden-arrow row d-flex align-items-center nav-link"
-                  >
-                    {/* {avatar !== undefined? (
+                  <MDBDropdownToggle  style={{ background: "transparent", boxShadow: "none" }}>
+                    {/* {avatar? (
                     <img
                       className="rounded-circle"
                       height="50"
@@ -137,20 +145,17 @@ const Header = () => {
                       <img
                       className="rounded-circle"
                       height="50"
-                      width="40"
+                      width="50"
                       alt={userinfo && userinfo.name}
                       src={"https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg"}
                       loading="lazy"
                     />
-                    {/* )} */}
+                     {/* )}  */}
                     
                  
                   </MDBDropdownToggle>
+                  </Box>
                   <MDBDropdownMenu>
-                    {/* {userinfo && userinfo.role === "ADMIN" && (
-                          <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
-                        )} */}
-
                     <MDBDropdownItem link>
                       <Link
                         to={`/courses/enrolled/${userId}`}
@@ -165,7 +170,7 @@ const Header = () => {
                     <div>
                       {userinfo && userinfo.role === "ADMIN" && (
                         <MDBDropdownItem>
-                          <Link to="/dashboard">---Dashboard</Link>
+                          <Link to="/dashboard" >---Dashboard</Link>
                         </MDBDropdownItem>
                       )}
                     </div>
@@ -177,59 +182,6 @@ const Header = () => {
                   </MDBDropdownMenu>
                 </MDBDropdown>
               ) : (
-                // {token ? (
-                //   <div>
-                //     <div className="dropdown">
-
-                //       <figure className="avatar avatar-nav">
-                //         <img
-                //           alt={userinfo && userinfo.name}
-                //           className="rounded-circle"
-                //         />
-                //       </figure>
-                //       <span className="head-user-name">
-                //         {userinfo && userinfo.name}
-                //       </span>
-
-                //       <div
-                //         className="dropdown-menu"
-                //         aria-labelledby="dropDownMenuButton"
-                //       >
-                //         {userinfo && userinfo.role === "ADMIN" && (
-                //           <Link
-                //             className="dropdown-item"
-                //             id="head-item"
-                //             to="/dashboard"
-                //           >
-                //             Dashboard
-                //           </Link>
-                //         )}
-                //         <Link
-                //           className="dropdown-item"
-                //           id="head-item"
-                //           to={`/courses/enrolled/${userId}`}
-                //           onClick={myEnrollCourseHandle}
-                //         >
-                //           MyEnrollCourses
-                //         </Link>
-                //         <Link
-                //           className="dropdown-item"
-                //           id="head-item"
-                //           to={`/user/${userId}`}
-                //         >
-                //           Profile
-                //         </Link>
-                //         <Link
-                //           className="dropdown-item text-danger"
-                //           id="head-item-logout"
-                //           to="/"
-                //           onClick={logoutHandler}
-                //         >
-                //           Logout
-                //         </Link>
-                //       </div>
-                //     </div>
-                //   </div>
                 !loading && (
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <MDBBtn href="/auth/login">LOGIN</MDBBtn>
@@ -239,6 +191,8 @@ const Header = () => {
               )}
             </div>
           </MDBContainer>
+
+
         </MDBNavbar>
       </div>
     </Fragment>

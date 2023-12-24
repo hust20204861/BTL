@@ -4,6 +4,7 @@ import { getAccessToken } from "../../apis/auth";
 import { Box, Button, List, ListItem, Rating, Typography } from "@mui/material";
 import { COLOR } from "../../styles/color";
 import { Add, Check } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const DummyData = {
   id: 1,
@@ -181,6 +182,7 @@ const CourseDetail = () => {
               {courseDetail.sale}% off
             </Typography>
           </Box>
+          <Link to="/payment">
           <Button
             variant="contained"
             fullWidth
@@ -193,6 +195,7 @@ const CourseDetail = () => {
               Buy now
             </Typography>
           </Button>
+          </Link>
         </Box>
       </Box>
     </Box>

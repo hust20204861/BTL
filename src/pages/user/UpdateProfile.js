@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import MetaData from '../../components/layout/MetaData'
 import { updateProfile, loadUser, clearErrors } from '../../actions/userActions'
 import { UPDATE_PROFILE_RESET } from '../../constants/userConstants'
+import { MDBValidation, MDBInput, MDBValidationItem, MDBCheckbox, MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
 
 const UpdateProfile = () => {
 
@@ -34,7 +35,6 @@ const UpdateProfile = () => {
             setWebsite(userinfo.website);
             setAvatar(userinfo.avatar);
             setDescription(userinfo.description);
-            setMoney(userinfo.money);
             setRole(userinfo.role);
    
         }
@@ -66,7 +66,6 @@ const UpdateProfile = () => {
         formData.set('website', website);
         formData.set('avatar', avatar);
         formData.set('description', description);
-        formData.set('money', money);
         formData.set('role', role);
 
         const jsonObject = {};
@@ -82,83 +81,71 @@ const UpdateProfile = () => {
         <Fragment>
             <MetaData title={'Update Profile'} />
 
-            <div className="row wrapper">
-                <div className="col-10 col-lg-5">
-                    <form className="shadow-lg" onSubmit={submitHandler} encType='application/json'>
-                        <h1 className="mt-2 mb-5">Update Profile</h1>
+                    <form className="square rounded-9 shadow-lg mb-4 mt-5 p-4 w-40 center" onSubmit={submitHandler} encType='multipart/form-data'>
+                        <h1 className="mb-3">Update Profile</h1>
 
-                        <div className="form-group">
-                            <label htmlFor="email_field">Name</label>
-                            <input
+                        <MDBValidation>
+                            <MDBValidationItem feedback='Enter your name'/>
+                            <MDBInput
                                 type="name"
-                                id="name_field"
-                                className="form-control"
+                                id="form3Example3"
+                                label="Name"
+                                className="mb-4"
                                 name='name'
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
-                        </div>
+                        </MDBValidation>
 
-                        <div className="form-group">
-                            <label htmlFor="email_field">Email</label>
-                            <input
+                        <MDBValidationItem>
+                            <MDBValidationItem feedback='Enter your email'/>
+                            <MDBInput
                                 type="text"
-                                id="email_field"
-                                className="form-control"
-                                name='email'
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email_field">Website</label>
-                            <input
+                        </MDBValidationItem>
+                        
+                            <MDBValidationItem feedback='Enter your website'/>
+                            <MDBInput
                                 type="text"
-                                id="email_field"
-                                className="form-control"
-                                name='email'
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Website'
                                 value={website}
                                 onChange={(e) => setWebsite(e.target.value)}
                             />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email_field">Avatar</label>
-                            <input
+                        
+                       
+                            <MDBValidationItem feedback='Enter your avatar'/>
+                            <MDBInput
                                 type="text"
-                                id="email_field"
-                                className="form-control"
-                                name='email'
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Avatar'
                                 value={avatar}
                                 onChange={(e) => setAvatar(e.target.value)}
                             />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email_field">Description</label>
-                            <input
+                       
+                       
+                            <MDBValidationItem feedback='Enter your description'/>
+                            <MDBInput
                                 type="text"
-                                id="email_field"
-                                className="form-control"
-                                name='email'
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Description'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email_field">Money</label>
-                            <input
-                                type="text"
-                                id="email_field"
-                                className="form-control"
-                                name='email'
-                                value={money}
-                                onChange={(e) => setMoney(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="email_field">Role</label>
+                        
+                       
+                            <MDBValidationItem feedback='Enter your role'>Role</MDBValidationItem>
                             <select
-                                        id="role_field"
-                                        className="form-control"
+                                        id="form3Example3"
+                                        className="mb-4"
                                         name='role'
                                         value={role}
                                         onChange={(e) => setRole(e.target.value)}
@@ -166,13 +153,15 @@ const UpdateProfile = () => {
                                         <option value="user">user</option>
                                         <option value="admin">admin</option>
                                     </select>
-                        </div>
-
-
-                        <button type="submit"  disabled={loading ? true : false} >Update</button>
+                                    <MDBCheckbox
+                                       wrapperClass="d-flex justify-content-center mb-4"
+                                       id="form3Example5"
+                                       label="Update your profile?"
+                                       defaultChecked
+                                    />
+                        <MDBBtn type="submit" className="mb-4" block disabled={loading ? true : false} >Update</MDBBtn>
                     </form>
-                </div>
-            </div>
+              
         </Fragment>
     )
 }

@@ -45,44 +45,44 @@ const Home = () => {
   return (
     <Fragment>
       <MDBCarousel showControls showIndicators>
-        <MDBCarouselItem itemId={1}>
+        <MDBCarouselItem itemId={1} style={{ maxHeight: '600px' }}>
           <img
-            src="https://mdbootstrap.com/img/new/slides/032.jpg"
+            src="https://thietkewebaio.com/wp-content/uploads/2021/09/code-web-tinh-code-web-dong.jpg"
             className="d-block w-100 "
             alt="..."
           />
         </MDBCarouselItem>
-        <MDBCarouselItem itemId={2}>
+        <MDBCarouselItem itemId={2} style={{ maxHeight: '600px' }}>
           <img
-            src="https://mdbootstrap.com/img/new/slides/004.jpg"
+            src="https://vn.mybestwebsitebuilder.com/storage/media/images/how-to-code-a-website-people.o.jpg"
             className="d-block w-100 "
             alt="..."
           />
         </MDBCarouselItem>
-        <MDBCarouselItem itemId={3}>
+        <MDBCarouselItem itemId={3} style={{ maxHeight: '600px' }}>
           <img
-            src="https://mdbootstrap.com/img/new/slides/025.jpg"
+            src="https://img.timviecit.net/2019/06/hoc-lap-trinh-web-6.jpg"
             className="d-block w-100"
             alt="..."
           />
         </MDBCarouselItem>
-        <MDBCarouselItem itemId={4}>
+        <MDBCarouselItem itemId={4} style={{ maxHeight: '600px' }}>
           <img
-            src="https://mdbootstrap.com/img/new/slides/026.jpg"
+            src="https://thietkewebaio.com/wp-content/uploads/2021/09/code-web-la-gi.jpg"
             className="d-block w-100"
             alt="..."
           />
         </MDBCarouselItem>
-        <MDBCarouselItem itemId={5}>
+        <MDBCarouselItem itemId={5} style={{ maxHeight: '600px' }}>
           <img
-            src="https://mdbootstrap.com/img/new/slides/029.jpg"
+            src="https://vn.mybestwebsitebuilder.com/storage/media/images/how-to-code-a-website-plant.o.jpg"
             className="d-block w-100"
             alt="..."
           />
         </MDBCarouselItem>
-        <MDBCarouselItem itemId={6}>
+        <MDBCarouselItem itemId={6} style={{ maxHeight: '600px' }}>
           <img
-            src="https://mdbootstrap.com/img/new/slides/040.jpg"
+            src="https://d1iv5z3ivlqga1.cloudfront.net/wp-content/uploads/2023/10/27144914/7N2A0739-1024x683.jpg"
             className="d-block w-100"
             alt="..."
           />

@@ -1,70 +1,4 @@
-// import React, { Fragment } from 'react'
-// import { Link } from 'react-router-dom'
-// import { useSelector } from 'react-redux'
 
-// import Loader from '../../components/layout/Loader'
-// import MetaData from '../../components/layout/MetaData'
-
-// const Profile = () => {
-
-//     const { userinfo, loading } = useSelector(state => state.info)
-// const { userId } = useSelector(state => state.auth)
-
-//   return (
-//     <Fragment>
-//             {loading ? <Loader /> : (
-//                 <Fragment>
-//                     <MetaData title={'Your Profile'} />
-
-//                     <h2 className="my-profile">My Profile</h2>
-//                     <div className="profile">
-                      
-//                             <figure className='avatar avatar-profile'>
-//                                 <img className="rounded-circle img-fluid" src={userinfo.avatar} alt={userinfo.name} />
-//                             </figure>
-//                         <div >
-//                             <Link to={`/user/update/${userId}`} className="btn btn-primary">
-//                                 Edit Profile
-//                             </Link>
-//                         </div>
-                       
-//                         <div className="ifnomation">
-//                             <h4>Full Name</h4>
-//                             <p>{userinfo.name}</p>
-//                             <hr/>
-//                             <h4>Email Address</h4>
-//                             <p>{userinfo.email}</p>
-//                             <hr/>
-//                             <h4>Your Website</h4>
-//                             <p>{userinfo.website}</p>
-//                             <hr/>
-//                             <h4>Avatar</h4>
-//                             <p>{userinfo.avatar}</p>
-//                             <hr/>
-//                             <h4>Description</h4>
-//                             <p>{userinfo.description}</p>
-//                             <hr/>
-//                             <h4>Your Money</h4>
-//                             <p>${userinfo.money}</p>
-//                             <hr/>
-//                             <h4>Joined On</h4>
-//                             <p>{String(userinfo.createdAt).substring(0, 10)}</p>
-                         
-//                         <div >
-//                             <Link to="/user/update_pass" className="btn btn-primary">
-//                                 Change Password
-//                             </Link>
-//                             </div>
-
-//                         </div>
-//                     </div>
-//                 </Fragment>
-//             )}
-//         </Fragment>
-//   )
-// }
-
-// export default Profile
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -78,6 +12,7 @@ const Profile = () => {
   const { userinfo, loading } = useSelector((state) => state.info);
   const { userId } = useSelector((state) => state.auth);
 
+
   return (
     <Fragment>
       {loading ? (
@@ -87,9 +22,6 @@ const Profile = () => {
           <MetaData title={'Your Profile'} />
 
           <Box sx={{ marginTop: '2rem' }}>
-            <Typography variant="h2" sx={{ mb: '1rem' }}>
-              {userinfo.name}
-            </Typography>
             <Box
               sx={{
                 display: 'flex',
@@ -102,26 +34,28 @@ const Profile = () => {
                 alt={userinfo.name}
                 sx={{ width: '200px', height: '200px', mr: '3rem' }}
               />
-              <div>
+              <Typography variant="h2" sx={{ mb: '1rem' }}>
+              {userinfo.name}
+            </Typography>
+            </Box>
+            <Typography marginLeft={4}>
                 <Link to={`/user/update/${userId}`}>
                   <Button variant="contained" color="primary">
                     Edit Profile
                   </Button>
                 </Link>
-              </div>
-            </Box>
-
+              </Typography>
             <div className="information">
-            <Typography variant="h5">Your Biography</Typography>
+            <Typography variant="h5">Tiểu sử</Typography>
               <Typography>{userinfo.description}</Typography>
               <hr />
-              <Typography variant="h5">Your Website</Typography>
+              <Typography variant="h5">Website</Typography>
               <Typography>{userinfo.website}</Typography>
               <hr />
               <Typography variant="h5">Email Address</Typography>
               <Typography>{userinfo.email}</Typography>
               <hr />
-              <Typography variant="h5">Money</Typography>
+              <Typography variant="h5">Tài khoản hiện có</Typography>
               <Typography>${userinfo.money}</Typography>
               <hr />
               <Typography variant="h5">Joined On</Typography>
