@@ -172,6 +172,9 @@ const Header = () => {
                     <MDBDropdownItem link>
                       <Link to={`/user/${userId}`}>Profile</Link>
                     </MDBDropdownItem>
+                    <MDBDropdownItem link>
+                      <Link to={`/user/${userId}`}>Update Profile</Link>
+                    </MDBDropdownItem>
                     <div>
                       {userinfo && userinfo.role === "ADMIN" && (
                         <MDBDropdownItem>
