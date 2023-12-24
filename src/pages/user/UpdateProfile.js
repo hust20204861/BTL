@@ -94,10 +94,12 @@ const UpdateProfile = () => {
   return (
     <Fragment>
       <MetaData title={"Update Profile"} />
+      <br />
       <form
         onSubmit={submitHandler}
-        className=" shadow-lg mb-4 mt-5 p-4 "
+        className="border shadow-lg mb-4 mt-5 p-4 "
         style={{ margin: "360px", paddingLeft: "300px", width: "800px" }}
+        encType="application/json"
       >
         <MDBRow className=" square border-end">
           <MDBCol md="4" className="d-flex row border-end ">
@@ -155,14 +157,14 @@ const UpdateProfile = () => {
                 id="form5Example2"
                 label="Name"
                 value={name}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
               <MDBInput
                 className="mb-4"
                 type="email"
                 id="form5Example2"
                 label="Email address"
-                value={name}
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <MDBTypography tag="small" className="center">
@@ -199,9 +201,11 @@ const UpdateProfile = () => {
             </form>
           </MDBCol>
         </MDBRow>
+        <br />
+        <br />
       </form>
 
-      <div className="row wrapper">
+      {/* <div className="row wrapper">
         <div className="col-10 col-lg-5">
           <form
             className="shadow-lg"
@@ -296,7 +300,7 @@ const UpdateProfile = () => {
             </button>
           </form>
         </div>
-      </div>
+      </div> */}
     </Fragment>
   );
 };
