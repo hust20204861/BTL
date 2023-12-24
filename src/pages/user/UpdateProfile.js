@@ -81,6 +81,15 @@ const UpdateProfile = () => {
     return (
         <Fragment>
             <MetaData title={'Update Profile'} />
+            <form
+            onSubmit={submitHandler}
+            className=" shadow-lg mb-4 mt-5 p-4 w-40 center"
+            style={{ margin: "360px", paddingLeft: "300px" }}
+          >
+
+            </form>
+
+
 
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">

@@ -72,7 +72,8 @@ const Header = () => {
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
-              <MDBNavbar expand="lg">
+              <Link to="/">Web Learning</Link>
+              {/* <MDBNavbar expand="lg">
                 <MDBContainer fluid>
                   <Link to="/">Home</Link>
                   <MDBNavbarToggler
@@ -97,7 +98,7 @@ const Header = () => {
                     </MDBNavbarNav>
                   </MDBCollapse>
                 </MDBContainer>
-              </MDBNavbar>
+              </MDBNavbar> */}
               <div>
                 <Search />
               </div>
@@ -112,34 +113,53 @@ const Header = () => {
                 </MDBBadge>
               </Link>
               {token ? (
-                
+                // <MDBDropdown className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
+
+                //     <MDBDropdownToggle
+                //     tag="a"
+                //     className="hidden-arrow row d-flex align-items-center nav-link"
+                //   ></MDBDropdownToggle>
+                //     </MDBDropdown>
+
                 <MDBDropdown className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
-                  <Link>
-                  <img
-                      className="rounded-circle"
-                      height="22"
-                      width="50"
-                      alt={userinfo && userinfo.name}
-                      loading="lazy"
-                    />
-                    </Link>
+                  <Link
+                    to={`/course/create/list/${userId}`}
+                    id="create-course"
+                    onClick={myCourseHandle}
+                  >
+                    My Course
+                  </Link>
                   <MDBDropdownToggle
                     tag="a"
                     className="hidden-arrow row d-flex align-items-center nav-link"
                   >
-                    <Link
-                      to={`/course/create/list/${userId}`}
-                      id="create-course"
-                      onClick={myCourseHandle}
+                    <MDBBtn
+                      className="mx-2"
+                      color="tertiary"
+                      rippleColor="light"
                     >
-                      My Course
-                    </Link>
+                      <img
+                        className="rounded-circle"
+                        height="22"
+                        width="50"
+                        alt={userinfo && userinfo.name}
+                        loading="lazy"
+                      />
+                    </MDBBtn>
                   </MDBDropdownToggle>
                   <MDBDropdownMenu>
                     {/* {userinfo && userinfo.role === "ADMIN" && (
                           <MDBDropdownItem link href="/dashboard">Dashboard</MDBDropdownItem>
                         )} */}
-
+                    <MDBDropdownItem link>
+                      <Link
+                        to={`/course/create/list/${userId}`}
+                        id="create-course"
+                        onClick={myCourseHandle}
+                      >
+                        My Course
+                      </Link>
+                    </MDBDropdownItem>
                     <MDBDropdownItem link>
                       <Link
                         to={`/courses/enrolled/${userId}`}
@@ -148,6 +168,7 @@ const Header = () => {
                         MyEnrollCourses
                       </Link>
                     </MDBDropdownItem>
+
                     <MDBDropdownItem link>
                       <Link to={`/user/${userId}`}>Profile</Link>
                     </MDBDropdownItem>
