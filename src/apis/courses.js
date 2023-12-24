@@ -19,4 +19,16 @@ const getCourse = async (id, accessToken) => {
   return data;
 };
 
-export { getCourses, getCourse };
+const updateCourse = async (courseData, accessToken) => {
+  const { data } = await api({
+    method: "PUT",
+    url: `/course/${courseData.id}`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: courseData,
+  });
+  return data;
+};
+
+export { getCourses, getCourse, updateCourse };

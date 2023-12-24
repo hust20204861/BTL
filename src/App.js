@@ -42,7 +42,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CourseScreen from "./pages/CourseVideo/Course";
 import CourseDetailScreen from "./pages/CourseDetail/CourseDetails";
-import TeacherCoursesPage from "./pages/teacher/TeacherCourses";
+import TeacherCoursesPage from "./pages/TeacherCourses/TeacherCourses";
+import TeacherCoursePage from "./pages/TeacherCourse";
 
 function App() {
   // const [stripeApiKey, setStripeApiKey] = useState('');
@@ -175,6 +176,11 @@ function App() {
           <Route
             path="/instructor/courses"
             element={<TeacherCoursesPage />}
+            exact
+          />
+          <Route
+            path="/instructor/courses/:courseId"
+            element={<TeacherCoursePage />}
             exact
           />
         </Routes>
