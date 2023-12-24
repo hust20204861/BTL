@@ -51,11 +51,12 @@ const Register = () => {
         className="shadow-lg mb-4 mt-4 p-4 w-50 center"
         onSubmit={submitHandler}
         encType="multipart/form-data"
+        style={{ margin: "360px", paddingLeft: "300px" }}
       >
         <hr />
         <h1 className="mb-3">Register</h1>
         <MDBValidation>
-          <MDBValidationItem feedback='Please enter username.' >
+          <MDBValidationItem feedback="Please enter username.">
             <MDBInput
               className="mb-4"
               type="name"
@@ -65,7 +66,7 @@ const Register = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </MDBValidationItem>
-          <MDBValidationItem feedback='Please enter your email' >
+          <MDBValidationItem feedback="Please enter your email">
             <MDBInput
               className="mb-4"
               type="text"
@@ -75,7 +76,7 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </MDBValidationItem>
-          <MDBValidationItem feedback='Please enter your password' >
+          <MDBValidationItem feedback="Please enter your password">
             {" "}
             <MDBInput
               className="mb-4"
