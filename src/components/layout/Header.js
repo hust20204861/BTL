@@ -41,11 +41,13 @@ const Header = () => {
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
 
+
    console.log("dskkkfdfds", userinfo);
   //  if(userinfo.avatar) {
   //   const avatar =  userinfo.avatar;
   //  }
   //console.log("bbbb", avatar)
+
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -71,17 +73,24 @@ const Header = () => {
         >
           <MDBContainer className="inline-row d-flex justify-content-between" >
             <MDBNavbarNav className="d-flex flex-row">
+
               <MDBNavbarBrand href="/home" className="row flex">
                 <Link to="/home">
                   <MDBIcon className="ms-1" size="4x" fab icon="react" />
                  
+
                 </Link>
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
-              <MDBNavbar expand="lg">
+              <Link to="/">Web Learning</Link>
+              {/* <MDBNavbar expand="lg">
                 <MDBContainer fluid>
+
                   <Link to="/home" style={{color:'#386bc0', fontWeight:'bold', padding:'2px'}}>Home</Link>
+
+            
+
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -92,19 +101,21 @@ const Header = () => {
                   </MDBNavbarToggler>
                   <MDBCollapse navbar open={openNav}>
                     <MDBNavbarNav>
-                      {/* <MDBNavbarItem>
+                      <MDBNavbarItem>
                         <Link to="/course">Course</Link>
+
                       </MDBNavbarItem> */}
                       <MDBNavbarItem marginLeft={2}>
                         <Link to="/blog" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Blog</Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
                         <Link to="/" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Website</Link>
+
                       </MDBNavbarItem>
                     </MDBNavbarNav>
                   </MDBCollapse>
                 </MDBContainer>
-              </MDBNavbar>
+              </MDBNavbar> */}
               <div>
                 <Search />
               </div>
@@ -120,6 +131,7 @@ const Header = () => {
                 </MDBBadge>
               </Link>
               {token ? (
+
                 <MDBDropdown display={"flex"}>
                   <Box display={'flex'}>
                      <Link
@@ -153,9 +165,11 @@ const Header = () => {
                      {/* )}  */}
                     
                  
+
                   </MDBDropdownToggle>
                   </Box>
                   <MDBDropdownMenu>
+
                     <MDBDropdownItem link>
                       <Link
                         to={`/courses/enrolled/${userId}`}
@@ -164,6 +178,7 @@ const Header = () => {
                         MyEnrollCourses
                       </Link>
                     </MDBDropdownItem>
+
                     <MDBDropdownItem link>
                       <Link to={`/user/${userId}`}>Profile</Link>
                     </MDBDropdownItem>
