@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAccessToken } from "../../apis/auth";
-import { getAllLectures, getLecture } from "../../apis/lecture";
+import { getLectureByCourseId, getLecture } from "../../apis/lecture";
 import { Box, Typography } from "@mui/material";
 import YouTube from "react-youtube";
 import { getSectionFromCourse } from "../../apis/section";
@@ -58,7 +58,7 @@ const Course = () => {
     try {
       const accessToken = await getAccessToken();
 
-      const res = await getAllLectures(accessToken);
+      const res = await getLectureByCourseId(courseId, accessToken);
       setAllLectureList(res.data);
     } catch (error) {
       console.log("error: ", error);
