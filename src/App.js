@@ -4,15 +4,18 @@ import "./App.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
+
 import Home from "./pages/Home";
 import MyCourse from "./pages/course/MyCourse";
 import MyEnrollCourseDetails from "./pages/course/MyEnrollCourseDetails";
 import MyCourseDetails from "./pages/course/MyCourseDetails";
 import MyEnrollCourse from "./pages/course/MyEnrollCourse";
+import Website from "./pages/review/Website";
+
+
 
 // Cart Imports
 import Cart from "./pages/cart/Cart";
-import Payment from "./pages/cart/Payment";
 
 // Auth or User imports
 import Login from "./pages/user/Login";
@@ -39,29 +42,12 @@ import axios from "axios";
 
 // Payment
 import PaymentPage from "./pages/payment/Payment";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import CourseScreen from "./pages/CourseVideo/Course";
 import CourseDetailScreen from "./pages/CourseDetail/CourseDetails";
 import TeacherCoursesPage from "./pages/TeacherCourses/TeacherCourses";
 import TeacherCoursePage from "./pages/TeacherCourse";
 
 function App() {
-  // const [stripeApiKey, setStripeApiKey] = useState('');
-
-  // useEffect(() => {
-  //   store.dispatch(loadUser())
-
-  //   async function getStripApiKey() {
-  //     const { data } = await axios.get('/api/v1/stripeapi');
-
-  //     setStripeApiKey(data.stripeApiKey)
-  //   }
-
-  //   getStripApiKey();
-
-  // }, [])
-
   const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
   const currentUrl = window.location.href;
 
@@ -72,9 +58,12 @@ function App() {
           <Header />
           <div className="container container-fluid">
             <Routes>
-              <Route path="/" element={<Home />} exact />
-              {/* <Route path="/blog" element={<Blog />} exact />
-              <Route path="/" element={<Website />} exact /> */}
+
+
+            <Route path="/home" element={<Home />} exact />
+              {/* <Route path="/blog" element={<Blog />} exact /> */}
+              <Route path="/" element={<Website />} exact />
+
 
               <Route path="/search/:keyword" element={<Home />} />
               <Route
@@ -83,14 +72,6 @@ function App() {
                 exact
               />
               <Route path="/cart" element={<Cart />} exact />
-              {/* {stripeApiKey &&
-            <Elements stripe={loadStripe(stripeApiKey)}>
-              <Routes>
-           <Route path="/payment" element={<Payment/>} />
-           </Routes>
-            </Elements>
-          }  */}
-
               <Route path="/auth/login" element={<Login />} />
               <Route path="auth/register" element={<Register />} />
               <Route path="/user/:user_id" element={<Profile />} exact />
