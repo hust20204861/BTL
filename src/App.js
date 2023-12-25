@@ -59,9 +59,11 @@ function App() {
           <div className="container container-fluid">
             <Routes>
 
+
             <Route path="/home" element={<Home />} exact />
               {/* <Route path="/blog" element={<Blog />} exact /> */}
               <Route path="/" element={<Website />} exact />
+
 
               <Route path="/search/:keyword" element={<Home />} />
               <Route
@@ -73,7 +75,7 @@ function App() {
               <Route path="/auth/login" element={<Login />} />
               <Route path="auth/register" element={<Register />} />
               <Route path="/user/:user_id" element={<Profile />} exact />
-              <Route path="/payment" element={<PaymentPage />} />
+              <Route path="/payment/:courseId" element={<PaymentPage />} />
               <Route
                 path="/user/update/:id"
                 element={<UpdateProfile />}

@@ -1,13 +1,15 @@
-import React, { Fragment, useState, useEffect, useMemo } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
+
 
 
 import MetaData from '../../components/layout/MetaData'
 import { updateProfile, loadUser, clearErrors } from '../../actions/userActions'
 import { UPDATE_PROFILE_RESET } from '../../constants/userConstants'
 import { MDBValidation, MDBInput, MDBValidationItem, MDBRow, MDBCol, MDBBtnGroup,MDBTypography, MDBTextArea, MDBCheckbox, MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
+
 
 
 const UpdateProfile = () => {
@@ -60,16 +62,19 @@ const UpdateProfile = () => {
     }, [dispatch, alert, error, navigate, isUpdated, userinfo, token, userId]);
 
 
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.set("id", userId)
     formData.set("name", name);
     formData.set("email", email);
     formData.set("website", website);
     formData.set("avatar", avatar);
     formData.set("description", description);
-    formData.set("role", role);
+    formData.set("money", 10)
+    formData.set("role", "ADMIN");
 
     const jsonObject = {};
     for (const pair of formData.entries()) {
@@ -79,6 +84,22 @@ const UpdateProfile = () => {
 
     dispatch(updateProfile(userId, jsonData, token));
   };
+
+  if (error) {
+    alert.error(error);
+    dispatch(clearErrors());
+  }
+
+  if (isUpdated) {
+    alert.success("User updated successfully");
+    dispatch(loadUser(userId, token));
+
+    navigate(`/auth/login`);
+
+    dispatch({
+      type: UPDATE_PROFILE_RESET,
+    });
+  }
 
   return (
     <Fragment>

@@ -41,8 +41,9 @@ const TeacherCourses = () => {
       const accessToken = await getAccessToken();
 
       const res = await deleteCourse(courseId, accessToken);
+      const newCourses = courses.filter((course) => course.id !== courseId);
+      setCourses(newCourses);
 
-      console.log(res);
       // const courses = [...courses];
 
       // setCourses(res);
@@ -80,8 +81,6 @@ const TeacherCourses = () => {
       };
 
       const newCourse = await createCourse(courseData, accessToken);
-
-      console.log(newCourse);
 
       const newCourses = [...courses];
       newCourses.push(newCourse);
@@ -148,7 +147,10 @@ const TeacherCourses = () => {
                 >
                   Sửa
                 </Button>
-                <Button variant="contained" onClick={handleDeleteCourse}>
+                <Button
+                  variant="contained"
+                  onClick={() => handleDeleteCourse(course.id)}
+                >
                   Xóa
                 </Button>
               </Box>
