@@ -4,7 +4,10 @@ import { getAccessToken } from "../../apis/auth";
 import { Box, Button, List, ListItem, Rating, Typography } from "@mui/material";
 import { COLOR } from "../../styles/color";
 import { Add, Check } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getEnrolledCourses } from "../../apis/enroll";
+import { getLectureByCourseId } from "../../apis/lecture";
 
 const DummyData = {
   id: 1,
@@ -33,7 +36,25 @@ const DummyData = {
 
 const CourseDetail = () => {
   const [courseDetail, setCourseDetail] = useState({});
+  const [enrollCourse, setEnrollCourse] = useState([]);
   const courseId = window.location.pathname.split("/")[2];
+  const navigate = useNavigate();
+
+  const { userinfo } = useSelector((state) => state.info);
+
+  const fetchEnrollCourse = async () => {
+    try {
+      const accessToken = await getAccessToken();
+
+      const res = await getEnrolledCourses({
+        userId: userinfo.id,
+        accessToken,
+      });
+      setEnrollCourse(res.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
 
   const fetchCourseData = async () => {
     try {
@@ -41,7 +62,6 @@ const CourseDetail = () => {
 
       const res = await getCourse(courseId, accessToken);
       setCourseDetail(res);
-      console.log("res: ", res);
     } catch (error) {
       console.log("error: ", error);
     }
@@ -49,6 +69,7 @@ const CourseDetail = () => {
 
   useEffect(() => {
     fetchCourseData();
+    fetchEnrollCourse();
   }, []);
 
   return (
@@ -173,7 +194,7 @@ const CourseDetail = () => {
                 color={COLOR.subText}
                 fontWeight={600}
                 marginLeft={1}
-                textDecoration={"line-through"}
+                style={{ textDecoration: "line-through" }}
               >
                 ${courseDetail.price}
               </Typography>
@@ -182,20 +203,42 @@ const CourseDetail = () => {
               {courseDetail.sale}% off
             </Typography>
           </Box>
-          <Link to="/payment">
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{ marginTop: "12px" }}
-            onClick={() => {
-              // todo: handle enroll course
-            }}
-          >
-            <Typography variant={"body1"} color={COLOR.white}>
-              Buy now
-            </Typography>
-          </Button>
-          </Link>
+          {enrollCourse.find((item) => item.id === courseDetail.id) ? (
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ marginTop: "12px" }}
+              onClick={async () => {
+                const accessToken = await getAccessToken();
+                const lecture = await getLectureByCourseId(
+                  courseDetail.id,
+                  accessToken
+                );
+                const lectureId = lecture.data.sort((a, b) => a.id - b.id)[0]
+                  .id;
+                console.log(lecture);
+                navigate(`/course/${courseDetail.id}/${lectureId}`);
+              }}
+            >
+              <Typography variant={"body1"} color={COLOR.white}>
+                Watch now
+              </Typography>
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              fullWidth
+              sx={{ marginTop: "12px" }}
+              onClick={() => {
+                if (!userinfo) navigate("/auth/login");
+                else navigate(`/payment/${courseDetail.id}`);
+              }}
+            >
+              <Typography variant={"body1"} color={COLOR.white}>
+                Buy now
+              </Typography>
+            </Button>
+          )}
         </Box>
       </Box>
     </Box>

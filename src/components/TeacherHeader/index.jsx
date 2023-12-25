@@ -11,6 +11,7 @@ const TeacherHeader = () => {
       justifyContent={"end"}
       width={"100%"}
       position={"relative"}
+      bgcolor={COLOR.background}
     >
       <Box
         padding={2}

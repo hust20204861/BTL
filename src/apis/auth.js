@@ -12,10 +12,22 @@ const login = async (email, password) => {
   return data;
 };
 
-const getAccessToken = async () => {
-  const { access_token } = await login("minhtuyenvp02@gmail.com", "123456"); // ko dùng thì đừng có mà sửa linh tinh
+const getAccessToken = async (
+  email = "minhtuyenvp02@gmail.com",
+  password = "123456"
+) => {
+  const { access_token } = await login(email, password);
 
   return access_token;
 };
 
-export { login, getAccessToken };
+const getUserId = async (
+  email = "minhtuyenvp02@gmail.com",
+  password = "123456"
+) => {
+  const { user_id } = await login(email, password);
+
+  return user_id;
+};
+
+export { login, getAccessToken, getUserId };
