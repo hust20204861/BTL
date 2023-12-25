@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
+import { Box, Typography } from '@mui/material';
 
 import MetaData from '../../components/layout/MetaData'
 import Loader from '../../components/layout/Loader'
@@ -23,66 +24,60 @@ const Dashboard = () => {
 
     return (
         <Fragment>
-            <div className="dashboards">
-                <div className="sidebar">
+            <Box display={'flex'}>
+                <Box>
                     <Sidebar />
-                </div>
+                </Box>
 
-                <div className="dash">
-                    <h1 >Dashboard</h1>
-
+                <Box>
                     {loading ? <Loader /> : (
                         <Fragment>
                             <MetaData title={'Admin Dashboard'} />
+                        <Box display={'flex'} 
+                         style={{
+                           // backgroundImage: 'url("https://img.lovepik.com/background/20211020/medium/lovepik-colorful-black-blue-background-image_400065267.jpg")',
+                            backgroundSize: 'cover',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                            height: '100vh',
+                            width: "2244px",
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginLeft:'-555px',
+                            marginTop: '-240px',
+                          }}>
+                            <Box padding={10} alignItems={'center'} borderColor={'black'} border={2} marginLeft={5}>
+                                <Typography variant='h6'>Courses</Typography>
+                                <Typography fontWeight={'bold'}>{courses && courses.length}</Typography>
+                                    <Link to="/courses">
+                                <Typography bgcolor={'#386bc0'} color='white' padding={"5px"} borderRadius={4} fontWeight={'bold'}>View Details</Typography>
+                                    </Link>
+                            </Box>
 
+                            <Box  padding={10} alignItems={'center'} borderColor={'black'} border={2}  marginLeft={10}>
+                                <Typography variant='h6'>Users</Typography>
+                                <Typography fontWeight={'bold'}>{users && users.length}</Typography>
+                                    <Link to="/users">
+                                <Typography bgcolor={'#386bc0'} color='white' padding={"5px"} borderRadius={4} fontWeight={'bold'}>View Details</Typography>
+                                    </Link>
+                            </Box>
 
-                            <div className="row pr-4">
-                                <div className="cards">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <div className="course-length">Courses<br /> <b>{courses && courses.length}</b></div>
-                                        </div>
-                                        <Link className="to--admin-course" to="/courses">
-                                            <span className="view-details">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-
-                                <div className="cards">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <div className="user-length">Users<br /> <b>{users && users.length}</b></div>
-                                        </div>
-                                        <Link className="to-admin-users" to="/users">
-                                            <span className="view-details">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="cards">
-                                    <div className="card">
-                                        <div className="card-body">
-                                            <div className="user-length">Feedbacks<br /> <b>{adminfeedbacks && adminfeedbacks.data.length}</b></div>
-                                        </div>
-                                        <Link className="to-admin-users" to="/feedbacks">
-                                            <span className="view-details">View Details</span>
-                                            <span className="float-right">
-                                                <i className="fa fa-angle-right"></i>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
+                            <Box padding={10} alignItems={'center'} borderColor={'black'} border={2}  marginLeft={10}>
+                                <Typography variant='h6'>Feedbacks</Typography>
+                                <Typography fontWeight={'bold'}>{adminfeedbacks && adminfeedbacks.data.length}</Typography>
+                                    <Link to="/feedbacks">
+                                <Typography bgcolor={'#386bc0'} color='white' padding={"5px"} borderRadius={4} fontWeight={'bold'}>View Details</Typography>
+                                    </Link>
+                            </Box>
+                        </Box>
+                                
+                         
                         </Fragment>
                     )}
 
-                </div>
-            </div>
+                </Box>
+            </Box>
 
         </Fragment >
     )

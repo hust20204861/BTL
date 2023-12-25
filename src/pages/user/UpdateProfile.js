@@ -3,27 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 
-import MetaData from "../../components/layout/MetaData";
-import {
-  updateProfile,
-  loadUser,
-  clearErrors,
-} from "../../actions/userActions";
-import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
-import {
-  MDBTypography,
-  MDBBtnGroup,
-  MDBRow,
-  MDBInput,
-  MDBCol,
-  MDBCheckbox,
-  MDBSwitch,
-  MDBBtn,
-  MDBInputGroup,
-  MDBInputGroupElement,
-  MDBInputGroupText,
-  MDBTextArea,
-} from "mdb-react-ui-kit";
+
+import MetaData from '../../components/layout/MetaData'
+import { updateProfile, loadUser, clearErrors } from '../../actions/userActions'
+import { UPDATE_PROFILE_RESET } from '../../constants/userConstants'
+import { MDBValidation, MDBInput, MDBValidationItem, MDBCheckbox, MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
+
 
 const UpdateProfile = () => {
   const [name, setName] = useState("");
@@ -34,23 +19,73 @@ const UpdateProfile = () => {
   const [money, setMoney] = useState("");
   const [role, setRole] = useState("");
 
-  const alert = useAlert();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const { token, userId } = useSelector((state) => state.auth);
-  const { userinfo } = useSelector((state) => state.info);
-  const { error, isUpdated, loading } = useSelector((state) => state.user);
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [website, setWebsite] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [description, setDescription] = useState('')
+    const [money, setMoney] = useState('')
+    const [role, setRole] = useState('')
 
-  useEffect(() => {
-    if (userinfo) {
-      setName(userinfo.name);
-      setEmail(userinfo.email);
-      setWebsite(userinfo.website);
-      setAvatar(userinfo.avatar);
-      setDescription(userinfo.description);
-      setMoney(userinfo.money);
-      setRole(userinfo.role);
+
+    const alert = useAlert();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const { token, userId } = useSelector(state => state.auth);
+    const { userinfo } = useSelector(state => state.info);
+    const { error, isUpdated, loading } = useSelector(state => state.user)
+
+    useEffect(() => {
+
+        if (userinfo) {
+            setName(userinfo.name);
+            setEmail(userinfo.email);
+            setWebsite(userinfo.website);
+            setAvatar(userinfo.avatar);
+            setDescription(userinfo.description);
+            setRole(userinfo.role);
+   
+        }
+
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+
+        if (isUpdated) {
+            alert.success('User updated successfully')
+            dispatch(loadUser(userId, token));
+
+            navigate(`/auth/login`)
+
+            dispatch({
+                type: UPDATE_PROFILE_RESET
+            })
+        }
+
+    }, [dispatch, alert, error, navigate, isUpdated, userinfo, token, userId])
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.set('name', name);
+        formData.set('email', email);
+        formData.set('website', website);
+        formData.set('avatar', avatar);
+        formData.set('description', description);
+        formData.set('role', role);
+
+        const jsonObject = {};
+        for (const pair of formData.entries()) {
+            jsonObject[pair[0]] = pair[1]
+        }
+        const jsonData = JSON.stringify(jsonObject);
+
+        dispatch(updateProfile(userId, jsonData, token))
+
     }
 
     if (error) {
@@ -226,83 +261,91 @@ const UpdateProfile = () => {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="email_field">Email</label>
-              <input
-                type="text"
-                id="email_field"
-                className="form-control"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email_field">Website</label>
-              <input
-                type="text"
-                id="email_field"
-                className="form-control"
-                name="email"
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email_field">Avatar</label>
-              <input
-                type="text"
-                id="email_field"
-                className="form-control"
-                name="email"
-                value={avatar}
-                onChange={(e) => setAvatar(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email_field">Description</label>
-              <input
-                type="text"
-                id="email_field"
-                className="form-control"
-                name="email"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email_field">Money</label>
-              <input
-                type="text"
-                id="email_field"
-                className="form-control"
-                name="email"
-                value={money}
-                onChange={(e) => setMoney(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email_field">Role</label>
-              <select
-                id="role_field"
-                className="form-control"
-                name="role"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-              >
-                <option value="user">user</option>
-                <option value="admin">admin</option>
-              </select>
-            </div>
+                    <form className="square rounded-9 shadow-lg mb-4 mt-5 p-4 w-40 center" onSubmit={submitHandler} encType='multipart/form-data'>
+                        <h1 className="mb-3">Update Profile</h1>
 
-            <button type="submit" disabled={loading ? true : false}>
-              Update
-            </button>
-          </form>
-        </div>
-      </div> */}
-    </Fragment>
-  );
-};
+                        <MDBValidation>
+                            <MDBValidationItem feedback='Enter your name'/>
+                            <MDBInput
+                                type="name"
+                                id="form3Example3"
+                                label="Name"
+                                className="mb-4"
+                                name='name'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                        </MDBValidation>
+
+                        <MDBValidationItem>
+                            <MDBValidationItem feedback='Enter your email'/>
+                            <MDBInput
+                                type="text"
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </MDBValidationItem>
+                        
+                            <MDBValidationItem feedback='Enter your website'/>
+                            <MDBInput
+                                type="text"
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Website'
+                                value={website}
+                                onChange={(e) => setWebsite(e.target.value)}
+                            />
+                        
+                       
+                            <MDBValidationItem feedback='Enter your avatar'/>
+                            <MDBInput
+                                type="text"
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Avatar'
+                                value={avatar}
+                                onChange={(e) => setAvatar(e.target.value)}
+                            />
+                       
+                       
+                            <MDBValidationItem feedback='Enter your description'/>
+                            <MDBInput
+                                type="text"
+                                id="form3Example3"
+                                className="mb-4"
+                                label='Description'
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        
+                       
+                            <MDBValidationItem feedback='Enter your role'>Role</MDBValidationItem>
+                            <select
+                                        id="form3Example3"
+                                        className="mb-4"
+                                        name='role'
+                                        value={role}
+                                        onChange={(e) => setRole(e.target.value)}
+                                    >
+                                        <option value="user">user</option>
+                                        <option value="admin">admin</option>
+                                    </select>
+                                    <MDBCheckbox
+                                       wrapperClass="d-flex justify-content-center mb-4"
+                                       id="form3Example5"
+                                       label="Update your profile?"
+                                       defaultChecked
+                                    />
+                        <MDBBtn type="submit" className="mb-4" block disabled={loading ? true : false} >Update</MDBBtn>
+                    </form>
+              
+        </Fragment>
+    )
+}
+
+
 
 export default UpdateProfile;

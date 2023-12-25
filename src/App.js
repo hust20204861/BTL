@@ -38,6 +38,7 @@ import store from "./store";
 import axios from "axios";
 
 // Payment
+import PaymentPage from "./pages/payment/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CourseScreen from "./pages/CourseVideo/Course";
@@ -71,7 +72,11 @@ function App() {
           <Header />
           <div className="container container-fluid">
             <Routes>
-              <Route path="/" element={<Home />} exact />
+
+            <Route path="/home" element={<Home />} exact />
+              <Route path="/blog" element={<Blog />} exact />
+              <Route path="/" element={<Website />} exact />
+
               <Route path="/search/:keyword" element={<Home />} />
               <Route
                 path="/course/:id"
@@ -90,6 +95,7 @@ function App() {
               <Route path="/auth/login" element={<Login />} />
               <Route path="auth/register" element={<Register />} />
               <Route path="/user/:user_id" element={<Profile />} exact />
+              <Route path="/payment" element={<PaymentPage />} />
               <Route
                 path="/user/update/:id"
                 element={<UpdateProfile />}
