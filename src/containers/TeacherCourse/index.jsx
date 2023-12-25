@@ -1,36 +1,17 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TeacherCourseHeader from "./TeacherCourseHeader";
 import CourseIntendedLearners from "./CourseIntendedLearners";
-import { getCourse } from "../../apis/courses";
-import { getAccessToken } from "../../apis/auth";
 import CourseLandingPage from "./CourseLandingPage";
 import { COLOR } from "../../styles/color";
+import CourseCurriculum from "./CourseCurriculum";
 
 const TeacherCourse = () => {
-  const [courseDetail, setCourseDetail] = useState({});
   const [pageActive, setPageActive] = useState("intended-learners");
-
-  const courseId = window.location.pathname.split("/")[3];
-
-  const fetchCourseData = async () => {
-    try {
-      const accessToken = await getAccessToken();
-
-      const response = await getCourse(courseId, accessToken);
-      setCourseDetail(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCourseData();
-  }, []);
 
   return (
     <Box width={"100%"}>
-      <TeacherCourseHeader courseTitle={courseDetail.title || ""} />
+      <TeacherCourseHeader />
       <Box display={"flex"}>
         <Box
           padding={2}
@@ -48,9 +29,18 @@ const TeacherCourse = () => {
         >
           Course Landing Page
         </Box>
+        <Box
+          padding={2}
+          borderBottom={pageActive === "curriculum" ? 2 : 0}
+          borderColor={COLOR.blue}
+          onClick={() => setPageActive("curriculum")}
+        >
+          Course Curriculum
+        </Box>
       </Box>
       {pageActive === "intended-learners" && <CourseIntendedLearners />}
       {pageActive === "landing-page" && <CourseLandingPage />}
+      {pageActive === "curriculum" && <CourseCurriculum />}
     </Box>
   );
 };

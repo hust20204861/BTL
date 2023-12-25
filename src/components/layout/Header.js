@@ -189,7 +189,7 @@ const Header = () => {
                     <MDBDropdownItem link>
                       <Link to={`/user/${userId}`}>Profile</Link>
                     </MDBDropdownItem>
-                    
+
                     <MDBDropdownItem link>
                       <Link to="/" style={{color:'red'}} onClick={logoutHandler}>
                         Logout
