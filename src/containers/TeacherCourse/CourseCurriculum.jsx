@@ -14,10 +14,12 @@ import SuccessMessage from "../../components/SuccessMessage";
 const CourseCurriculum = () => {
   const courseId = window.location.pathname.split("/")[3];
   const [courseData, setCourseData] = useState([]);
+
   const fetchData = async () => {
     try {
       const accessToken = await getAccessToken();
       const response = await getSectionFromCourse(courseId, accessToken);
+      console.log(response);
       let course = [];
       const getData = response.map(async (item) => {
         const res = await getLectureByCourseIdAndSectionId(
@@ -49,25 +51,38 @@ const CourseCurriculum = () => {
         courseId,
         accessToken,
       });
-      console.log(resData);
-      setCourseData(courseData.filter((item) => item.sectionId !== sectionId));
+      console.log(sectionId);
+      console.log("courseData: ", courseData);
+      const newCouseData = courseData.filter(
+        (item) => item.sectionId !== sectionId
+      );
+      console.log("newCouseData: ", newCouseData);
+
+      setCourseData(newCouseData);
       SuccessMessage("Success", "Delete section successfully");
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleAddSection = async () => {
     try {
-      const accessToken = getAccessToken();
+      const accessToken = await getAccessToken();
       const resData = await createSection({
+        courseId,
         sectionData: {
           name: "New Section",
         },
-        courseId,
         accessToken,
       });
-      setCourseData(courseData.push(resData.data));
-      SuccessMessage("Success", "Delete section successfully");
+      const newCouseData = [...courseData];
+      newCouseData.push({
+        sectionId: resData.id,
+        sectionName: resData.name,
+        lecture: [],
+      });
+      setCourseData(newCouseData);
+      SuccessMessage("Success", "Create section successfully");
     } catch (error) {
       console.log(error);
     }
@@ -77,6 +92,7 @@ const CourseCurriculum = () => {
     <Box width={"100%"} paddingX={4} paddingY={2}>
       {courseData.map((item, index) => (
         <CourseCurriculumSection
+          key={index}
           sectionData={item}
           sectionIndex={index}
           handleDeleteSection={handleDeleteSection}

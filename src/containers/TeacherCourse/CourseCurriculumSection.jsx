@@ -4,7 +4,11 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { getAccessToken } from "../../apis/auth";
 import { deleteSection, updateSection } from "../../apis/section";
 import SuccessMessage from "../../components/SuccessMessage";
-import { createLecture, deleteLecture } from "../../apis/lecture";
+import {
+  createLecture,
+  deleteLecture,
+  updateLecture,
+} from "../../apis/lecture";
 
 const CourseCurriculumSection = ({
   sectionData,
@@ -31,21 +35,17 @@ const CourseCurriculumSection = ({
     }
   };
 
-  const handleSaveLectureTitle = async () => {
-    // try {
-    //   const accessToken = await getAccessToken();
-    //   await updateSection({
-    //     sectionId: section.sectionId,
-    //     courseId,
-    //     sectionData: {
-    //       name: section.sectionName,
-    //     },
-    //     accessToken,
-    //   });
-    //   SuccessMessage("Success", "Update section successfully");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  const handleSaveLectureChange = async (lectureData) => {
+    try {
+      const accessToken = await getAccessToken();
+      await updateLecture({
+        lectureData,
+        accessToken,
+      });
+      SuccessMessage("Success", "Update Lecture successfully");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleAddLecture = async () => {
@@ -57,15 +57,23 @@ const CourseCurriculumSection = ({
         section_id: section.sectionId,
         course_id: courseId,
       };
-      await createLecture({
+
+      const res = await createLecture({
         lectureData,
         accessToken,
       });
 
       const newSection = { ...section };
-      newSection.lecture.push(lectureData);
+      newSection.lecture.push({
+        id: res.data.id,
+        name: "New Lecture",
+        video_url: "",
+        section_id: section.sectionId,
+        course_id: courseId,
+      });
+      newSection.lecture = newSection.lecture.sort((a, b) => a.id - b.id);
       setSection(newSection);
-      SuccessMessage("Success", "Create section successfully");
+      SuccessMessage("Success", "Create new lecture successfully");
     } catch (error) {
       console.log(error);
     }
@@ -78,6 +86,11 @@ const CourseCurriculumSection = ({
         lectureId,
         accessToken,
       });
+      const newSection = { ...section };
+      newSection.lecture = newSection.lecture.filter(
+        (lecture) => lecture.id !== lectureId
+      );
+      setSection(newSection);
       SuccessMessage("Success", "Delete lecture successfully");
     } catch (error) {
       console.log(error);
@@ -106,7 +119,7 @@ const CourseCurriculumSection = ({
           />
         </Box>
 
-        <Box display={"flex"} gap={"2px"}>
+        <Box display={"flex"} gap={"4px"}>
           <Button variant={"outlined"} onClick={handleSaveSectionTitle}>
             Save
           </Button>
@@ -159,10 +172,24 @@ const CourseCurriculumSection = ({
               />
             </Box>
             <Box display={"flex"} gap={"2px"}>
-              <Button variant={"outlined"} onClick={handleSaveLectureTitle}>
+              <Button
+                variant={"outlined"}
+                onClick={() =>
+                  handleSaveLectureChange({
+                    id: lecture.id,
+                    name: lecture.name,
+                    video_url: lecture.video_url,
+                    section_id: section.sectionId,
+                    course_id: courseId,
+                  })
+                }
+              >
                 Save
               </Button>
-              <Button variant={"outlined"} onClick={handleDeleteLecture}>
+              <Button
+                variant={"outlined"}
+                onClick={() => handleDeleteLecture(lecture.id)}
+              >
                 Delete
               </Button>
             </Box>

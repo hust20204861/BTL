@@ -31,4 +31,27 @@ const updateCourse = async (courseData, accessToken) => {
   return data;
 };
 
-export { getCourses, getCourse, updateCourse };
+const createCourse = async (courseData, accessToken) => {
+  const { data } = await api({
+    method: "POST",
+    url: `/course`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: courseData,
+  });
+  return data;
+};
+
+const deleteCourse = async (id, accessToken) => {
+  const { data } = await api({
+    method: "DELETE",
+    url: `/course/${id}`,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return data;
+};
+
+export { getCourses, getCourse, updateCourse, deleteCourse, createCourse };
