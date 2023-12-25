@@ -14,12 +14,13 @@ import { MDBValidation, MDBInput, MDBValidationItem, MDBRow, MDBCol, MDBBtnGroup
 
 const UpdateProfile = () => {
 
-
+    const [id, setId] = useState('')
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [website, setWebsite] = useState('')
     const [avatar, setAvatar] = useState('')
     const [description, setDescription] = useState('')
+    const [money, setMoney] = useState('')
     const [role, setRole] = useState('')
 
 
@@ -30,9 +31,7 @@ const UpdateProfile = () => {
     const { token, userId } = useSelector(state => state.auth);
     const { userinfo } = useSelector(state => state.info);
     const { error, isUpdated, loading } = useSelector(state => state.user)
-
     useEffect(() => {
-
         if (userinfo) {
             setName(userinfo.name);
             setEmail(userinfo.email);
@@ -40,7 +39,6 @@ const UpdateProfile = () => {
             setAvatar(userinfo.avatar);
             setDescription(userinfo.description);
             setRole(userinfo.role);
-   
         }
 
         if (error) {
@@ -49,11 +47,9 @@ const UpdateProfile = () => {
         }
 
         if (isUpdated) {
-            alert.success('User updated successfully')
-            dispatch(loadUser(userId, token));
-
             navigate(`/auth/login`)
-
+            alert.success('User updated successfully')
+            //dispatch(loadUser(userId, token));
             dispatch({
                 type: UPDATE_PROFILE_RESET
             })
@@ -68,12 +64,13 @@ const UpdateProfile = () => {
 
     const formData = new FormData();
     formData.set("id", userId)
+    formData.set("id", userId)
     formData.set("name", name);
     formData.set("email", email);
     formData.set("website", website);
     formData.set("avatar", avatar);
     formData.set("description", description);
-    formData.set("money", 10)
+    formData.set("money", 1000000)
     formData.set("role", "ADMIN");
 
     const jsonObject = {};
@@ -105,7 +102,7 @@ const UpdateProfile = () => {
     <Fragment>
       <MetaData title={"Update Profile"} />
       <br />
-      <form className="square rounded-9 shadow-lg mb-4 mt-5 p-4 w-40 center" onSubmit={submitHandler} encType='multipart/form-data'>
+      <form className="square rounded-9 shadow-lg mb-4 mt-5 p-4 w-40 center" onSubmit={submitHandler} encType='application/json'>
                         <h1 className="mb-3">Update Profile</h1>
 
                         <MDBValidation>
@@ -166,17 +163,17 @@ const UpdateProfile = () => {
                             />
 
 
-                            <MDBValidationItem feedback='Enter your role'>Role</MDBValidationItem>
-                            <select
-                                        id="form3Example3"
+                            {/* <MDBValidationItem feedback='Enter your role'>Role</MDBValidationItem> */}
+                            {/* <select
                                         className="mb-4"
                                         name='role'
+                                        width='100px'
                                         value={role}
                                         onChange={(e) => setRole(e.target.value)}
                                     >
-                                        <option value="user">user</option>
-                                        <option value="admin">admin</option>
-                                    </select>
+                                        <option value="user">USER</option>
+                                        <option value="admin">ADMIN</option>
+                                    </select> */}
                                     <MDBCheckbox
                                        wrapperClass="d-flex justify-content-center mb-4"
                                        id="form3Example5"

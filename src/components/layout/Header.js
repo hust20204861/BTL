@@ -21,7 +21,9 @@ import {
 } from "mdb-react-ui-kit";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { Avatar } from '@mui/material';
+import { Button } from "react-bootstrap";
 
 import Search from "./Search";
 import { loadUser } from "../../actions/userActions";
@@ -35,6 +37,7 @@ const Header = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
   const { token, userId, loading } = useSelector((state) => state.auth);
+  const { avatar } = useSelector(state => state.info)
   //lấy token được lưu gọi hàm loadUser và lấy dữ liệu
 
   useEffect(() => {
@@ -42,6 +45,7 @@ const Header = () => {
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
 
+   console.log("dskkkfdfds", userinfo);
   //  if(userinfo.avatar) {
   //   const avatar =  userinfo.avatar;
   //  }
@@ -79,10 +83,9 @@ const Header = () => {
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
-
-              <MDBNavbar expand="lg">
+              <MDBNavbar expand="lg" style={{borderRadius: 10}}>
                 <MDBContainer fluid>
-                  <Link to="/home" style={{color:'#386bc0', fontWeight:'bold', padding:'2px'}}>Home</Link>
+                  <Link to="/home" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', width:'90px'}}>Trang chủ</Link>
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -93,9 +96,9 @@ const Header = () => {
                   </MDBNavbarToggler>
                   <MDBCollapse navbar open={openNav}>
                     <MDBNavbarNav>
-                      <MDBNavbarItem marginLeft={2}>
-                        <Link to="/blog" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Blog</Link>
-                      </MDBNavbarItem>
+                      {/* <MDBNavbarItem marginLeft={2}>
+                        <Link to="/blog" style={{color:'#386bc0', fontWeight:'bold', marginLeft:'5px',  width:'110px'}}>Bài viết</Link>
+                      </MDBNavbarItem> */}
                       <MDBNavbarItem>
                         <Link to="/" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Website</Link>
                       </MDBNavbarItem>
@@ -126,7 +129,7 @@ const Header = () => {
                       onClick={myCourseHandle}
                       style={{ padding: "20px" }}
                     >
-                      My Course
+                      Course
                     </Link>
                     <Button
                       onClick={() =>
@@ -140,11 +143,20 @@ const Header = () => {
                       to={`/instructor/courses`}
                       style={{ padding: "20px" }}
                     ></Link>
-                    <MDBDropdownToggle
-                      style={{ background: "transparent", boxShadow: "none" }}
-                    >
-                      <img
+                   
 
+                  <MDBDropdownToggle  style={{ background: "transparent", boxShadow: "none" }}>
+                    {avatar? (
+                    <Avatar
+                      className="rounded-circle"
+                      height="50"
+                      width="50"
+                      alt={userinfo && userinfo.name}
+                      src={avatar}
+                      loading="lazy"
+                    />
+                    ):(
+                      <Avatar
                       className="rounded-circle"
                       height="50"
                       width="50"
@@ -152,17 +164,16 @@ const Header = () => {
                       src={"https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg"}
                       loading="lazy"
                     />
-                     {/* )}  */}
+                   )}  
                     
-                 
                   </MDBDropdownToggle>
                   </Box>
                   <MDBDropdownMenu>
                   <MDBDropdownItem link>
 
                       {userinfo && userinfo.role === "ADMIN" && (
-                        <MDBDropdownItem style={{ marginTop: "10px" }}>
-                          <Link to="/dashboard">Dashboard</Link>
+                        <MDBDropdownItem style={{marginTop:'10px'}}>
+                          <Link to="/dashboard"  >Dashboard</Link>
                         </MDBDropdownItem>
                       )}
                     </MDBDropdownItem>
@@ -171,19 +182,15 @@ const Header = () => {
                         to={`/courses/enrolled/${userId}`}
                         onClick={myEnrollCourseHandle}
                       >
-                        MyEnrollCourses
+                        Khóa học của tôi
                       </Link>
                     </MDBDropdownItem>
                     <MDBDropdownItem link>
-                      <Link to={`/user/${userId}`}>Profile</Link>
+                      <Link to={`/user/${userId}`}>Thông tin tài khoản</Link>
                     </MDBDropdownItem>
                     
                     <MDBDropdownItem link>
-                      <Link
-                        to="/"
-                        style={{ color: "red" }}
-                        onClick={logoutHandler}
-                      >
+                      <Link to="/" style={{color:'red'}} onClick={logoutHandler}>
                         Logout
                       </Link>
                     </MDBDropdownItem>

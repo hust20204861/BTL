@@ -141,7 +141,8 @@ export const infoReducer = (state = { userinfo: {} }, action) => {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                userinfo: action.payload
+                userinfo: action.payload,
+                avatar: action.payload.avatar
             }
         case LOAD_USER_FAIL:
             return {

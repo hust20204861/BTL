@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import MetaData from '../../components/layout/MetaData'
 import Loader from '../../components/layout/Loader'
-import Sidebar from '../../components/layout/Sidebar'
 import { getAdminCourses, deleteCourse, clearErrors } from '../../actions/courseActions'
 import { DELETE_COURSE_RESET } from '../../constants/courseConstants'
 
@@ -100,28 +99,19 @@ const CoursesList = () => {
     return (
         <Fragment>
             <MetaData title={'All Courses'} />
-            <div className="row">
-                <div className="col-12 col-md-2">
-                    <Sidebar />
-                </div>
 
-                <div className="col-12 col-md-10">
                     <Fragment>
                         <h1 className="my-5">All Courses</h1>
 
                         {loading ? <Loader /> : (
                             <MDBDataTable
                                 data={setCourses()}
-                                className="px-3"
                                 bordered
                                 striped
-                                hover
                             />
                         )}
 
                     </Fragment>
-                </div>
-            </div>
 
         </Fragment>
     )
