@@ -62,6 +62,7 @@ const CourseCurriculumSection = ({
         lectureData,
         accessToken,
       });
+      console.log("res: ", res)
 
       const newSection = { ...section };
       newSection.lecture.push({

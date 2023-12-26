@@ -12,6 +12,8 @@ import { buyCourse } from "../../apis/enroll";
 import SuccessMessage from "../../components/SuccessMessage";
 
 const Payment = () => {
+  const { userinfo, loading } = useSelector((state) => state.info);
+  console.log('userinfo', userinfo)
   // ông làm lại hàm lấy courseDetail với id cho tôi với
   const [courseDetail, setCourseDetail] = useState({});
   const courseId = window.location.pathname.split("/")[2];

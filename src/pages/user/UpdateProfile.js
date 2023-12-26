@@ -14,7 +14,6 @@ import { MDBValidation, MDBInput, MDBValidationItem, MDBRow, MDBCol, MDBBtnGroup
 
 const UpdateProfile = () => {
 
-
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [website, setWebsite] = useState('')
@@ -73,7 +72,7 @@ const UpdateProfile = () => {
     formData.set("website", website);
     formData.set("avatar", avatar);
     formData.set("description", description);
-    formData.set("money", 10)
+    formData.set("money", 1000)
     formData.set("role", "ADMIN");
 
     const jsonObject = {};
@@ -93,8 +92,8 @@ const UpdateProfile = () => {
   if (isUpdated) {
     alert.success("User updated successfully");
     dispatch(loadUser(userId, token));
-
     navigate(`/auth/login`);
+
 
     dispatch({
       type: UPDATE_PROFILE_RESET,
@@ -166,17 +165,7 @@ const UpdateProfile = () => {
                             />
 
 
-                            <MDBValidationItem feedback='Enter your role'>Role</MDBValidationItem>
-                            <select
-                                        id="form3Example3"
-                                        className="mb-4"
-                                        name='role'
-                                        value={role}
-                                        onChange={(e) => setRole(e.target.value)}
-                                    >
-                                        <option value="user">user</option>
-                                        <option value="admin">admin</option>
-                                    </select>
+                     
                                     <MDBCheckbox
                                        wrapperClass="d-flex justify-content-center mb-4"
                                        id="form3Example5"

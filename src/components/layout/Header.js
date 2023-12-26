@@ -29,15 +29,17 @@ import { logout } from "../../actions/userActions";
 import { myCourses, myEnrollCourses } from "../../actions/courseActions";
 import { useEffect } from "react";
 import { MDBLink } from "mdbreact";
+import { getAccessToken, getUserId } from "../../apis/auth";
 
 const Header = () => {
   const navigate = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { token, userId, loading } = useSelector((state) => state.auth);
+  const { userId, token, loading } = useSelector((state) => state.auth);
   //lấy token được lưu gọi hàm loadUser và lấy dữ liệu
 
   useEffect(() => {
+    
     dispatch(loadUser(userId, token));
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);

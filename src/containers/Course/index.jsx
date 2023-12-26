@@ -14,6 +14,7 @@ const Course = () => {
   const [sectionList, setSectionList] = useState([]);
   const [allLectureList, setAllLectureList] = useState([]);
   const [sectionLectureList, setSectionLectureList] = useState([]);
+  
 
   const opts = {
     height: "500",

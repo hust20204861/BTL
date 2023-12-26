@@ -62,6 +62,7 @@ const CourseDetail = () => {
       const accessToken = await getAccessToken();
 
       const res = await getCourse(courseId, accessToken);
+      console.log('res: ', res)
       setCourseDetail(res);
     } catch (error) {
       console.log("error: ", error);
@@ -225,9 +226,10 @@ const CourseDetail = () => {
                   courseDetail.id,
                   accessToken
                 );
+                console.log("lecture: ", lecture);
+
                 const lectureId = lecture.data.sort((a, b) => a.id - b.id)[0]
                   .id;
-                console.log(lecture);
                 navigate(`/course/${courseDetail.id}/${lectureId}`);
               }}
             >
