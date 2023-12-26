@@ -83,7 +83,11 @@ console.log("afdgsdajfgksahfjs", id)
     return (
         <Fragment>
             <MetaData title={`Update User`} />
-            <div className="row" style={{marginLeft:"700px"}}>
+            <div className="row">
+                <div className="col-12 col-md-2">
+                    <Sidebar />
+                </div>
+
                 <div className="col-12 col-md-10">
                     <div className="row wrapper">
                         <div className="col-10 col-lg-5">

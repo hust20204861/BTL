@@ -11,7 +11,7 @@ const MyCourse = () => {
     <MetaData title={'My Course'} />
     <Box>
     <Typography variant="h2" sx={{ mb: '1rem' }} textAlign={"center"}>
-    Khóa học bạn đã tạo
+    Khóa học của bạn
     </Typography>
     <Box
     display="flex"
@@ -28,6 +28,7 @@ const MyCourse = () => {
         display="flex"
         flexDirection="column"
         alignItems="center"
+        border={2}
         borderColor={COLOR.gray}
         borderRadius={2}
         padding={2}
@@ -39,9 +40,8 @@ const MyCourse = () => {
         <Box
           component="img"
           sx={{
-            height: 250,
-            width: 400,
-             borderRadius:5
+            height: 190,
+            width: "100%",
          
           }}
           alt="Course Image"
@@ -83,7 +83,7 @@ const MyCourse = () => {
   <Link  to="/create/course">
   <Button variant="contained" fullWidth sx={{ marginTop: "20px", padding: "20px" }}>
           <Typography variant="body1" color={COLOR.white}>
-            Đến trang Teacher
+            Tạo khóa học của bạn
           </Typography>
         </Button>
   </Link>

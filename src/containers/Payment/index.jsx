@@ -1,39 +1,66 @@
-import React, { useState, useEffect } from 'react'
-import { enrollCourses, getCourseDetails } from '../../actions/courseActions'
-import { Box, Typography, Button } from '@mui/material'
-import { Link, useParams } from 'react-router-dom'
-import { COLOR } from '../../styles/color'
-import { useDispatch, useSelector } from 'react-redux'
-import MetaData from '../../components/layout/MetaData'
-import { getCourseFeedbacks } from '../../actions/courseActions'
-import { getAccessToken } from '../../apis/auth'
-import { getCourse } from '../../apis/courses'
-
+import React, { useState, useEffect } from "react";
+import { enrollCourses } from "../../actions/courseActions";
+import { Box, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { COLOR } from "../../styles/color";
+import { useDispatch, useSelector } from "react-redux";
+import MetaData from "../../components/layout/MetaData";
+import { getCourseFeedbacks } from "../../actions/courseActions";
+import { getAccessToken, getMe, getUserId } from "../../apis/auth";
+import { getCourse } from "../../apis/courses";
+import { buyCourse } from "../../apis/enroll";
+import SuccessMessage from "../../components/SuccessMessage";
 
 const Payment = () => {
+  // ông làm lại hàm lấy courseDetail với id cho tôi với
+  const [courseDetail, setCourseDetail] = useState({});
+  const courseId = window.location.pathname.split("/")[2];
 
-   const courseId = useParams();
-console.log('gggg', courseId.courseId)
-    const dispatch = useDispatch();
-    const { course } = useSelector(state => state.courseDetails)
-    const { userId, token } = useSelector(state => state.auth)
-    useEffect(() => {
-      dispatch(getCourseDetails(courseId.courseId, token))
-    }, [dispatch, courseId.courseId, token ])
-
-    const handlePayment = () => {
-        dispatch(enrollCourses(courseId.courseId, userId, token))
-    }
-    const { feedbacks } = useSelector(state => state.courseFeedbacks)
-    const [showFeedbacks, setShowFeedbacks] = useState(false);
-    const handleFeedbacksClick = async () => {
+  const fetchCourseData = async () => {
+    try {
       const accessToken = await getAccessToken();
-            dispatch(getCourseFeedbacks(courseId.courseId, accessToken));
-            setShowFeedbacks(true);
-          };
-          const handleCancelFeedbacks = () => {
-            setShowFeedbacks(false);
-          };
+
+      const res = await getCourse(courseId, accessToken);
+      setCourseDetail(res);
+      console.log("res: ", res);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCourseData();
+  }, []);
+
+  const dispatch = useDispatch();
+  const { userId, token } = useSelector((state) => state.auth);
+  console.log("userId: ", userId);
+
+  const handlePayment = async () => {
+    try {
+      const accessToken = await getAccessToken();
+      const userId = await getUserId();
+      const res = await buyCourse({
+        userId,
+        courseId,
+        accessToken,
+      });
+
+      SuccessMessage("Success", "Mua khóa học thành công");
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+  const { feedbacks } = useSelector((state) => state.courseFeedbacks);
+  const [showFeedbacks, setShowFeedbacks] = useState(false);
+  const handleFeedbacksClick = async () => {
+    const accessToken = await getAccessToken();
+    dispatch(getCourseFeedbacks(courseId, accessToken));
+    setShowFeedbacks(true);
+  };
+  const handleCancelFeedbacks = () => {
+    setShowFeedbacks(false);
+  };
   return (
     <div>
       <MetaData title={"Payment"} />
@@ -86,14 +113,34 @@ console.log('gggg', courseId.courseId)
               trong mỗi khóa học giúp bạn nắm vững kiến thức nền tảng
             </Typography>
 
-        <Box bgcolor={"#202425"} padding={3} borderRadius={3}>
-            <Typography variant='h5' color={COLOR.white}>Giá bán: </Typography>
-            <Typography  style={{textDecoration: 'line-through'}} color={COLOR.red}>${course.price}</Typography>
-            <Typography fontWeight="bold" color={COLOR.lightGreen}> ${(course.price * (100 - course.sale)) / 100}</Typography>
-            <hr   style={{ borderColor: 'white' , fontWeight: 'bold',  borderWidth: '2px', }}/>
-            <Typography variant='h5' color={COLOR.white}>Tổng tiền:</Typography>
-            <Typography  fontWeight="bold" variant='h4' color={COLOR.blue}>${(course.price * (100 - course.sale)) / 100}</Typography>
-        </Box>
+            <Box bgcolor={"#202425"} padding={3} borderRadius={3}>
+              <Typography variant="h5" color={COLOR.white}>
+                Giá bán:{" "}
+              </Typography>
+              <Typography
+                style={{ textDecoration: "line-through" }}
+                color={COLOR.red}
+              >
+                ${courseDetail.price}
+              </Typography>
+              <Typography fontWeight="bold" color={COLOR.lightGreen}>
+                {" "}
+                ${(courseDetail.price * (100 - courseDetail.sale)) / 100}
+              </Typography>
+              <hr
+                style={{
+                  borderColor: "white",
+                  fontWeight: "bold",
+                  borderWidth: "2px",
+                }}
+              />
+              <Typography variant="h5" color={COLOR.white}>
+                Tổng tiền:
+              </Typography>
+              <Typography fontWeight="bold" variant="h4" color={COLOR.blue}>
+                ${(courseDetail.price * (100 - courseDetail.sale)) / 100}
+              </Typography>
+            </Box>
 
             <Button
               onClick={handlePayment}

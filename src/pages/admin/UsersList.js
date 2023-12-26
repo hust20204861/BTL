@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import MetaData from '../../components/layout/MetaData'
 import Loader from '../../components/layout/Loader'
+import Sidebar from '../../components/layout/Sidebar'
 import { allUsers, deleteUser, clearErrors } from '../../actions/userActions'
 import { DELETE_USER_RESET } from '../../constants/userConstants'
 
@@ -96,19 +97,29 @@ const UsersList = () => {
     return (
         <Fragment>
             <MetaData title={'All Users'} />
-         
+            <div className="row">
+                <div className="col-12 col-md-2">
+                    <Sidebar />
+                </div>
+
+                <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1>All Users</h1>
+                        <h1 className="my-5">All Users</h1>
 
                         {loading ? <Loader /> : (
                             <MDBDataTable
                                 data={setUsers()}
+                                className="px-3"
                                 bordered
                                 striped
+                                hover
                             />
                         )}
 
                     </Fragment>
+                </div>
+            </div>
+
         </Fragment>
     )
 }
