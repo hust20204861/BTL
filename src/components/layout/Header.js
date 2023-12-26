@@ -50,8 +50,7 @@ const Header = () => {
   //console.log("bbbb", avatar)
 
   const logoutHandler = () => {
-    dispatch(logout());
-    alert.success("Logged out successfully");
+    window.location.href = window.location.href === "/" ? "/home" : "/";
   };
   const myEnrollCourseHandle = () => {
     dispatch(myEnrollCourses(userId, token));
@@ -76,15 +75,22 @@ const Header = () => {
               <MDBNavbarBrand href="/home" className="row flex">
                 <Link to="/">
                   <MDBIcon className="ms-1" size="4x" fab icon="react" />
-
                 </Link>
               </MDBNavbarBrand>
             </MDBNavbarNav>
             <div className="d-grid gap-4 d-md-flex justify-content-md-end align-items-center">
-
               <MDBNavbar expand="lg">
                 <MDBContainer fluid>
-                  <Link to="/home" style={{color:'#386bc0', fontWeight:'bold', padding:'2px'}}>Home</Link>
+                  <Link
+                    to="/home"
+                    style={{
+                      color: "#386bc0",
+                      fontWeight: "bold",
+                      padding: "2px",
+                    }}
+                  >
+                    Home
+                  </Link>
                   <MDBNavbarToggler
                     type="button"
                     aria-expanded="false"
@@ -96,10 +102,30 @@ const Header = () => {
                   <MDBCollapse navbar open={openNav}>
                     <MDBNavbarNav>
                       <MDBNavbarItem marginLeft={2}>
-                        <Link to="/blog" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Blog</Link>
+                        <Link
+                          to="/blog"
+                          style={{
+                            color: "#386bc0",
+                            fontWeight: "bold",
+                            padding: "2px",
+                            marginLeft: "5px",
+                          }}
+                        >
+                          Blog
+                        </Link>
                       </MDBNavbarItem>
                       <MDBNavbarItem>
-                        <Link to="/" style={{color:'#386bc0', fontWeight:'bold', padding:'2px', marginLeft:'5px'}}>Website</Link>
+                        <Link
+                          to="/"
+                          style={{
+                            color: "#386bc0",
+                            fontWeight: "bold",
+                            padding: "2px",
+                            marginLeft: "5px",
+                          }}
+                        >
+                          Website
+                        </Link>
                       </MDBNavbarItem>
                     </MDBNavbarNav>
                   </MDBCollapse>
@@ -131,9 +157,7 @@ const Header = () => {
                       My Course
                     </Link>
                     <Button
-                      onClick={() =>
-                        window.location.replace("/instructor/courses")
-                      }
+                      onClick={() => navigate("/instructor/courses")}
                       style={{ justifyContent: "center", alignItems: "center" }}
                     >
                       Create course
@@ -146,22 +170,20 @@ const Header = () => {
                       style={{ background: "transparent", boxShadow: "none" }}
                     >
                       <img
-
-                      className="rounded-circle"
-                      height="50"
-                      width="50"
-                      alt={userinfo && userinfo.name}
-                      src={"https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg"}
-                      loading="lazy"
-                    />
-                     {/* )}  */}
-                    
-                 
-                  </MDBDropdownToggle>
+                        className="rounded-circle"
+                        height="50"
+                        width="50"
+                        alt={userinfo && userinfo.name}
+                        src={
+                          "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg"
+                        }
+                        loading="lazy"
+                      />
+                      {/* )}  */}
+                    </MDBDropdownToggle>
                   </Box>
                   <MDBDropdownMenu>
-                  <MDBDropdownItem link>
-
+                    <MDBDropdownItem link>
                       {userinfo && userinfo.role === "ADMIN" && (
                         <MDBDropdownItem style={{ marginTop: "10px" }}>
                           <Link to="/dashboard">Dashboard</Link>
@@ -179,7 +201,7 @@ const Header = () => {
                     <MDBDropdownItem link>
                       <Link to={`/user/${userId}`}>Profile</Link>
                     </MDBDropdownItem>
-                    
+
                     <MDBDropdownItem link>
                       <Link
                         to="/"
