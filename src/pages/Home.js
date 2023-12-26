@@ -18,6 +18,7 @@ const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState([]);
+  console.log("dfgfd", courses)
   const createSliderWithTooltip = () => {
     return Slider.createSliderWithTooltip;
   };

@@ -16,43 +16,43 @@ const { userId } = useSelector(state => state.auth)
   flexWrap="wrap"
   justifyContent="space-between"
   width={"100%"}
-  height={1000}
 >
   {myenrollcourses.map((course, index) => (
+    <Link to={`/course/enrolled/${userId}/${course.id}`}>
     <Box
       key={index}
       margin={5}
+      width="80%"
       position="relative"
       display="flex"
       flexDirection="column"
       alignItems="center"
+      border={2}
+      borderColor={COLOR.gray}
+      borderRadius={2}
       padding={2}
       marginBottom={2}
     >
-    <Link to={`/course/enrolled/${userId}/${course.id}`} >
-    
+      <Typography variant="h4" color={COLOR.black}>
+        {course.title}
+      </Typography>
       <Box
+        display={'flex'}
         component="img"
         sx={{
           height: 250,
           width: 400,
-          borderRadius:5,
         }}
         alt="Course Image"
         src={course.courseImageUrl}
-
       />
-        <Typography variant="h4"  style={{ color:"blue" ,marginTop:'-260px'} } >
-        {course.title}
-      </Typography>
-    </Link>
-
       <Box
         display="flex"
         flexDirection="column"
         textAlign="left"
+        width="100%"
       >
-        {/* <Box display="flex" alignItems="center" marginTop={4}>
+        <Box display="flex" alignItems="center" marginTop={4}>
           <Typography
             variant="body1"
             color={COLOR.functionYellow.default}
@@ -67,7 +67,7 @@ const { userId } = useSelector(state => state.auth)
             precision={0.5}
             readOnly
           />
-        </Box> */}
+        </Box>
       </Box>
       {/* <Button variant="contained" fullWidth sx={{ marginTop: "12px" }}>
         <Typography variant="body1" color={COLOR.white}>
@@ -76,6 +76,7 @@ const { userId } = useSelector(state => state.auth)
       </Button> */}
 
     </Box>
+    </Link>
   ))}
 </Box> 
         </div>
