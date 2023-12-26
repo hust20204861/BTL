@@ -4,7 +4,6 @@ import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 
 import MetaData from '../../components/layout/MetaData'
-import Sidebar from '../../components/layout/Sidebar'
 import { DELETE_FEEDBACK_RESET } from '../../constants/courseConstants'
 import { getAdminCourseFeedbacks, deleteFeedback, clearErrors } from '../../actions/courseActions'
 
@@ -15,7 +14,6 @@ const CourseFeedbacks = () => {
     const { token } = useSelector(state => state.auth);
     const { error, adminfeedbacks } = useSelector(state => state.adminFeedbacks);
     const { isDeleted, error: deleteError } = useSelector(state => state.feedback)
-console.log("sgsdgds", adminfeedbacks)
     useEffect(() => {
 
         dispatch(getAdminCourseFeedbacks(token));
@@ -94,30 +92,20 @@ console.log("sgsdgds", adminfeedbacks)
     return (
         <Fragment>
             <MetaData title={'Course Feedbacks'} />
-            <div className="row">
-                <div className="col-12 col-md-2">
-                    <Sidebar />
-                </div>
-
-                <div className="col-12 col-md-10">
+            
                     <Fragment>
-                       
+                        <h1>Feedbacks</h1>
                         {adminfeedbacks ? (
                             <MDBDataTable
                                 data={setFeedbacks()}
-                                className="px-3"
                                 bordered
                                 striped
-                                hover
                             />
                         ) : (
                                 <p className="mt-5 text-center">No Feedbacks.</p>
                             )}
-
-
                     </Fragment>
-                </div>
-            </div>
+            
 
         </Fragment>
     )

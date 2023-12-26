@@ -25,7 +25,7 @@ const Dashboard = () => {
     return (
         <Fragment>
             <Box display={'flex'}>
-                <Box>
+                <Box bgcolor={'#6e9dea'}>
                     <Sidebar />
                 </Box>
 
@@ -47,7 +47,7 @@ const Dashboard = () => {
                             marginLeft:'-555px',
                             marginTop: '-240px',
                           }}>
-                            <Box padding={10} alignItems={'center'} borderColor={'black'} border={2} marginLeft={5}>
+                            <Box padding={5} paddingRight={10} paddingLeft={10} bgcolor={'pink'} alignItems={'center'} marginLeft={5}>
                                 <Typography variant='h6'>Courses</Typography>
                                 <Typography fontWeight={'bold'}>{courses && courses.length}</Typography>
                                     <Link to="/courses">
@@ -55,7 +55,7 @@ const Dashboard = () => {
                                     </Link>
                             </Box>
 
-                            <Box  padding={10} alignItems={'center'} borderColor={'black'} border={2}  marginLeft={10}>
+                            <Box  padding={5}  paddingRight={10} paddingLeft={10} alignItems={'center'} bgcolor={'#cbe9bf'} marginLeft={10}>
                                 <Typography variant='h6'>Users</Typography>
                                 <Typography fontWeight={'bold'}>{users && users.length}</Typography>
                                     <Link to="/users">
@@ -63,7 +63,7 @@ const Dashboard = () => {
                                     </Link>
                             </Box>
 
-                            <Box padding={10} alignItems={'center'} borderColor={'black'} border={2}  marginLeft={10}>
+                            <Box padding={5}  paddingRight={10} paddingLeft={10} alignItems={'center'} bgcolor={'#f7f791'} marginLeft={10}>
                                 <Typography variant='h6'>Feedbacks</Typography>
                                 <Typography fontWeight={'bold'}>{adminfeedbacks && adminfeedbacks.data.length}</Typography>
                                     <Link to="/feedbacks">

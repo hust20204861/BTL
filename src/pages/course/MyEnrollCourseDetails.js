@@ -9,6 +9,7 @@ import {
   MDBInput,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
+import { Box, Typography  } from "@mui/material";
 
 import ListReviews from "../review/ListReviews";
 import Loader from "../../components/layout/Loader";
@@ -18,7 +19,9 @@ import {
   newFeedback,
   clearErrors,
   getSections,
+  getLectures
 } from "../../actions/courseActions";
+import Lecture from "./Lecture";
 const MyEnrollCourseDetails = () => {
   const { token } = useSelector((state) => state.auth);
 
@@ -65,15 +68,17 @@ const MyEnrollCourseDetails = () => {
     alert.success("Sent your feedback");
   };
   const [ visible, setVisible ] = useState(false);
-  const handleClick = () => {
+  const [selectedSectionId, setSelectedSectionId] = useState(null);
+  const handleClick = (sectionId) => {
     setVisible(!visible);
+    setSelectedSectionId(sectionId);
   }
   return (
     <Fragment>
       {loading ? (
         <Loader />
       ) : (
-        <Fragment>
+        <Fragment >
           <MetaData title={course.learningObject} />
           <div className="courses-details">
             <div className="course-details-name">
@@ -81,53 +86,50 @@ const MyEnrollCourseDetails = () => {
                 <h3>{course.learningObject}</h3>
                 <p id="course_id">Course # {course.id}</p>
               </div>
-              <hr />
-              <div className="course-rating">
-                <div
-                  className="star"
-                  style={{ width: `${(course.rating / 5) * 100}%` }}
-                ></div>
-              
-              </div>
-
-              <hr />
               <MDBTypography className="lead mb-0 border">
                 <p>Description:</p>
                 <p>{course.courseDescription}</p>
               </MDBTypography>
-              <hr />
-              <p id="course_price">${course.price}</p>
-              <p id="requiredSkills">${course.requiredSkills}</p>
-              <p id="courseFor">${course.courseFor}</p>
-              <p id="title">${course.title}</p>
-              <p id="subtitle">${course.subtitle}</p>
-              <p id="language">${course.language}</p>
-              <p id="level">${course.level}</p>
-              <p id="category">${course.category}</p>
-              <p id="primarilyTaught">${course.primarilyTaught}</p>
-              <p id="welcomeMessage">${course.welcomeMessage}</p>
-              <p id="congratulationMessage">${course.congratulationMessage}</p>
-              <p id="status">${course.status}</p>
-              <p id="createdAt">${course.createdAt}</p>
-              <p id="updatedAt">${course.updatedAt}</p>
-              <hr />
+             
                {/* khi click vào section thì thả xuống các lecture */}
+               {/* nếu section không rỗng, in ra các section  */}
               {sections ? (
-              <div>
-                    <h5 onClick={handleClick}>
+              <Box>
+                    <Box id='section'>
                       {sections.map(section => (
-                      <p id="section">{section.name}</p>
+                        // click vào các section thay đổi visible hiệc lecture
+                        <Box onClick={() => handleClick(section.id)} key={section.id}>
+                        <Typography fontWeight={'bold'} 
+                        bgcolor={'#e5e0e0'} 
+                        width={'50%'}
+                        variant="h6" 
+                        border={1} 
+                        borderColor={'black'} 
+                        marginBottom={1} 
+                        height={'30px'}>
+                                 {section.name}
+                        </Typography>
+                        </Box>
                       ))}
-                    </h5>
-                      {visible?  (<div>a  
-                                 <MDBBtn>Discussion</MDBBtn>
-                                 </div>) : (<div>bài giảng</div>)}
-              </div>) : (<div>các bài giảng ở đây</div>
+                    </Box>
+                      {visible &&  (<Box >
+                        <Typography fontWeight={'bold'} 
+                        bgcolor={'#e3f2fd'} 
+                        variant="h6" 
+                        width={'50%'}
+                        border={1} 
+                        borderColor={'black'} 
+                        marginTop={1} 
+                        height={'60px'}>
+                        <Lecture key={selectedSectionId} selectedSectionId={selectedSectionId} id={id}></Lecture>   
+                        </Typography>
+                         
+                                 </Box>)}
+              </Box>) : (<Box>Khóa học này chưa có bài giảng</Box>
               )}
 
             
-              <hr/>
-              <form>
+              <form style={{marginTop: "500px"}}>
                 <h4>Đánh giá của bạn</h4>
                 <MDBInput
                   wrapperClass="mb-4"
@@ -155,27 +157,6 @@ const MyEnrollCourseDetails = () => {
                   Feedback
                 </MDBBtn>
               </form>
-              {/* <div className="form-group">
-
-                                    <label htmlFor="name_field">Đánh giá của bạn</label>
-                                    <input
-                                        type="text"
-                                        value={feed_back}
-                                        onChange={(e) => setFeed_back(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="name_field">Khóa học được đánh giá bao nhiêu sao?</label>
-                                    <input
-                                        type="text"
-                                        value={rating}
-                                        onChange={(e) => setRating(e.target.value)}
-                                    />
-                                </div>
-                            <button type="button" onClick={feedback} >feedback</button>
-        
-
-                            <hr /> */}
             </div>
           </div>
         </Fragment>

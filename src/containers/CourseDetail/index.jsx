@@ -203,42 +203,20 @@ const CourseDetail = () => {
               {courseDetail.sale}% off
             </Typography>
           </Box>
-          {enrollCourse.find((item) => item.id === courseDetail.id) ? (
-            <Button
-              variant="contained"
-              fullWidth
-              sx={{ marginTop: "12px" }}
-              onClick={async () => {
-                const accessToken = await getAccessToken();
-                const lecture = await getLectureByCourseId(
-                  courseDetail.id,
-                  accessToken
-                );
-                const lectureId = lecture.data.sort((a, b) => a.id - b.id)[0]
-                  .id;
-                console.log(lecture);
-                navigate(`/course/${courseDetail.id}/${lectureId}`);
-              }}
-            >
-              <Typography variant={"body1"} color={COLOR.white}>
-                Watch now
-              </Typography>
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              fullWidth
-              sx={{ marginTop: "12px" }}
-              onClick={() => {
-                if (!userinfo) navigate("/auth/login");
-                else navigate(`/payment/${courseDetail.id}`);
-              }}
-            >
-              <Typography variant={"body1"} color={COLOR.white}>
-                Buy now
-              </Typography>
-            </Button>
-          )}
+          <Link to={`/payment/${courseId}`} >
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{ marginTop: "12px" }}
+            onClick={() => {
+              // todo: handle enroll course
+            }}
+          >
+            <Typography variant={"body1"} color={COLOR.white}>
+              Buy now
+            </Typography>
+          </Button>
+          </Link>
         </Box>
       </Box>
     </Box>

@@ -478,7 +478,6 @@ export const getSections = (id, token) => async (dispatch) => {
         console.log("before", id, token)
 
         const { data } = await axios.get(`/api/v1/section/course-id/${id}`, config)
-        console.log("after", id, token)
       
         dispatch({
             type: GET_SECTIONS_SUCCESS,
@@ -578,7 +577,7 @@ export const newLecture = (json , token) => async (dispatch) => {
     }
 }
 //get lectures
-export const getLectures = (id, token) => async (dispatch) => {
+export const getLectures = (selectedSectionId, token) => async (dispatch) => {
 
     try {
 
@@ -589,8 +588,9 @@ export const getLectures = (id, token) => async (dispatch) => {
                 'Authorization': `Bearer ${token}` 
                 }
             }
-
-        const { data } = await axios.get(`api/v1/lecture`, config)
+        
+        const { data } = await axios.get(`/api/v1/lecture/filter?page_size=10&page_number=0&section_id=${selectedSectionId}`, config)
+        console.log("after", token)
       
         dispatch({
             type: GET_LECTURES_SUCCESS,
