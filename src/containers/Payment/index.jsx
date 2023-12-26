@@ -12,6 +12,7 @@ import { buyCourse } from "../../apis/enroll";
 import SuccessMessage from "../../components/SuccessMessage";
 
 const Payment = () => {
+
   const navigate = useNavigate();
 
   // ông làm lại hàm lấy courseDetail với id cho tôi với

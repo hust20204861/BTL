@@ -9,6 +9,9 @@ import {
   MDBInput,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
+import { Box, Button, List, ListItem, Rating, Typography } from "@mui/material";
+import { COLOR } from "../../styles/color";
+import { useNavigate } from "react-router-dom";
 
 import ListReviews from "../review/ListReviews";
 import Loader from "../../components/layout/Loader";
@@ -18,10 +21,12 @@ import {
   newFeedback,
   clearErrors,
   getSections,
+  getLectures
 } from "../../actions/courseActions";
+import { Link } from "react-router-dom";
 const MyEnrollCourseDetails = () => {
   const { token } = useSelector((state) => state.auth);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
@@ -30,6 +35,7 @@ const MyEnrollCourseDetails = () => {
   );
   const { sections } = useSelector((state) => state.sections);
   const { lectures } = useSelector(state => state.lectures);
+  console.log("sssss", lectures)
   const { discussions } = useSelector(state => state.discussions)
  
   const [rating, setRating] = useState("");
@@ -44,7 +50,7 @@ const MyEnrollCourseDetails = () => {
     }
   }, [dispatch, id, token]);
   useEffect(() => {
-    dispatch(getSections(id, token));
+    dispatch(getLectures(id, token));
   }, [dispatch, id, token]);
   const feedback = (e) => {
     e.preventDefault();
@@ -81,51 +87,33 @@ const MyEnrollCourseDetails = () => {
                 <h3>{course.learningObject}</h3>
                 <p id="course_id">Course # {course.id}</p>
               </div>
-              <hr />
               <div className="course-rating">
                 <div
                   className="star"
                   style={{ width: `${(course.rating / 5) * 100}%` }}
                 ></div>
-              
               </div>
 
-              <hr />
               <MDBTypography className="lead mb-0 border">
                 <p>Description:</p>
                 <p>{course.courseDescription}</p>
               </MDBTypography>
-              <hr />
-              <p id="course_price">${course.price}</p>
-              <p id="requiredSkills">${course.requiredSkills}</p>
-              <p id="courseFor">${course.courseFor}</p>
-              <p id="title">${course.title}</p>
-              <p id="subtitle">${course.subtitle}</p>
-              <p id="language">${course.language}</p>
-              <p id="level">${course.level}</p>
-              <p id="category">${course.category}</p>
-              <p id="primarilyTaught">${course.primarilyTaught}</p>
-              <p id="welcomeMessage">${course.welcomeMessage}</p>
-              <p id="congratulationMessage">${course.congratulationMessage}</p>
-              <p id="status">${course.status}</p>
-              <p id="createdAt">${course.createdAt}</p>
-              <p id="updatedAt">${course.updatedAt}</p>
-              <hr />
-               {/* khi click vào section thì thả xuống các lecture */}
-              {sections ? (
-              <div>
-                    <h5 onClick={handleClick}>
-                      {sections.map(section => (
-                      <p id="section">{section.name}</p>
-                      ))}
-                    </h5>
-                      {visible?  (<div>a  
-                                 <MDBBtn>Discussion</MDBBtn>
-                                 </div>) : (<div>bài giảng</div>)}
-              </div>) : (<div>các bài giảng ở đây</div>
-              )}
-
+           
             
+              <Button
+              variant="contained"
+              fullWidth
+              sx={{ marginTop: "12px" }}
+              onClick={async () => {
+                const lectureId = lectures.data.sort((a, b) => a.id - b.id)[0]
+                  .id;
+                navigate(`/course/${course.id}/${lectureId}`);
+              }}
+            >
+              <Typography variant={"body1"} color={COLOR.white}>
+                Watch now
+              </Typography>
+            </Button>
               <hr/>
               <form>
                 <h4>Đánh giá của bạn</h4>

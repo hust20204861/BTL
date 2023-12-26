@@ -590,7 +590,7 @@ export const getLectures = (id, token) => async (dispatch) => {
                 }
             }
 
-        const { data } = await axios.get(`api/v1/lecture`, config)
+        const { data } = await axios.get(`/api/v1/lecture/filter?page_size=10&page_number=0&course_id=${id}`, config)
       
         dispatch({
             type: GET_LECTURES_SUCCESS,

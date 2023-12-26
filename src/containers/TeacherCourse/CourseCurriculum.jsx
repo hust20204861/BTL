@@ -68,6 +68,7 @@ const CourseCurriculum = () => {
   const handleAddSection = async () => {
     try {
       const accessToken = await getAccessToken();
+
       const resData = await createSection({
         courseId,
         sectionData: {
