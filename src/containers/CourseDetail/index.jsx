@@ -203,7 +203,7 @@ const CourseDetail = () => {
               {courseDetail.sale}% off
             </Typography>
           </Box>
-          <Link to="/payment">
+          <Link to={`/payment/${courseId}`} >
           <Button
             variant="contained"
             fullWidth

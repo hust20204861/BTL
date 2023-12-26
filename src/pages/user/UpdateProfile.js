@@ -64,7 +64,6 @@ const UpdateProfile = () => {
 
     const formData = new FormData();
     formData.set("id", userId)
-    formData.set("id", userId)
     formData.set("name", name);
     formData.set("email", email);
     formData.set("website", website);

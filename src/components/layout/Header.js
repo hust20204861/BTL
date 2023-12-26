@@ -45,12 +45,6 @@ const Header = () => {
   }, [userId, token]);
   const { userinfo } = useSelector((state) => state.info);
 
-   console.log("dskkkfdfds", userinfo);
-  //  if(userinfo.avatar) {
-  //   const avatar =  userinfo.avatar;
-  //  }
-  //console.log("bbbb", avatar)
-
   const logoutHandler = () => {
     dispatch(logout());
     alert.success("Logged out successfully");
@@ -131,17 +125,18 @@ const Header = () => {
                     >
                       Course
                     </Link>
+                    
                     <Button
                       onClick={() =>
                         window.location.replace("/instructor/courses")
                       }
-                      style={{ justifyContent: "center", alignItems: "center" }}
+                      style={{ justifyContent: "center", alignItems: "center",  background: "transparent", boxShadow: "none" }}
                     >
                       Create course
                     </Button>
                     <Link
                       to={`/instructor/courses`}
-                      style={{ padding: "20px" }}
+                      style={{ padding: "10px" }}
                     ></Link>
                    
 
@@ -173,7 +168,7 @@ const Header = () => {
 
                       {userinfo && userinfo.role === "ADMIN" && (
                         <MDBDropdownItem style={{marginTop:'10px'}}>
-                          <Link to="/dashboard"  >Dashboard</Link>
+                          <Link to="/dashboard"  >Cài đặt</Link>
                         </MDBDropdownItem>
                       )}
                     </MDBDropdownItem>
@@ -191,7 +186,7 @@ const Header = () => {
                     
                     <MDBDropdownItem link>
                       <Link to="/" style={{color:'red'}} onClick={logoutHandler}>
-                        Logout
+                        Đăng xuất
                       </Link>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
