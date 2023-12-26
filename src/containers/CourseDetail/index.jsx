@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getCourse, getCourses } from "../../apis/courses";
-import { getAccessToken } from "../../apis/auth";
+import { getAccessToken, getUserId } from "../../apis/auth";
 import { Box, Button, List, ListItem, Rating, Typography } from "@mui/material";
 import { COLOR } from "../../styles/color";
 import { Add, Check } from "@mui/icons-material";
@@ -45,9 +45,10 @@ const CourseDetail = () => {
   const fetchEnrollCourse = async () => {
     try {
       const accessToken = await getAccessToken();
+      const userId = await getUserId();
 
       const res = await getEnrolledCourses({
-        userId: userinfo.id,
+        userId,
         accessToken,
       });
       setEnrollCourse(res.data);
