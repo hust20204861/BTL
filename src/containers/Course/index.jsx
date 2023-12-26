@@ -5,8 +5,10 @@ import { Box, Typography } from "@mui/material";
 import YouTube from "react-youtube";
 import { getSectionFromCourse } from "../../apis/section";
 import { COLOR } from "../../styles/color";
+import { useNavigate } from "react-router-dom";
 
 const Course = () => {
+  const navigate = useNavigate();
   const lectureId = window.location.pathname.split("/")[3];
   const courseId = window.location.pathname.split("/")[2];
   const [lecture, setLecture] = useState({});
@@ -21,7 +23,7 @@ const Course = () => {
   };
 
   const handleClickLecture = (lectureId) => {
-    window.location.href = `/course/${courseId}/${lectureId}`;
+    navigate(`/course/${courseId}/${lectureId}`);
   };
 
   const exactVideoIdFromUrl = (videoUrl) => {

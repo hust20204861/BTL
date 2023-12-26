@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { enrollCourses } from "../../actions/courseActions";
 import { Box, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { COLOR } from "../../styles/color";
 import { useDispatch, useSelector } from "react-redux";
 import MetaData from "../../components/layout/MetaData";
@@ -12,6 +12,8 @@ import { buyCourse } from "../../apis/enroll";
 import SuccessMessage from "../../components/SuccessMessage";
 
 const Payment = () => {
+  const navigate = useNavigate();
+
   // ông làm lại hàm lấy courseDetail với id cho tôi với
   const [courseDetail, setCourseDetail] = useState({});
   const courseId = window.location.pathname.split("/")[2];
@@ -47,6 +49,7 @@ const Payment = () => {
       });
 
       SuccessMessage("Success", "Mua khóa học thành công");
+      navigate("/home");
     } catch (error) {
       console.log("error: ", error);
     }

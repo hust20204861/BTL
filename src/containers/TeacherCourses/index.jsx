@@ -104,9 +104,8 @@ const TeacherCourses = () => {
       paddingX={3}
       paddingY={2}
     >
-      <TeacherHeader />
       <Box>
-        <Typography variant={"h5"}>Khóa học của bạn</Typography>
+        <Typography variant={"h5"}>Tìm kiếm khóa học của bạn</Typography>
         <Box
           display={"flex"}
           width={"100%"}

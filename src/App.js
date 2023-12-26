@@ -4,15 +4,12 @@ import "./App.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
-
 import Home from "./pages/Home";
 import MyCourse from "./pages/course/MyCourse";
 import MyEnrollCourseDetails from "./pages/course/MyEnrollCourseDetails";
 import MyCourseDetails from "./pages/course/MyCourseDetails";
 import MyEnrollCourse from "./pages/course/MyEnrollCourse";
 import Website from "./pages/review/Website";
-
-
 
 // Cart Imports
 import Cart from "./pages/cart/Cart";
@@ -53,112 +50,90 @@ function App() {
 
   return (
     <Router>
-      {!currentUrl.includes("instructor") ? (
-        <div className="App">
-          <Header />
-          <div className="container container-fluid">
-            <Routes>
-
-
-            <Route path="/home" element={<Home />} exact />
-              {/* <Route path="/blog" element={<Blog />} exact /> */}
-              <Route path="/" element={<Website />} exact />
-
-
-              <Route path="/search/:keyword" element={<Home />} />
-              <Route
-                path="/course/:id"
-                element={<CourseDetailScreen />}
-                exact
-              />
-              <Route path="/cart" element={<Cart />} exact />
-              <Route path="/auth/login" element={<Login />} />
-              <Route path="auth/register" element={<Register />} />
-              <Route path="/user/:user_id" element={<Profile />} exact />
-              <Route path="/payment/:courseId" element={<PaymentPage />} />
-              <Route
-                path="/user/update/:id"
-                element={<UpdateProfile />}
-                exact
-              />
-              <Route
-                path="/user/update_pass"
-                element={<UpdatePassword />}
-                exact
-              />
-              <Route
-                path="/password/forgot"
-                element={<ForgotPassword />}
-                exact
-              />
-              <Route path="/user/reset_pass" element={<NewPassword />} exact />
-            </Routes>
-          </div>
+      <div className="App">
+        <Header />
+        <div className="container container-fluid">
           <Routes>
-            <Route
-              path="/course/:courseId/:lectureId"
-              element={<CourseScreen />}
-              exact
-            />
-            <Route
-              path="/dashboard"
-              isAdmin={true}
-              element={<Dashboard />}
-              exact
-            />
-            <Route
-              path="/courses"
-              isAdmin={true}
-              element={<CoursesList />}
-              exact
-            />
-            <Route
-              path="/feedbacks"
-              isAdmin={true}
-              element={<CourseFeedbacks />}
-              exact
-            />
-            <Route
-              path="/create/course"
-              isAdmin={true}
-              element={<NewCourse />}
-              exact
-            />
-            <Route
-              path="/update/course/:id"
-              isAdmin={true}
-              element={<UpdateCourse />}
-              exact
-            />
-            <Route path="/users" isAdmin={true} element={<UsersList />} exact />
-            <Route
-              path="/admin/update/:userId"
-              isAdmin={true}
-              element={<UpdateUser />}
-              exact
-            />
-            <Route
-              path="/course/create/list/:userId"
-              element={<MyCourse />}
-              exact
-            />
-            <Route path="/mycourse/:id" element={<MyCourseDetails />} exact />
-            <Route
-              path="/courses/enrolled/:userId"
-              element={<MyEnrollCourse />}
-              exact
-            />
-            <Route
-              path="/course/enrolled/:userId/:id"
-              element={<MyEnrollCourseDetails />}
-              exact
-            />
-          </Routes>
+            <Route path="/home" element={<Home />} exact />
+            {/* <Route path="/blog" element={<Blog />} exact /> */}
+            <Route path="/" element={<Website />} exact />
 
-          <Footer />
+            <Route path="/search/:keyword" element={<Home />} />
+            <Route path="/course/:id" element={<CourseDetailScreen />} exact />
+            <Route path="/cart" element={<Cart />} exact />
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="auth/register" element={<Register />} />
+            <Route path="/user/:user_id" element={<Profile />} exact />
+            <Route path="/payment/:courseId" element={<PaymentPage />} />
+            <Route path="/user/update/:id" element={<UpdateProfile />} exact />
+            <Route
+              path="/user/update_pass"
+              element={<UpdatePassword />}
+              exact
+            />
+            <Route path="/password/forgot" element={<ForgotPassword />} exact />
+            <Route path="/user/reset_pass" element={<NewPassword />} exact />
+          </Routes>
         </div>
-      ) : (
         <Routes>
+          <Route
+            path="/course/:courseId/:lectureId"
+            element={<CourseScreen />}
+            exact
+          />
+          <Route
+            path="/dashboard"
+            isAdmin={true}
+            element={<Dashboard />}
+            exact
+          />
+          <Route
+            path="/courses"
+            isAdmin={true}
+            element={<CoursesList />}
+            exact
+          />
+          <Route
+            path="/feedbacks"
+            isAdmin={true}
+            element={<CourseFeedbacks />}
+            exact
+          />
+          <Route
+            path="/create/course"
+            isAdmin={true}
+            element={<NewCourse />}
+            exact
+          />
+          <Route
+            path="/update/course/:id"
+            isAdmin={true}
+            element={<UpdateCourse />}
+            exact
+          />
+          <Route path="/users" isAdmin={true} element={<UsersList />} exact />
+          <Route
+            path="/admin/update/:userId"
+            isAdmin={true}
+            element={<UpdateUser />}
+            exact
+          />
+          <Route
+            path="/course/create/list/:userId"
+            element={<MyCourse />}
+            exact
+          />
+          <Route path="/mycourse/:id" element={<MyCourseDetails />} exact />
+          <Route
+            path="/courses/enrolled/:userId"
+            element={<MyEnrollCourse />}
+            exact
+          />
+          <Route
+            path="/course/enrolled/:userId/:id"
+            element={<MyEnrollCourseDetails />}
+            exact
+          />
           <Route
             path="/instructor/courses"
             element={<TeacherCoursesPage />}
@@ -170,7 +145,9 @@ function App() {
             exact
           />
         </Routes>
-      )}
+
+        <Footer />
+      </div>
     </Router>
   );
 }
