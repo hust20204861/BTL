@@ -3,7 +3,7 @@ import api from "./api";
 const getEnrolledCourses = async ({ userId, accessToken }) => {
   const res = await api({
     method: "GET",
-    url: `/enroll/user/${userId}`,
+    url: `/course/enrolled/${userId}`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

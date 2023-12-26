@@ -5,13 +5,14 @@ import { COLOR } from "../../styles/color";
 
 const Course = ({ course }) => {
   return (
-      <Box 
+    <Box
       display="flex"
       flexDirection="row"
       flexWrap="wrap"
       justifyContent="space-between"
-      width="30%">
-        <Link to={`/course/${course.id}`}>
+      width="30%"
+    >
+      <Link to={`/course/${course.id}`}>
         <Box
           backgroundColor={COLOR.gray}
           position={"stricky"}
@@ -26,11 +27,10 @@ const Course = ({ course }) => {
           borderRadius={2}
           padding={2}
           marginLeft={2}
-          
         >
-            <Typography variant={"h4"} color={COLOR.black}>
-              {course.learningObject}
-            </Typography>
+          <Typography variant={"h4"} color={COLOR.black}>
+            {course.title}
+          </Typography>
           <Box
             component="img"
             sx={{
@@ -63,19 +63,14 @@ const Course = ({ course }) => {
               />
             </Box>
           </Box>
-          <Button
-            variant="contained"
-            fullWidth
-            sx={{ marginTop: "12px" }}
-          >
+          <Button variant="contained" fullWidth sx={{ marginTop: "12px" }}>
             <Typography variant={"body1"} color={COLOR.white}>
               Xem khóa học
             </Typography>
           </Button>
         </Box>
-        </Link>
-
-      </Box>
+      </Link>
+    </Box>
   );
 };
 

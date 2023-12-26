@@ -112,14 +112,19 @@ const CourseDetail = () => {
             What you'll learn
           </Typography>
           <List>
-            {courseDetail.learningObject?.split(".").map((item, index) => (
-              <Box key={index} marginTop={1} display={"flex"}>
-                <Check color={COLOR.primary} />
-                <Typography variant={"body1"} color={COLOR.text} marginLeft={2}>
-                  {item}
-                </Typography>
-              </Box>
-            ))}
+            {courseDetail.learningObject?.trim().length > 0 &&
+              courseDetail.learningObject?.split(".").map((item, index) => (
+                <Box key={index} marginTop={1} display={"flex"}>
+                  <Check color={COLOR.primary} />
+                  <Typography
+                    variant={"body1"}
+                    color={COLOR.text}
+                    marginLeft={2}
+                  >
+                    {item}
+                  </Typography>
+                </Box>
+              ))}
           </List>
         </Box>
         <Box padding={3} marginTop={2} borderRadius={2}>
@@ -128,14 +133,19 @@ const CourseDetail = () => {
           </Typography>
 
           <List>
-            {courseDetail.requiredSkills?.split(".").map((item, index) => (
-              <Box key={index} marginTop={1} display={"flex"}>
-                <Add color={COLOR.primary} />
-                <Typography variant={"body1"} color={COLOR.text} marginLeft={2}>
-                  {item}
-                </Typography>
-              </Box>
-            ))}
+            {courseDetail.requiredSkills?.trim().length > 0 &&
+              courseDetail.requiredSkills?.split(".").map((item, index) => (
+                <Box key={index} marginTop={1} display={"flex"}>
+                  <Add color={COLOR.primary} />
+                  <Typography
+                    variant={"body1"}
+                    color={COLOR.text}
+                    marginLeft={2}
+                  >
+                    {item}
+                  </Typography>
+                </Box>
+              ))}
           </List>
         </Box>
         <Box padding={3} marginTop={2} borderRadius={2}>
